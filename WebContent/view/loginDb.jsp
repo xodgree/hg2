@@ -17,7 +17,11 @@
 	eq = equal , ne = not equal 
 	문자 비교할때는 위에 처럼 쓰고 숫자 비교할때는 ==, != 이렇게 씀.
 	--> 
-	
+<c:if test="${result == 1}">
+	<script type="text/javascript">
+		window.location.href = "/view/Main.jsp";
+	</script>
+</c:if>
 <c:if test="${result == 0}">
 	<script type="text/javascript">
 		alert("비밀번호가 맞지 않습니다");

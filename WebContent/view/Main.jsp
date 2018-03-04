@@ -19,9 +19,9 @@
 						<span class="avatar"><img src="/HugHug2/assets/assets_main/images/avatar.jpg" alt="" /></span>
 						<div style="margin-bottom:25px; margin-top:-20px;">
 						
-						<a href="Mypage">mypage</a>
+						<a href="/board/Mypage">mypage</a>
 						 &nbsp;  &nbsp;  &nbsp;
-						<a href="Logout">logout</a>
+						<a href="/board/Logout">logout</a>
 						</div>
 						<!-- <h1>This is <strong>your space</strong>. Have a good time!<br /> -->
 						
@@ -82,8 +82,8 @@
 									</a>
 								</div>
 							</section>
-
 					</section>
+
 
 				<!-- Footer -->
 					<footer id="footer">

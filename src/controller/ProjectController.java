@@ -3,8 +3,10 @@ package controller;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.sist.msk.Action;
 
@@ -17,50 +19,77 @@ public class ProjectController extends Action{
 	public String login(HttpServletRequest request, HttpServletResponse response)  throws Throwable { 
 			 return  "/view/login.jsp"; 
 			} 
+	
 	//로그인 확인
-	public String loginDb(HttpServletRequest request, HttpServletResponse response)  throws Throwable { 
-		String inputEmail = request.getParameter("inputEmail");
-		String inputPasswd = request.getParameter("inputPasswd");
+	public String LoginDb(HttpServletRequest request, HttpServletResponse response)  throws Throwable {
+		String inputEmail = null;
+		String inputPasswd = null;
+		int result = -1;
+		
+		HttpSession session = request.getSession();
+		
+		try {
+			Object tempEmail = session.getAttribute("userEmail");
+			Object tempPass = session.getAttribute("userPasswd");
+			
+			// 만약 로그인이 성공되어서 inputEmail이 있다면
+			if( tempEmail != null && tempPass != null) {
+				inputEmail = tempEmail.toString();
+				inputPasswd = tempPass.toString();
+			} else {
+				// 로그인 화면에서 넘어올 경우에는 파라미터로 전달하기 때문에
+				inputEmail = request.getParameter("inputEmail");
+				inputPasswd = request.getParameter("inputPasswd");
+			}
 
-		MemberDBBean instance =MemberDBBean.getInstance();
-		int result = instance.login(inputEmail, inputPasswd);
+			result = MemberDBBean.getInstance().login(inputEmail, inputPasswd);
+			
+			System.out.println(inputEmail + "," + inputPasswd);
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 		if(result == 1){
 			/* result가 1이 맞고, email이 admin@hughug.com이면 회원관리 페이지로 보냅니다. 
 			result가 1이 맞고, email이 adim이 아니면 메인.jsp로 이동합니다. */
 			
-			if(inputEmail.equals("admin@hughug.com")){
+			// 로그인이 성공하면 attribute를 설정해줍니다.
+			// admin, user 모두
+			String userName = MemberDBBean.getInstance().MainName(inputEmail);
+			
+			// 로그인 성공하면 여기서 어트리뷰트 지정합니다.
+			// userEmail, userName, userPasswd 항목으로 getAttribute를 받습니다.
+			session.setAttribute("userEmail", inputEmail);
+			session.setAttribute("userName", userName);
+			session.setAttribute("userPasswd", inputPasswd);
+			
+			if(inputEmail.equals("admin@hughug.com")){		
 				return "/board/list";
 			}else{
-				String userName = instance.MainName(inputEmail);
-				request.setAttribute("userEmail", inputEmail);
-				request.setAttribute("userName", userName);        
-				return "/board/main";  
+				response.sendRedirect(request.getContextPath() + "/view/Main.jsp");
+				return null;
 			}
 		}
 		else {
-			request.setAttribute("inputEmail", inputEmail);
-			request.setAttribute("inputPasswd", inputPasswd);
+			// 로그인 실패할 때
 			request.setAttribute("result", result);
-			return  "/view/1.jsp"; 
+			return  "/view/loginDb.jsp"; 
 		} 
+		
 	}
 	
-	//메인
-	public String main(HttpServletRequest request,
+	//회원가입
+	public String signUp(HttpServletRequest request,
 			 HttpServletResponse response)  throws Throwable { 
-		 //String userName = (String)session.getAttribute("userName"); 
-		//String userEmail = (String)session.getAttribute("userEmail"); 
-		 String userName = (String)request.getAttribute("userName"); 
-		 String userEmail = (String)request.getAttribute("userEmail"); 
-		 
-		 if(userName == null || userName.equals("")){
-			return "/board/login";
-			//response.sendRedirect("login.jsp");
-		}
-		 	request.setAttribute("userName", userName);
-			 return  "/view/Main.jsp"; 
+		int num = 0;
+		if(request.getParameter("num")!=null){
+			num = Integer.parseInt(request.getParameter("num"));
+		};
+		request.setAttribute("num", num);
+			 return  "/view/signUp.jsp"; 
 			} 
-	
 	
 //회원관리 게시판
 	//목록
@@ -103,7 +132,8 @@ public class ProjectController extends Action{
 		request.setAttribute("currentPage", currentPage);
 		request.setAttribute("number", number);
 			
-		   return  "/mb_view/list.jsp"; 
+		   response.sendRedirect(request.getContextPath() + "/mb_view/list.jsp");
+		   return null;
 	}
 	
 	//회원보기
@@ -217,7 +247,10 @@ public class ProjectController extends Action{
 	public String Logout(HttpServletRequest request,
 			 HttpServletResponse response)  throws Throwable { 
 		request.getSession().invalidate();
-
-			 return  "/view/Logout.jsp"; 
+		System.out.println("asdfasfd");
+		System.out.println("asdfasfd");
+		System.out.println("asdfasfd");
+		System.out.println("asdfasfd");
+		return  "/view/Logout.jsp"; 
 			} 
 }

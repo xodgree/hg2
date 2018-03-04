@@ -35,7 +35,7 @@
 		<div class="container-login100">
 			<div class="wrap-login100 p-t-85 p-b-20">
 				<!-- <form class="login100-form validate-form">  -->
-				<form method = "post" name = "loginform" class="login100-form validate-form" action ="loginDb">
+				<form method = "post" name = "loginform" class="login100-form validate-form" action ="LoginDb">
 					<span class="login100-form-title p-b-70" lang="ko">
 						<!-- 웰컴 메세지 Welcome-->
 						토닥토닥
@@ -68,13 +68,13 @@
 					
 					<div class = "row justify-content-center centered-text">
 						<div class="col-4">	
-							<a href="SignUp.jsp" class="txt2 centered-text">
+							<a href="signUp" class="txt2 centered-text">
 									회원가입
 							</a>
 						</div>
 
 						<div class = "col-4 centered-text">
-							<a href="FindPasswd.jsp" class="txt2">
+							<a href="findPasswd" class="txt2">
 								비밀번호 찾기
 							</a>						
 						</div>
