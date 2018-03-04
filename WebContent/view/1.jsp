@@ -18,31 +18,18 @@
 	문자 비교할때는 위에 처럼 쓰고 숫자 비교할때는 ==, != 이렇게 씀.
 	--> 
 	
-<c:if test="${result == 1}">
-	<c:if test="${inputEmail eq 'admin@hughug.com'}"></c:if>
-
-		response.sendRedirect("/HugHug/mb_view/list.jsp");
-		
-	}else{
-		String userName = instance.MainName(inputEmail);
-		session.setAttribute("userEmail", inputEmail);
-		session.setAttribute("userName", userName);        
-		response.sendRedirect("Main.jsp");  
-	}
-</c:if>
-
 <c:if test="${result == 0}">
-<script type="text/javascript">
-alert("비밀번호가 맞지 않습니다");
-history.go(-1);
-</script>
+	<script type="text/javascript">
+		alert("비밀번호가 맞지 않습니다");
+		history.go(-1);
+	</script>
 </c:if>
 
 <c:if test="${result == -1}">
-<script type="text/javascript">
-alert("이메일이 존재하지 않습니다.");
-history.go(-1);
-</script>
+	<script type="text/javascript">
+		alert("이메일이 존재하지 않습니다.");
+		history.go(-1);
+	</script>
 </c:if>
 
 </body>

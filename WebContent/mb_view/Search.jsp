@@ -7,8 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-
-<%response.sendRedirect("/HugHug2/board/login"); %>
-
+준비중입니다.
 </body>
 </html>
