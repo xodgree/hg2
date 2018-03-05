@@ -19,9 +19,9 @@
 						<span class="avatar"><img src="/HugHug2/assets/assets_main/images/avatar.jpg" alt="" /></span>
 						<div style="margin-bottom:25px; margin-top:-20px;">
 						
-						<a href="/board/Mypage">mypage</a>
+						<a href="Mypage">mypage</a>
 						 &nbsp;  &nbsp;  &nbsp;
-						<a href="/board/Logout">logout</a>
+						<a href="Logout">logout</a>
 						</div>
 						<!-- <h1>This is <strong>your space</strong>. Have a good time!<br /> -->
 						
@@ -34,11 +34,11 @@
 						</div>
 						
 						<ul class="icons">
-							<li><a href="#" class="icon style2 fa-twitter"><span class="label">Twitter</span></a></li>
-							<li><a href="#" class="icon style2 fa-facebook"><span class="label">Facebook</span></a></li>
-							<li><a href="#" class="icon style2 fa-instagram"><span class="label">Instagram</span></a></li>
-							<li><a href="#" class="icon style2 fa-500px"><span class="label">500px</span></a></li>
-							<li><a href="#" class="icon style2 fa-envelope-o"><span class="label">Email</span></a></li>
+							<li><a href="#" class="icon style2 fa-pencil-square-o"><span class="label">Twitter</span></a></li>
+							<li><a href="#" class="icon style2 fa-search"><span class="label">Facebook</span></a></li>
+							<li><a href="#" class="icon style2 fa-bar-chart"><span class="label">Instagram</span></a></li>
+							<!-- <li><a href="#" class="icon style2 fa-500px"><span class="label">500px</span></a></li>
+							<li><a href="#" class="icon style2 fa-envelope-o"><span class="label">Email</span></a></li> -->
 						</ul>
 					</header>
 

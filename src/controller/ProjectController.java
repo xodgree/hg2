@@ -68,8 +68,8 @@ public class ProjectController extends Action{
 			if(inputEmail.equals("admin@hughug.com")){		
 				return "/board/list";
 			}else{
-				response.sendRedirect(request.getContextPath() + "/view/Main.jsp");
-				return null;
+				//response.sendRedirect(request.getContextPath() + "/view/Main.jsp");
+				return "/view/Main.jsp";
 			}
 		}
 		else {
@@ -90,6 +90,21 @@ public class ProjectController extends Action{
 		request.setAttribute("num", num);
 			 return  "/view/signUp.jsp"; 
 			} 
+	
+	//회원가입 action
+	public String signUpDb(HttpServletRequest request,
+			 HttpServletResponse response)  throws Throwable {
+		MemberDataBean member = new MemberDataBean();
+		member.setEmail(request.getParameter("email"));
+		member.setName(request.getParameter("name"));
+		member.setNum(Integer.parseInt(request.getParameter("num")));
+		member.setPasswd(request.getParameter("passwd"));
+		 System.out.println(member); 
+		 MemberDBBean dbPro = MemberDBBean.getInstance();
+			dbPro.insertArticle(member);
+
+			 return  "/view/login.jsp"; 
+			} 	
 	
 //회원관리 게시판
 	//목록
@@ -132,8 +147,8 @@ public class ProjectController extends Action{
 		request.setAttribute("currentPage", currentPage);
 		request.setAttribute("number", number);
 			
-		   response.sendRedirect(request.getContextPath() + "/mb_view/list.jsp");
-		   return null;
+		   //response.sendRedirect(request.getContextPath() + "/mb_view/list.jsp");
+		   return "/mb_view/list.jsp";
 	}
 	
 	//회원보기

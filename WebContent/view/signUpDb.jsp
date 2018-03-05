@@ -9,17 +9,7 @@
 </head>
 <body>
 
-<% request.setCharacterEncoding("euc-kr"); %>
 
-<jsp:useBean id = "member" class = "memberDb.MemberDataBean">
-<jsp:setProperty name ="member" property="*"/>
-</jsp:useBean>
-<% System.out.println(member); %>
-<% MemberDBBean dbPro = MemberDBBean.getInstance();
-	dbPro.insertArticle(member);
-	response.sendRedirect("Login.jsp");
-
-%>
 
 
 </body>

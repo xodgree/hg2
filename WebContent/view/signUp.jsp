@@ -8,26 +8,26 @@
 <!--===============================================================================================-->
 	<link rel="icon" type="image/png" href="/HugHug2/assets/assets_signup/images/icons/favicon.ico"/>
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="assets/assets_signup/vendor/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="/HugHug2/assets/assets_signup/vendor/bootstrap/css/bootstrap.min.css">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="assets/assets_signup/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="/HugHug2/assets/assets_signup/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="assets/assets_signup/fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
+	<link rel="stylesheet" type="text/css" href="/HugHug2/assets/assets_signup/fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="assets/assets_signup/fonts/iconic/css/material-design-iconic-font.min.css">
+	<link rel="stylesheet" type="text/css" href="/HugHug2/assets/assets_signup/fonts/iconic/css/material-design-iconic-font.min.css">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="assets/assets_signup/vendor/animate/animate.css">
+	<link rel="stylesheet" type="text/css" href="/HugHug2/assets/assets_signup/vendor/animate/animate.css">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="assets/assets_signup/vendor/css-hamburgers/hamburgers.min.css">
+	<link rel="stylesheet" type="text/css" href="/HugHug2/assets/assets_signup/vendor/css-hamburgers/hamburgers.min.css">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="assets/assets_signup/vendor/animsition/css/animsition.min.css">
+	<link rel="stylesheet" type="text/css" href="/HugHug2/assets/assets_signup/vendor/animsition/css/animsition.min.css">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="assets/assets_signup/vendor/select2/select2.min.css">
+	<link rel="stylesheet" type="text/css" href="/HugHug2/assets/assets_signup/vendor/select2/select2.min.css">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="assets/assets_signup/vendor/daterangepicker/daterangepicker.css">
+	<link rel="stylesheet" type="text/css" href="/HugHug2/assets/assets_signup/vendor/daterangepicker/daterangepicker.css">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="assets/assets_signup/css/util.css">
-	<link rel="stylesheet" type="text/css" href="assets/assets_signup/css/main.css">
+	<link rel="stylesheet" type="text/css" href="/HugHug2/assets/assets_signup/css/util.css">
+	<link rel="stylesheet" type="text/css" href="/HugHug2/assets/assets_signup/css/main.css">
 <!--===============================================================================================-->
 <title>Login V13</title>
 </head>
@@ -95,7 +95,7 @@
 						</div>
 
 						<!-- login �������� ���ư��� ��ũ -->
-						<a href="Login.jsp" class="dis-block txt3 hov1 p-r-30 p-t-10 p-b-10 p-l-30">
+						<a href="Login" class="dis-block txt3 hov1 p-r-30 p-t-10 p-b-10 p-l-30">
 							Sign in
 							<i class="fa fa-long-arrow-right m-l-5"></i>
 						</a>
@@ -106,21 +106,21 @@
 	</div>
 
 <!--===============================================================================================-->
-	<script src="assets/assets_signup/vendor/jquery/jquery-3.2.1.min.js"></script>
+	<script src="/HugHug2/assets/assets_signup/vendor/jquery/jquery-3.2.1.min.js"></script>
 <!--===============================================================================================-->
-	<script src="assets/assets_signup/vendor/animsition/js/animsition.min.js"></script>
+	<script src="/HugHug2/assets/assets_signup/vendor/animsition/js/animsition.min.js"></script>
 <!--===============================================================================================-->
-	<script src="assets/assets_signup/vendor/bootstrap/js/popper.js"></script>
-	<script src="assets/assets_signup/vendor/bootstrap/js/bootstrap.min.js"></script>
+	<script src="/HugHug2/assets/assets_signup/vendor/bootstrap/js/popper.js"></script>
+	<script src="/HugHug2/assets/assets_signup/vendor/bootstrap/js/bootstrap.min.js"></script>
 <!--===============================================================================================-->
-	<script src="assets/assets_signup/vendor/select2/select2.min.js"></script>
+	<script src="/HugHug2/assets/assets_signup/vendor/select2/select2.min.js"></script>
 <!--===============================================================================================-->
-	<script src="assets/assets_signup/vendor/daterangepicker/moment.min.js"></script>
-	<script src="assets/assets_signup/vendor/daterangepicker/daterangepicker.js"></script>
+	<script src="/HugHug2/assets/assets_signup/vendor/daterangepicker/moment.min.js"></script>
+	<script src="/HugHug2/assets/assets_signup/vendor/daterangepicker/daterangepicker.js"></script>
 <!--===============================================================================================-->
-	<script src="assets/assets_signup/vendor/countdowntime/countdowntime.js"></script>
+	<script src="/HugHug2/assets/assets_signup/vendor/countdowntime/countdowntime.js"></script>
 <!--===============================================================================================-->
-	<script src="assets/assets_signup/js/main.js"></script>
+	<script src="/HugHug2/assets/assets_signup/js/main.js"></script>
 
 </body>
 </html>
