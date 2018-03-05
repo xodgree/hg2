@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 <html>
@@ -7,8 +8,59 @@
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="stylesheet" href="/HugHug2/assets/assets_main/css/main.css" />
+
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script> 
+
 <title>Visualize by TEMPLATED</title>
 </head>
+
+<!-- ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å©ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½. -->
+<script type="text/javascript">
+var rowIdx = 1;
+var rowCount = 3;
+
+// ï¿½Ñ¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ï±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ô´Ï´ï¿½.
+// DBï¿½ï¿½ï¿½ï¿½ ï¿½Ð¾ï¿½ï¿½ ï¿½Ï±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Æ¾ï¿½ï¿½Õ´Ï´ï¿½.
+var loopCount = 6;
+
+$(window).scroll(function() {
+	var maxHeight = $(document).height();
+	var currentScroll = $(window).scrollTop() + $(window).height();
+
+	if (maxHeight <= currentScroll + 50) {
+		// ï¿½Ì¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ï³ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½.
+		var thumb = document.getElementById('dummy_thumb').cloneNode(true);
+		test1(thumb);
+	}
+});
+
+function test(thumb) {
+	for(i = 0; i < loopCount; i++) {
+		var targetRow = "thumb_container_row" + rowIdx;
+		
+		console.log(targetRow);
+		
+		$("#" + targetRow).append(thumb);
+
+		// ï¿½Ì¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ rowIdxï¿½ï¿½ ï¿½Ï³ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½.
+		// rowIdxï¿½ï¿½ 1 - 2 - 3 - 1 - 2 - 3 ï¿½Ì·ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È­ï¿½Õ´Ï´ï¿½.
+		rowIdx = (rowIdx % rowCount) + 1;
+	}
+}
+
+function test1(thumb) {
+	var targetRow = "thumb_container_row" + rowIdx;
+	
+	console.log(targetRow);
+	
+	$("#" + targetRow).append(thumb);
+
+	// ï¿½Ì¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ rowIdxï¿½ï¿½ ï¿½Ï³ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½.
+	// rowIdxï¿½ï¿½ 1 - 2 - 3 - 1 - 2 - 3 ï¿½Ì·ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È­ï¿½Õ´Ï´ï¿½.
+	rowIdx = (rowIdx % rowCount) + 1;
+}
+</script>
+
 <body>
 
 		<!-- Wrapper -->
@@ -19,17 +71,17 @@
 						<span class="avatar"><img src="/HugHug2/assets/assets_main/images/avatar.jpg" alt="" /></span>
 						<div style="margin-bottom:25px; margin-top:-20px;">
 						
-						<a href="Mypage">mypage</a>
+						<a href="${pageContext.request.contextPath}/board/mypage">mypage</a>
 						 &nbsp;  &nbsp;  &nbsp;
-						<a href="Logout">logout</a>
+						<a href="${pageContext.request.contextPath}/board/Logout">logout</a>
 						</div>
 						<!-- <h1>This is <strong>your space</strong>. Have a good time!<br /> -->
 						
-						<!-- È¯¿µ¸Þ¼¼Áö -->
-						<!-- txt_ko class selector¸¦ »ç¿ëÇÏ¿© ³ª´®¹Ù¸¥Ææ ÆùÆ®¸¦ Àû¿ëÇÕ´Ï´Ù. -->
+						<!-- È¯ï¿½ï¿½ï¿½Þ¼ï¿½ï¿½ï¿½ -->
+						<!-- txt_ko class selectorï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ï¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ù¸ï¿½ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½. -->
 						<div class="txt_ko">
 							<h1>
-								<strong>${userName}</strong>´Ô È¯¿µÇÕ´Ï´Ù.
+								<strong>${userName}</strong>ï¿½ï¿½ È¯ï¿½ï¿½ï¿½Õ´Ï´ï¿½.
 							</h1>
 						</div>
 						
@@ -43,12 +95,13 @@
 					</header>
 
 				<!-- Main -->
-					<section id="main">
+				
+				<section style="display:none">
 
 						<!-- Thumbnails -->
 							<section class="thumbnails">
 								<div>
-									<a href="/HugHug2/assets/assets_main/images/fulls/01.jpg">
+									<a id="dummy_thumb" href="/HugHug2/assets/assets_main/images/fulls/01.jpg">
 										<img src="/HugHug2/assets/assets_main/images/thumbs/01.jpg" alt="" />
 										<h3>2018 . 02 . 12 MON</h3>
 									</a>
@@ -62,6 +115,43 @@
 										<img src="/HugHug2/assets/assets_main/images/thumbs/03.jpg" alt="" />
 										<h3>2018 . 02 . 14 WED</h3>
 									</a>
+									<a href="/HugHug2/assets/assets_main/images/fulls/05.jpg">
+										<img src="/HugHug2/assets/assets_main/images/thumbs/05.jpg" alt="" />
+										<h3>2018 . 02 . 16 FRI</h3>
+									</a>
+								</div>
+								<div>
+									<a href="/HugHug2/assets/assets_main/images/fulls/06.jpg">
+										<img src="/HugHug2/assets/assets_main/images/thumbs/06.jpg" alt="" />
+										<h3>2018 . 02 . 17 SAT</h3>
+									</a>
+									<a href="/HugHug2/assets/assets_main/images/fulls/07.jpg">
+										<img src="/HugHug2/assets/assets_main/images/thumbs/07.jpg" alt="" />
+										<h3>2018 . 02 . 18 SUN</h3>
+									</a>
+								</div>
+							</section>
+				</section>
+						
+					<section id="main">
+
+						<!-- Thumbnails -->
+							<section id="thumbnailImages" class="thumbnails">
+								<div id="thumb_container_row1">
+									<a href="/HugHug2/assets/assets_main/images/fulls/01.jpg">
+										<img src="/HugHug2/assets/assets_main/images/thumbs/01.jpg" alt="" />
+										<h3>2018 . 02 . 12 MON</h3>
+									</a>
+									<a href="/HugHug2/assets/assets_main/images/fulls/02.jpg">
+										<img src="/HugHug2/assets/assets_main/images/thumbs/02.jpg" alt="" />
+										<h3>2018 . 02 . 13 TUE</h3>
+									</a>
+								</div>
+								<div id="thumb_container_row2">
+									<a href="/HugHug2/assets/assets_main/images/fulls/03.jpg">
+										<img src="/HugHug2/assets/assets_main/images/thumbs/03.jpg" alt="" />
+										<h3>2018 . 02 . 14 WED</h3>
+									</a>
 									<a href="/HugHug2/assets/assets_main/images/fulls/04.jpg">
 										<img src="/HugHug2/assets/assets_main/images/thumbs/04.jpg" alt="" />
 										<h3>2018 . 02 . 15 THU</h3>
@@ -71,7 +161,7 @@
 										<h3>2018 . 02 . 16 FRI</h3>
 									</a>
 								</div>
-								<div>
+								 <div id="thumb_container_row3">
 									<a href="/HugHug2/assets/assets_main/images/fulls/06.jpg">
 										<img src="/HugHug2/assets/assets_main/images/thumbs/06.jpg" alt="" />
 										<h3>2018 . 02 . 17 SAT</h3>
@@ -91,7 +181,6 @@
 					</footer>
 
 			</div>
-
 		<!-- Scripts -->
 			<script src="/HugHug2/assets/assets_main/js/jquery.min.js"></script>
 			<script src="/HugHug2/assets/assets_main/js/jquery.poptrox.min.js"></script>
