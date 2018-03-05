@@ -48,7 +48,7 @@ public class DiaryDBBean {
 
 		//Count 세는 메소드
 		public int getDataCount() {
-			String sql = "select nvl(count(*),0) from diary";
+			String sql = "select nvl(count(*),0) from diarys";
 			Connection con = getConnection();
 			PreparedStatement pstmt = null;
 			ResultSet rs = null;
@@ -84,7 +84,7 @@ public class DiaryDBBean {
 	           
 	           sql = "select * from ("
 	        		  +"select rownum rnum, b.* from" 
-	        		   +"(select num,regdate,content,image from diary order by regdate desc)b"
+	        		   +"(select num,regdate,content,image from diarys order by regdate desc)b"
 	        		   +")where rnum between ? and ?";
 	         
 	           // Connection에 쿼리를 등록하고 PreparedStatement에 넣습니다.
@@ -162,7 +162,7 @@ public class DiaryDBBean {
 			
 			
 			//데이터 삽입 sql쿼리 작성
-			sql = "insert into diary(num,regdate,content,image)"+"values(?,?,?,?)";
+			sql = "insert into diarys(num,regdate,content,image)"+"values(?,?,?,?)";
 			
 			pstmt = con.prepareStatement(sql);
 			//위에서 쓴 시퀀스 이용
@@ -208,7 +208,7 @@ public class DiaryDBBean {
 			String sql ="";
 			try {
 				conn = getConnection();
-				sql = "select * from diary where num =?";
+				sql = "select * from diarys where num =?";
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setInt(1, num);
 				rs = pstmt.executeQuery();
@@ -238,7 +238,7 @@ public class DiaryDBBean {
 			int pwdck = 0;	//비밀번호 체크?
 			try {
 				conn = getConnection();
-				String sql = "update diary set regdate=?,content=?,image=? where num=?";
+				String sql = "update diarys set regdate=?,content=?,image=? where num=?";
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setString(1, diary.getRegdate());
 				pstmt.setString(2, diary.getContent());
@@ -258,7 +258,7 @@ public class DiaryDBBean {
 			Connection conn = null;
 			PreparedStatement pstmt = null;
 			ResultSet rs = null;
-			String sql = "delete from diary where num=?";
+			String sql = "delete from diarys where num=?";
 			//String sql = "delete from diary where num=? and passwd=?";
 			//지금은 비밀번호 없이 삭제되지만 자기 비밀번호 치면 삭제되게 하고싶음.
 			int x = -1;
