@@ -15,6 +15,25 @@ import memberDb.MemberDataBean;
 
 
 public class ProjectController extends Action{
+	//일기 쓰기
+public String diaryWrite(HttpServletRequest request, HttpServletResponse response)  throws Throwable { 
+	
+	int num = 0;
+	if(request.getParameter("num")!=null){
+		num = Integer.parseInt(request.getParameter("num"));
+	};
+	request.setAttribute("num", num);
+		return  "/view/diaryWrite.jsp"; 
+		} 
+
+	//일기 쓰기 pro
+	public String diaryWriteDb(HttpServletRequest request, HttpServletResponse response)  throws Throwable { 
+		 
+		
+		return  "/view/diaryWriteDb"; 	
+		} 
+	
+	
 	//메인(로그인화면)
 	public String login(HttpServletRequest request, HttpServletResponse response)  throws Throwable { 
 			 return  "/view/login.jsp"; 

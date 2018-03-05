@@ -329,4 +329,5 @@ public class MemberDBBean {
 			}
 			return userName;
 		}
+		
 	}
