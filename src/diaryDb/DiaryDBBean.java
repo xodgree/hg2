@@ -162,17 +162,19 @@ public class DiaryDBBean {
 			
 			
 			//데이터 삽입 sql쿼리 작성
-			sql = "insert into diarys(num,regdate,content,image)"+"values(?,?,?,?)";
+			sql = "insert into diarys(num,regdate,content,imagename,emotion,useremail)"+"values(?,sysdate,?,?,?,?)";
 			
 			pstmt = con.prepareStatement(sql);
 			//위에서 쓴 시퀀스 이용
 			pstmt.setInt(1, number);
-		
-			pstmt.setString(2, diary.getRegdate());
 			
 			pstmt.setString(3, diary.getContent());
 			
-			pstmt.setString(4, diary.getImage());
+			pstmt.setString(4, diary.getImagename());
+			
+			pstmt.setString(5, diary.getEmotion());
+			
+			pstmt.setString(6, diary.getUseremail());
 			
 			pstmt.executeUpdate();
 			
