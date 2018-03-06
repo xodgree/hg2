@@ -139,7 +139,7 @@ public class DiaryDBBean {
 		
 		//회원 등록, 데이터 삽입 메소드
 		//	리턴 타입 void, BoardDataBean type의 article을 매개변수로 받음
-		public void insertArticle(DiaryDataBean diary) {
+		public void insertArticle(DiaryDataBean diary, String useremail) {
 			//쿼리를 저장할 sql 변수 선언
 			String sql ="";
 			//db와 커넥션 해줌.
@@ -165,19 +165,20 @@ public class DiaryDBBean {
 			
 			
 			//데이터 삽입 sql쿼리 작성
-			sql = "insert into diarys(num,regdate,content,imagename,emotion,useremail)"+"values(?,sysdate,?,?,?,?)";
+			sql = "insert into diarys(num,regdate,content,imagename,emotion,useremail) "
+					+ "values (?,sysdate,?,?,?,?)";
 			
 			pstmt = con.prepareStatement(sql);
 			//위에서 쓴 시퀀스 이용
-			pstmt.setInt(1, number);
+			pstmt.setInt(1, getDiarySeq());
 			
-			pstmt.setString(3, diary.getContent());
+			pstmt.setString(2, diary.getContent());
 			
-			pstmt.setString(4, diary.getImagename());
+			pstmt.setString(3, diary.getImagename());
 			
-			pstmt.setString(5, diary.getEmotion());
+			pstmt.setString(4, diary.getEmotion());
 			
-			pstmt.setString(6, diary.getUseremail());
+			pstmt.setString(5, useremail);
 			
 			pstmt.executeUpdate();
 			
@@ -307,7 +308,29 @@ public class DiaryDBBean {
 					
 				}
 		
-
+				//시퀀스 가져오는 메소드
+				public int getDiarySeq() {
+					Connection con = null;
+					String sql = "select diary_seq.nextval from dual";
+					PreparedStatement ps = null;
+					ResultSet rs = null;
+					int number = 0;
+					con = getConnection();
+					try {
+						ps = con.prepareStatement(sql);
+						rs = ps.executeQuery();
+						if(rs.next()) {
+							number = rs.getInt(1)+1;
+						}else {
+							number = 1;
+						}
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					System.out.println(number);
+					return number;
+				}
 		
 
 		

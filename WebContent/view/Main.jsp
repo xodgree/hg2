@@ -91,7 +91,25 @@ function test1(thumb) {
 					</header>
 
 				<!-- Main -->
-				
+				 <table class="w3-table-all" width="700">
+      <tr class="w3-babypink" style="background-color:rgba(255, 0, 0, 0.4);">
+         <td >번호</td>
+         <td >날짜</td>
+         <td >내용</td>
+         <td>첨부파일</td>
+         <td >감정</td>
+         <td >사용자메일</td>
+         <c:forEach var="article" items="${articleList}">
+         <tr>
+         <td>${article.num}</td>
+         <td>${article.regdate}</td>
+         <td>${article.content}</td>
+		  <td>${article.imagename}</td>
+		  <td>${article.emotion}</td>
+		  <td>${article.useremail}</td>
+		<tr>
+      </tr></c:forEach>
+   </table>
 				<section style="display:none">
 
 						<!-- Thumbnails -->

@@ -16,14 +16,13 @@
 				<div class="logo txt_ko"><a href="#">Write Diary</a></div>
 			</header>
 			
-		<input type="hidden" name="num" value="${num}">
-		<input type="hidden" name="useremail" value="${useremail}">
+
 		<!-- Main -->
 
 			<section id="main">
 				<!-- input regdate -->
-				<div class="inner inputbox" style="width: 200px; text-align: center;">
-					<input type="date" name="regdate" form="submitForm" style="border: 0; width: 200px;">
+				<div class="inner inputbox" style="text-align: center;">
+					Date: <input type="date" name="regdate" form="submitForm" style="border: 0; width: 400px;">
 				</div> 
 
 				<!-- Input Message -->
@@ -62,19 +61,19 @@
 						</div>
 					</div>
 				</div>
-				
+			<input type="hidden" name="useremail" value="${useremail}">
 				<div style="text-align: center; margin-top: 10px; margin-bottom: 10px; ">
-					<form id="submitForm" action="${pageContext.request.contextPath}/view/test.jsp" method="post">
+					<form id="submitForm" action="diaryWritePro" method="post">
 					</form>
 					
-					<!-- input submit rewrite -->
-					<a href="${pageContext.request.contextPath}/view/test.jsp" class="button special">Rewrite</a>
-					
+					<!-- input submit rewrite 
+					<a href="${pageContext.request.contextPath}/view/test.jsp" class="button special">Rewrite</a>-->
+						<input type="reset" form="submitForm" class="button special" value="Rewrite">
 					<!-- input submit confirm-->
 					<input type="Submit" form="submitForm" class="buttion special">
 
 					<!-- input submit Go to Main-->
-					<a href="${pageContext.request.contextPath}/view/test.jsp" class="button special">Go to Main</a>
+					<a href="Main" class="button special">Go to Main</a>
 				</div>
 			</section>
 			

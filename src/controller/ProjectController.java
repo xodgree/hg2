@@ -33,7 +33,6 @@ public class ProjectController extends Action{
 			  
 	        request.setAttribute("articleList", articleList);
 	        request.setAttribute("count", count);
-           System.out.println(count);
            System.out.println(articleList);
 	        return "/view/list.jsp";
 	     }	
@@ -59,51 +58,69 @@ public String read(HttpServletRequest request,
 	
 public String Main(HttpServletRequest request,
 		HttpServletResponse response)  throws Throwable { 
+	 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+     List articleList = null;
+     DiaryDBBean dbPro = DiaryDBBean.getInstance();
+     int count = 0;
+		 count = dbPro.getDataCount();
+		 
+		  if(count > 0){
+			  articleList = dbPro.articleList2(1, 7);}
+		  
+     request.setAttribute("articleList", articleList);
+     request.setAttribute("count", count);
+    System.out.println(articleList);
 	return  "/view/Main.jsp"; 
 			} 
+
 	//일기 쓰기
 public String diaryWrite(HttpServletRequest request, HttpServletResponse response)  throws Throwable { 
 	HttpSession session = request.getSession();
-	int num = 0;
+	/*int num = 0;
 	if(request.getParameter("num")!=null){
 		num = Integer.parseInt(request.getParameter("num"));
-	};
+	};*/
 	//useremail도 보내야함.
 	String useremail = (String) session.getAttribute("userEmail");
 	
-	request.setAttribute("num", num);
 	request.setAttribute("useremail", useremail);
+	System.out.println(useremail);
 		return  "/view/diaryWrite.jsp"; 
 		} 
 	
 	//일기 쓰기 pro
 	public String diaryWritePro(HttpServletRequest request, HttpServletResponse response)  throws Throwable { 
+		
+		HttpSession session = request.getSession();
+		//세션에 저장된 이메일 주소를 가져옴.
+		String useremail = (String) session.getAttribute("userEmail");
+				
 		/*
 		 * 일기 작성 누르면 여기로 옴.
 		 * 여기서는 db와 연결해서 작성한 데이터 db에 insert하고 난 다음. diaryWriteDb에서 코멘트 창을 띄어줌.
 		 * maindb로 보내서 리스트 받아서 뿌리게 한다음에 main으로 가게함.
 		 * */ 
 		//db와 연결해서 insert하기.
-		String boardid=request.getParameter("boardid");
-		if(boardid==null) boardid="1";
-		String pageNum = request.getParameter("pageNum");
-		if(pageNum==null || pageNum==""){
-		   pageNum = "1";   }
+		
 		
 		DiaryDataBean diary = new DiaryDataBean();
-		diary.setNum(Integer.parseInt(request.getParameter("num")));
+		//diary.setNum(Integer.parseInt(request.getParameter("num")));
 		diary.setImagename(request.getParameter("imagename"));
 		diary.setEmotion(request.getParameter("emotion"));
-		diary.setUseremail(request.getParameter("useremail"));
+		diary.setContent(request.getParameter("content"));
 
-	System.out.println(diary); 
+		System.out.println("이미지11==="+request.getParameter("imagename"));
+		System.out.println("이미지22==="+request.getParameter("emotion"));
+		System.out.println("이미지33==="+useremail);
+		System.out.println("이미지44==="+request.getParameter("content"));
 	
 	DiaryDBBean dbPro = DiaryDBBean.getInstance();
-		dbPro.insertArticle(diary);
+		dbPro.insertArticle(diary,useremail);
 		String emotion = diary.getEmotion();
+		
 		request.setAttribute("emotion", emotion);	//감정 보냄.
 	
-		return  "/view/diaryWritePro"; 	
+		return  "/view/diaryWritePro.jsp"; 	
 		} 
 	
 	
@@ -161,7 +178,7 @@ public String diaryWrite(HttpServletRequest request, HttpServletResponse respons
 				return "/board/list";
 			}else{
 				//response.sendRedirect(request.getContextPath() + "/view/Main.jsp");
-				return "/view/Main.jsp";
+				return "/board/Main";
 			}
 		}
 		else {
