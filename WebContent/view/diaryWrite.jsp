@@ -15,12 +15,17 @@
 			<header id="header">
 				<div class="logo txt_ko"><a href="#">Write Diary</a></div>
 			</header>
-	  <input type="hidden" name="num" value="${num}">
-      <input type="hidden" name="useremail" value="${useremail}">
+			
+		<input type="hidden" name="num" value="${num}">
+		<input type="hidden" name="useremail" value="${useremail}">
 		<!-- Main -->
 
 			<section id="main">
-				
+				<!-- input regdate -->
+				<div class="inner inputbox" style="width: 200px; text-align: center;">
+					<input type="date" name="regdate" form="submitForm" style="border: 0; width: 200px;">
+				</div> 
+
 				<!-- Input Message -->
 				<div class="inner inputbox">
 					<textarea name="content" id="message" placeholder="Enter your message" rows="13" form="submitForm"></textarea>
