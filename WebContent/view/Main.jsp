@@ -82,9 +82,9 @@ function test1(thumb) {
 						</div>
 						
 						<ul class="icons">
-							<li><a href="diaryWrite" class="icon style2 fa-pencil-square-o"><span class="label">Twitter</span></a></li>
-							<li><a href="#" class="icon style2 fa-search"><span class="label">Facebook</span></a></li>
-							<li><a href="#" class="icon style2 fa-bar-chart"><span class="label">Instagram</span></a></li>
+							<li><a href="diaryWrite" class="icon style2 fa-pencil-square-o"><span class="label">일기쓰기</span></a></li>
+							<li><a href="#" class="icon style2 fa-search"><span class="label">검색</span></a></li>
+							<li><a href="#" class="icon style2 fa-bar-chart"><span class="label">감정그래프</span></a></li>
 							<!-- <li><a href="#" class="icon style2 fa-500px"><span class="label">500px</span></a></li>
 							<li><a href="#" class="icon style2 fa-envelope-o"><span class="label">Email</span></a></li> -->
 						</ul>

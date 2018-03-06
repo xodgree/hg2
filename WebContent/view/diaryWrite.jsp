@@ -15,23 +15,24 @@
 			<header id="header">
 				<div class="logo txt_ko"><a href="#">Write Diary</a></div>
 			</header>
-
+	  <input type="hidden" name="num" value="${num}">
+      <input type="hidden" name="useremail" value="${useremail}">
 		<!-- Main -->
 
 			<section id="main">
 				
 				<!-- Input Message -->
 				<div class="inner inputbox">
-					<textarea name="message" id="message" placeholder="Enter your message" rows="13" form="submitForm"></textarea>
+					<textarea name="content" id="message" placeholder="Enter your message" rows="13" form="submitForm"></textarea>
 				</div>
 				
 				<!-- 감정을 표현하는 라디오 버튼입니다.
 				라디오 버튼은 다수를 선택할 수 없도록 만들어진 체크박스입니다. -->
 				<!-- Input Radio Emotion -->
 				<div class="inner inputbox" style="text-align: center">
-					<input type="radio" name="emotion" value="joy" checked form="submitForm">Joy
-					<input type="radio" name="emotion" value="soso" form="submitForm">So so
-					<input type="radio" name="emotion" value="sad" form="submitForm">Sad
+					<input type="radio" name="emotion" value="기쁨" checked form="submitForm">Joy
+					<input type="radio" name="emotion" value="보통" form="submitForm">So so
+					<input type="radio" name="emotion" value="나쁨" form="submitForm">Sad
 				</div>
 				
 				<!-- input file Image upload -->
