@@ -14,11 +14,13 @@
 <title>Visualize by TEMPLATED</title>
 </head>
 
-
+<!-- ���� ��ũ���� �����մϴ�. -->
 <script type="text/javascript">
 var rowIdx = 1;
 var rowCount = 3;
 
+// �ѹ��� ���� �ϱ��� �����Դϴ�.
+// DB���� �о�� �ϱ��� ������ ���ƾ��մϴ�.
 var loopCount = 6;
 
 $(window).scroll(function() {
@@ -26,7 +28,7 @@ $(window).scroll(function() {
 	var currentScroll = $(window).scrollTop() + $(window).height();
 
 	if (maxHeight <= currentScroll + 50) {
-	
+		// �̹��� ������� �ϳ� �����մϴ�.
 		var thumb = document.getElementById('dummy_thumb').cloneNode(true);
 		test1(thumb);
 	}
@@ -40,8 +42,8 @@ function test(thumb) {
 		
 		$("#" + targetRow).append(thumb);
 
-
-
+		// �̹��� ������� �߰��� ������ rowIdx�� �ϳ��� �����մϴ�.
+		// rowIdx�� 1 - 2 - 3 - 1 - 2 - 3 �̷� ������ ��ȭ�մϴ�.
 		rowIdx = (rowIdx % rowCount) + 1;
 	}
 }
@@ -53,7 +55,8 @@ function test1(thumb) {
 	
 	$("#" + targetRow).append(thumb);
 
-
+	// �̹��� ������� �߰��� ������ rowIdx�� �ϳ��� �����մϴ�.
+	// rowIdx�� 1 - 2 - 3 - 1 - 2 - 3 �̷� ������ ��ȭ�մϴ�.
 	rowIdx = (rowIdx % rowCount) + 1;
 }
 </script>
@@ -74,15 +77,16 @@ function test1(thumb) {
 						</div>
 						<!-- <h1>This is <strong>your space</strong>. Have a good time!<br /> -->
 						
-		
+						<!-- ȯ���޼��� -->
+						<!-- txt_ko class selector�� ����Ͽ� �����ٸ��� ��Ʈ�� �����մϴ�. -->
 						<div class="txt_ko">
 							<h1>
-								<strong>${userName}�� ȯ���մϴ�.</strong>
+								<strong>${userName}</strong>�� ȯ���մϴ�.
 							</h1>
 						</div>
 						
 						<ul class="icons">
-							<li><a href="diaryWrite" class="icon style2 fa-pencil-square-o"><span class="label">Twitter</span></a></li>
+							<li><a href="#" class="icon style2 fa-pencil-square-o"><span class="label">Twitter</span></a></li>
 							<li><a href="#" class="icon style2 fa-search"><span class="label">Facebook</span></a></li>
 							<li><a href="#" class="icon style2 fa-bar-chart"><span class="label">Instagram</span></a></li>
 							<!-- <li><a href="#" class="icon style2 fa-500px"><span class="label">500px</span></a></li>

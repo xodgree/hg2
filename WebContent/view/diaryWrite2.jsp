@@ -10,7 +10,7 @@
 </head>
 <body>	
 		<!-- Header -->
-			<!-- �ϱ⺸�� ������ ���� -->
+			
 			<header id="header">
 				<div class="logo txt_ko"><a href="#">일기 쓰기</a></div>
 			</header>
@@ -18,7 +18,7 @@
 		<!-- Main -->
 
 			<section id="main">
-				<!-- inner �ȿ� �ִ� �͵��� ���� �����ӿ� �׷����ϴ�. -->
+				
 				<div class="inner inputbox">
 					<textarea name="message" id="message" placeholder="Enter your message" rows="13"></textarea>
 				</div>
@@ -31,7 +31,7 @@
 					<input type="radio" name="gender" value="other"> 슬퍼요
 				</div>
 				
-				<!-- ���� ���ε� -->
+				
 				<div class="inner inputbox file-upload">
 					<div style="text-align: center">
 						<a href="#" class="button special fit" onclick="$('.file-upload-input').trigger( 'click' )">Add Image</a>

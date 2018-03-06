@@ -1,5 +1,5 @@
 package controller;
-//이 안에 메소드 다 넣음!!
+//컨트롤러
 import java.text.SimpleDateFormat;
 import java.util.List;
 
@@ -10,27 +10,100 @@ import javax.servlet.http.HttpSession;
 
 import com.sist.msk.Action;
 
+import diaryDb.DiaryDBBean;
+import diaryDb.DiaryDataBean;
 import memberDb.MemberDBBean;
 import memberDb.MemberDataBean;
 
 
 public class ProjectController extends Action{
+
+//일기 7개 뿌리기.	
+	public String sevenList(HttpServletRequest request,
+			HttpServletResponse response)  throws Throwable { 
+			
+	        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+	        List articleList = null;
+	        DiaryDBBean dbPro = DiaryDBBean.getInstance();
+	        int count = 0;
+			 count = dbPro.getDataCount();
+			 
+			  if(count > 0){
+				  articleList = dbPro.articleList2(1, 7);}
+			  
+	        request.setAttribute("articleList", articleList);
+	        request.setAttribute("count", count);
+           System.out.println(count);
+           System.out.println(articleList);
+	        return "/view/list.jsp";
+	     }	
+//일기 보는 페이지
+public String read(HttpServletRequest request,
+		HttpServletResponse response)  throws Throwable {
+	//일기 받아와서 뿌리기
+	//int num =Integer.parseInt(request.getParameter("num"));
+	int num = 1;
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm");
+	try{
+		DiaryDBBean dbPro = DiaryDBBean.getInstance();
+		DiaryDataBean diary = dbPro.getContent(num,"content");
+		
+		request.setAttribute("diary", diary);
+		
+	    
+	}catch(Exception e){
+		
+	}
+	return  "/view/read.jsp"; 
+			}  
+	
+public String Main(HttpServletRequest request,
+		HttpServletResponse response)  throws Throwable { 
+	return  "/view/Main.jsp"; 
+			} 
 	//일기 쓰기
 public String diaryWrite(HttpServletRequest request, HttpServletResponse response)  throws Throwable { 
-	
+	HttpSession session = request.getSession();
 	int num = 0;
 	if(request.getParameter("num")!=null){
 		num = Integer.parseInt(request.getParameter("num"));
 	};
+	//useremail도 보내야함.
+	String useremail = (String) session.getAttribute("userEmail");
+	
 	request.setAttribute("num", num);
+	request.setAttribute("useremail", useremail);
 		return  "/view/diaryWrite.jsp"; 
 		} 
-
+	
 	//일기 쓰기 pro
-	public String diaryWriteDb(HttpServletRequest request, HttpServletResponse response)  throws Throwable { 
-		 
+	public String diaryWritePro(HttpServletRequest request, HttpServletResponse response)  throws Throwable { 
+		/*
+		 * 일기 작성 누르면 여기로 옴.
+		 * 여기서는 db와 연결해서 작성한 데이터 db에 insert하고 난 다음. diaryWriteDb에서 코멘트 창을 띄어줌.
+		 * maindb로 보내서 리스트 받아서 뿌리게 한다음에 main으로 가게함.
+		 * */ 
+		//db와 연결해서 insert하기.
+		String boardid=request.getParameter("boardid");
+		if(boardid==null) boardid="1";
+		String pageNum = request.getParameter("pageNum");
+		if(pageNum==null || pageNum==""){
+		   pageNum = "1";   }
 		
-		return  "/view/diaryWriteDb"; 	
+		DiaryDataBean diary = new DiaryDataBean();
+		diary.setNum(Integer.parseInt(request.getParameter("num")));
+		diary.setImagename(request.getParameter("imagename"));
+		diary.setEmotion(request.getParameter("emotion"));
+		diary.setUseremail(request.getParameter("useremail"));
+
+	System.out.println(diary); 
+	
+	DiaryDBBean dbPro = DiaryDBBean.getInstance();
+		dbPro.insertArticle(diary);
+		String emotion = diary.getEmotion();
+		request.setAttribute("emotion", emotion);	//감정 보냄.
+	
+		return  "/view/diaryWritePro"; 	
 		} 
 	
 	
