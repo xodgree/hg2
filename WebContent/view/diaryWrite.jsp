@@ -25,8 +25,8 @@
 					<textarea name="message" id="message" placeholder="Enter your message" rows="13" form="submitForm"></textarea>
 				</div>
 				
-				<!-- ê°ì •ì„ í‘œí˜„í•˜ëŠ” ë¼ë””ì˜¤ ë²„íŠ¼ìž…ë‹ˆë‹¤.
-				ë¼ë””ì˜¤ ë²„íŠ¼ì€ ë‹¤ìˆ˜ë¥¼ ì„ íƒí•  ìˆ˜ ì—†ë„ë¡ ë§Œë“¤ì–´ì§„ ì²´í¬ë°•ìŠ¤ìž…ë‹ˆë‹¤. -->
+				<!-- °¨Á¤À» Ç¥ÇöÇÏ´Â ¶óµð¿À ¹öÆ°ÀÔ´Ï´Ù.
+				¶óµð¿À ¹öÆ°Àº ´Ù¼ö¸¦ ¼±ÅÃÇÒ ¼ö ¾øµµ·Ï ¸¸µé¾îÁø Ã¼Å©¹Ú½ºÀÔ´Ï´Ù. -->
 				<!-- Input Radio Emotion -->
 				<div class="inner inputbox" style="text-align: center">
 					<input type="radio" name="emotion" value="joy" checked form="submitForm">Joy
