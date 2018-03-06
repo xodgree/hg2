@@ -14,7 +14,7 @@
 	src: url('../../assets_common/fonts/NanumBarunpenR.ttf'); 
   }
   
-  /* ³ª´®¹Ù¸¥Ææ ÆùÆ® Àû¿ë class selector */
+  /* ï¿½ï¿½ï¿½ï¿½ï¿½Ù¸ï¿½ï¿½ï¿½ ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ class selector */
   .txt_ko {
 	  font-family: NanumBarunpenR;
   }
@@ -2163,8 +2163,8 @@
 		padding: 0.75rem 1rem;
 	}
 
-	input[type="checkbox"],
-	input[type="radio"] {
+	input[type="checkbox"]
+	 {
 		-moz-appearance: none;
 		-webkit-appearance: none;
 		-ms-appearance: none;
@@ -3021,7 +3021,7 @@
 		border-radius: 4px;
 	}
 
-	/* ÀÏ±â¾²±âÀÇ ¸Ş¼¼Áö »óÀÚ, ÆÄÀÏ »óÀÚ */
+	/* ï¿½Ï±â¾²ï¿½ï¿½ï¿½ï¿½ ï¿½Ş¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ */
 	#main > .inner.inputbox {
 		max-width: 500px;
 	}
@@ -3161,7 +3161,7 @@
 
 
 		
-/* ?ŒŒ?¼ ?—…ë¡œë“œ */
+/* ?ï¿½ï¿½?ï¿½ï¿½ ?ï¿½ï¿½ë¡œë“œ */
 .file-upload {
   background-color: #ffffff;
   width: 600px;
