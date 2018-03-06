@@ -9,7 +9,6 @@
 	<title>Doughnut Chart</title>
 	<script src="/HugHug2/assets/assets_chart/js/Chart.bundle.js"></script>
 	<script src="/HugHug2/assets/assets_chart/js/utils.js"></script>
-<!-- 	<link rel="stylesheet" href="/HugHug2/assets/assets_diary/css/main.css" /> -->
 	
 	<style>
 .center {

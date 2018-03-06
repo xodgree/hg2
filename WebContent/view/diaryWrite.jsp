@@ -46,7 +46,7 @@
 					</div>
 				
 					<div class="image-upload-wrap">
-						<input class="file-upload-input" type='file' onchange="readURL(this);" accept="image/*" form="submitForm"/>
+						<input class="file-upload-input" type="file" name="uploadImage" onchange="readURL(this);" accept="image/*" form="submitForm"/>
 					<div class="drag-text">
 						<h3>Drag and drop a file<br>or select add Image</h3>
 					</div>
@@ -61,16 +61,17 @@
 						</div>
 					</div>
 				</div>
-			<input type="hidden" name="useremail" value="${useremail}">
-				<div style="text-align: center; margin-top: 10px; margin-bottom: 10px; ">
-					<form id="submitForm" action="diaryWritePro" method="post">
-					</form>
 					
-					<!-- input submit rewrite 
-					<a href="${pageContext.request.contextPath}/view/test.jsp" class="button special">Rewrite</a>-->
-						<input type="reset" form="submitForm" class="button special" value="Rewrite">
+				<input type="hidden" name="useremail" value="${useremail}">
+				
+				<div style="text-align: center; margin-top: 10px; margin-bottom: 10px;">
+					<form id="submitForm" action="${pageContext.request.contextPath}/board/diaryWritePro" method="post" enctype="multipart/form-data"></form>
+					
+					<!-- input submit rewrite -->
+					<input type="reset" form="submitForm" class="button special" value="Rewrite">
+					
 					<!-- input submit confirm-->
-					<input type="Submit" form="submitForm" class="buttion special">
+					<input type="submit" form="submitForm" class="buttion special">
 
 					<!-- input submit Go to Main-->
 					<a href="Main" class="button special">Go to Main</a>
