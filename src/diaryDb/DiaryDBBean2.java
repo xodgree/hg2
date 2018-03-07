@@ -1,4 +1,4 @@
-package diaryDb;
+/*package diaryDb;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -279,3 +279,4 @@ public class DiaryDBBean2 {
 		
 
 }
+*/

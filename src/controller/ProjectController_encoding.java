@@ -1,4 +1,4 @@
-package controller;
+/*package controller;
 //컨트롤러
 import java.text.SimpleDateFormat;
 import java.util.Enumeration;
@@ -16,7 +16,7 @@ import diaryDb.DiaryDataBean;
 import memberDb.MemberDBBean;
 import memberDb.MemberDataBean;
 
-/*for fileupload*/
+for fileupload
 import javax.servlet.ServletContext;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
@@ -81,10 +81,10 @@ public String Main(HttpServletRequest request,
 	//일기 쓰기
 public String diaryWrite(HttpServletRequest request, HttpServletResponse response)  throws Throwable { 
 	HttpSession session = request.getSession();
-	/*int num = 0;
+	int num = 0;
 	if(request.getParameter("num")!=null){
 		num = Integer.parseInt(request.getParameter("num"));
-	};*/
+	};
 	//useremail도 보내야함.
 	String useremail = (String) session.getAttribute("userEmail");
 	
@@ -98,7 +98,7 @@ public String diaryWrite(HttpServletRequest request, HttpServletResponse respons
 		request.setCharacterEncoding("euc-kr");
 		HttpSession session = request.getSession();
 		
-		/*----- image upload -----*/
+		----- image upload -----
 		String realFolder = "";
 		String imagename = "";
 		int maxSize = 1024 * 1024 * 10;
@@ -119,11 +119,11 @@ public String diaryWrite(HttpServletRequest request, HttpServletResponse respons
 		//세션에 저장된 이메일 주소를 가져옴.
 		String useremail = (String) session.getAttribute("userEmail");
 				
-		/*
+		
 		 * 일기 작성 누르면 여기로 옴.
 		 * 여기서는 db와 연결해서 작성한 데이터 db에 insert하고 난 다음. diaryWriteDb에서 코멘트 창을 띄어줌.
 		 * maindb로 보내서 리스트 받아서 뿌리게 한다음에 main으로 가게함.
-		 * */ 
+		 *  
 		//db와 연결해서 insert하기.
 		
 		
@@ -185,8 +185,8 @@ public String diaryWrite(HttpServletRequest request, HttpServletResponse respons
 		}
 		
 		if(result == 1){
-			/* result가 1이 맞고, email이 admin@hughug.com이면 회원관리 페이지로 보냅니다. 
-			result가 1이 맞고, email이 adim이 아니면 메인.jsp로 이동합니다. */
+			 result가 1이 맞고, email이 admin@hughug.com이면 회원관리 페이지로 보냅니다. 
+			result가 1이 맞고, email이 adim이 아니면 메인.jsp로 이동합니다. 
 			
 			// 로그인이 성공하면 attribute를 설정해줍니다.
 			// admin, user 모두
@@ -328,12 +328,12 @@ public String diaryWrite(HttpServletRequest request, HttpServletResponse respons
 	
 	
 	public String updatePro(HttpServletRequest request, HttpServletResponse response)  throws Throwable { 
-		/*
+		
 		 <jsp:useBean id="member" class="memberDb.MemberDataBean">
 		<jsp:setProperty name = "member" property="*"/>
 		</jsp:useBean>
 			아래 처럼 바꿔줌.
-		 * */
+		 * 
 		
 		MemberDataBean member = new MemberDataBean();
 		member.setEmail(request.getParameter("email"));
@@ -402,3 +402,4 @@ public String diaryWrite(HttpServletRequest request, HttpServletResponse respons
 		return  "/view/Logout.jsp"; 
 			} 
 }
+*/
