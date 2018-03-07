@@ -10,8 +10,6 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="/HugHug2/assets/assets_main/css/main.css" />
 
-
-
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script> 
 
 <title>Visualize by TEMPLATED</title>
@@ -29,60 +27,60 @@ $(window).scroll(function() {
 	var currentScroll = $(window).scrollTop() + $(window).height();
 
 	if (maxHeight <= currentScroll + 50) {
-	
-		var thumb = generateArticle("/HugHug2/assets/assets_main/images/fulls/01.jpg", "test");
-		
-		/* for(i = 0; i < 7; i++) {
-			var newThumb = document.getElementById('dummy_thumb').cloneNode(true);
-			test1(newThumb);
-		} */
-		
-		/* var thumb = addArticle(imagename, content); */
-		
-		// 데이터베이스로부터 일기를 받아옵니다.
-		// 받은 일기를 java script로 Array로 변환합니다.
-		/* var arr = new Array();
-		<c:forEach var="article" items="${articleList}" varStatus="status">
-			arr[${status.index}] = "{state}";
-		</c:forEach> */
-		
-		// 변환한 내용을 바탕으로 일기 그리드를 생성합니다.
-		
+		 $.ajax({
+             url : 'HugHug2/board/l', // Your Servlet mapping or JSP(not suggested)
+             data :dataToBeSent, 
+             type : 'POST',
+             dataType : 'html', // Returns HTML as plain text; included script tags are evaluated when inserted in the DOM.
+             success : function(response) {
+                 $('#outputDiv').html(response); // create an empty div in your page with some id
+             },
+             error : function(request, textStatus, errorThrown) {
+                 alert(errorThrown);
+             }
+         });
 	}
 });
 
 function getRecentDiary(articles) {
- 
-/* 	<c:forEach var="article" items="${articles}" varStatus="status">
-	</c:forEach> */
+	
 }
 
-function onClick(element) {
-	  document.getElementById("diaryImage").src = element.src;
-	  document.getElementById("diaryModal").style.display = "block";
+// 일기 그리드를 클릭하면, 모달에 일기 내용을 적용합니다.
+function onClickThumb(element) {
+	var childElement = element.children;
+	
+	document.getElementById("diaryImage").src = childElement[0].src;
+	document.getElementById("diaryTitle").innerHTML = childElement[2].innerHTML;
+	document.getElementById("diaryContent").innerHTML = childElement[3].innerHTML;
+	
+	document.getElementById("diaryModal").style.display = "block";
 }
 
-
-// add article to main page
-function generateArticle(imagename, content) {
+function attachToPage(imagename, regdate, title, content) {
 	var newThumb = document.getElementById('dummy_thumb').cloneNode(true);
 	newThumb.href = imagename;
+	newThumb.style.display = "block";
 	
+	/* child
+	0 - imagename
+	1 - regdate
+	2 - title
+	3 - contet */
 	var childElement = newThumb.children;
 	
 	// article.imagename
-	childElement[0].src = imagename;
-	// aritcle.content  
-	childElement[1].innerHTML = content;
+	childElement[0].src = "${pageContext.servletContext.contextPath}" + "/images/" + imagename;
+	childElement[1].innerHTML = regdate;
+	childElement[2].innerHTML = title;
+	childElement[3].innerHTML = content;
 	
-	return newThumb;
-}
-
-function attachToPage(article) {
+	console.log(childElement[0].src);
+	
 	var targetRow = "thumb_container_row" + rowIdx;
 	console.log(targetRow);
 	
-	$("#" + targetRow).append(thumb);
+	$("#" + targetRow).append(newThumb);
 	rowIdx = (rowIdx % rowCount) + 1;
 }
 
@@ -114,21 +112,18 @@ function test1(thumb) {
 <!-- modal div -->
 <div id="diaryModal" class="w3-modal w3-animate-opacity">
 	<div class="w3-modal-content w3-card-4" style="width:50%; min-width:300px; max-width:500px;">
-		<header class="w3-container w3-teal"> 
+		<header class="w3-container w3-teal">
 			<span onclick="document.getElementById('diaryModal').style.display='none'" class="w3-button w3-display-topright">&times;</span>
-			<h2>Modal Title</h2>
+			<h2 id="diaryTitle">Modal Title</h2>
 		</header>
 	
-		<div class="w3-center">
+		<div class="w3-center w3-round">
 			<img id="diaryImage" style="width:100%;">
 		</div>
 	
 		<!-- diary content -->	
 		<footer class="w3-container w3-teal">
-			<p>Modal FooterModal FooterModal FooterModal FooterModal FooterModal FooterModal FooterModal Footer</p>
-			<p>Modal FooterModal FooterModal FooterModal FooterModal FooterModal FooterModal FooterModal Footer</p>
-			<p>Modal FooterModal FooterModal FooterModal FooterModal FooterModal FooterModal FooterModal Footer</p>
-			<p>Modal FooterModal FooterModal FooterModal FooterModal FooterModal FooterModal FooterModal Footer</p>
+			<p id="diaryContent">Modal Content</p>
 		</footer>
 	</div>
 	<div class="w3-bar w3-center w3-padding">
@@ -194,10 +189,10 @@ function test1(thumb) {
 	<section style="display:none">
 		<section class="thumbnails">
 			<div>
-				<a id="dummy_thumb">
-					<img src="/HugHug2/assets/assets_main/images/fulls/06.jpg" style="width:100%;cursor:pointer" onclick="onClick(this)" class="w3-hover-opacity">
+				<!-- <a id="dummy_thumb">
+					<img src="/HugHug2/assets/assets_main/images/fulls/06.jpg" style="width:100%;cursor:pointer" onclick="onClickThumb(this)" class="w3-hover-opacity">
 					<h3>2018 . 02 . 12 MON</h3>
-				</a>
+				</a> -->
 			</div>
 		</section>
 	</section>
@@ -207,11 +202,13 @@ function test1(thumb) {
 		<!-- Thumbnails -->
 		<section id="thumbnailImages" class="thumbnails">
 			<div id="thumb_container_row1">
-				<!-- 모달 테스트 더미입니다. -->
-				<a id="dummy_thumb">
-					<img src="/HugHug2/assets/assets_main/images/fulls/06.jpg" style="width:100%;cursor:pointer" onclick="onClick(this)" class="w3-hover-opacity">
-					<h3>2018 . 02 . 12 MON</h3>
-				</a>
+				<!-- DUMMY DUMMY DUMMY -->
+				<div class="w3-card-2 w3-margin w3-border-0 w3-round w3-center" id="dummy_thumb" style="display:none" onclick="onClickThumb(this)">
+					<img class="w3-round" src="/HugHug2/assets/assets_main/images/fulls/06.jpg" style="width:100%;cursor:pointer" class="w3-hover-opacity">
+					<h1>2018 . 02 . 12 MON</h1>
+					<p style="display:none">Title</p>
+					<p style="display:none">Content</p>
+				</div>
 			</div>
 			<div id="thumb_container_row2"></div>
 			<div id="thumb_container_row3"></div>
@@ -221,8 +218,7 @@ function test1(thumb) {
 	<!-- 데이터베이스로부터 최근 일기 7개를 받아서 화면에 뿌려줍니다. -->
 	<c:forEach var="article" items="${articleList}">
 		<script type="text/javascript">
-			var article = generateArticle(${article.imagename}, ${article.regdate});
-			attachToPage(article);
+			attachToPage("${article.imagename}", "${article.regdate}", "${article.title}", "${article.content}");
 		</script>
 	</c:forEach>
 
@@ -242,10 +238,10 @@ function test1(thumb) {
 		</script>
 	</c:forEach>
 
-				<!-- Footer -->
-					<footer id="footer">
-						<p>&copy; Untitled. All rights reserved. Design: <a href="http://templated.co">TEMPLATED</a>. Demo Images: <a href="http://unsplash.com">Unsplash</a>.</p>
-					</footer>
+	<!-- Footer -->
+	<footer id="footer">
+		<p>&copy; Untitled. All rights reserved. Design: <a href="http://templated.co">TEMPLATED</a>. Demo Images: <a href="http://unsplash.com">Unsplash</a>.</p>
+	</footer>
 
 			</div>
 		<!-- Scripts -->
