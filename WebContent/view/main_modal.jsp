@@ -10,7 +10,10 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="/HugHug2/assets/assets_main/css/main.css" />
 
-<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script> 
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+
+<style>
+</style> 
 
 <title>Visualize by TEMPLATED</title>
 </head>
@@ -28,16 +31,6 @@ $(window).scroll(function() {
 
 	if (maxHeight <= currentScroll + 50) {
 		 $.ajax({
-             url : 'HugHug2/board/l', // Your Servlet mapping or JSP(not suggested)
-             data :dataToBeSent, 
-             type : 'POST',
-             dataType : 'html', // Returns HTML as plain text; included script tags are evaluated when inserted in the DOM.
-             success : function(response) {
-                 $('#outputDiv').html(response); // create an empty div in your page with some id
-             },
-             error : function(request, textStatus, errorThrown) {
-                 alert(errorThrown);
-             }
          });
 	}
 });
@@ -108,31 +101,45 @@ function test1(thumb) {
 }
 </script>
 
-<body>
-<!-- modal div -->
-<div id="diaryModal" class="w3-modal w3-animate-opacity">
-	<div class="w3-modal-content w3-card-4" style="width:50%; min-width:300px; max-width:500px;">
-		<header class="w3-container w3-teal">
-			<span onclick="document.getElementById('diaryModal').style.display='none'" class="w3-button w3-display-topright">&times;</span>
-			<h2 id="diaryTitle">Modal Title</h2>
-		</header>
-	
-		<div class="w3-center w3-round">
-			<img id="diaryImage" style="width:100%;">
+<body class="txt_ko">
+	<!-- modal div -->
+	<div id="diaryModal" class="w3-modal w3-animate-opacity">
+		<div class="w3-modal-content w3-card-4" style="width:50%; min-width:300px; max-width:500px;">
+			<header class="w3-container w3-teal">
+				<span onclick="document.getElementById('diaryModal').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+				<h2 id="diaryTitle">Modal Title</h2>
+			</header>
+		
+			<div class="w3-center w3-round">
+				<img id="diaryImage" style="width:100%;">
+			</div>
+		
+			<!-- diary content -->	
+			<footer class="w3-container w3-teal">
+				<p id="diaryContent">Modal Content</p>
+			</footer>
 		</div>
+		<div class="w3-bar w3-center w3-padding txt_ko">
+			<button class="w3-button w3-teal" onclick="document.getElementById('diaryModal').style.display='none'">Confirm</button>
+			<button class="w3-button w3-teal">Rewrite</button>
+			<button class="w3-button w3-teal" onclick="document.getElementById('confirmModal').style.display='block'">Delete</button>
+		</div>
+	</div>
+
+	<!-- modal div -->
+	<div id="confirmModal" class="w3-modal w3-animate-opacity">
+		<div class="w3-panel w3-modal-content w3-card-4 w3-light-grey" style="width:50%; min-width:300px; max-width:500px;">
+			<div class="w3-panel w3-center">
+				정말 지울고얌?
+			</div>
+			<div class="w3-bar w3-center w3-padding">
+				<button class="w3-button w3-teal"onclick="document.getElementById('confirmModal').style.display='none'">No</button>
+				<button class="w3-button w3-red" onclick="document.getElementById('confirmModal').style.display='none'; document.getElementById('diaryModal').style.display='none';">Yes</button>
+			</div>
+		</div>
+		
+	</div>
 	
-		<!-- diary content -->	
-		<footer class="w3-container w3-teal">
-			<p id="diaryContent">Modal Content</p>
-		</footer>
-	</div>
-	<div class="w3-bar w3-center w3-padding">
-		<button class="w3-button w3-teal">Confirm</button>
-		<button class="w3-button w3-teal">Rewrite</button>
-		<button class="w3-button w3-teal">Delete</button>
-	</div>
-</div>
-	  
 	<!-- Wrapper -->
 	<div id="wrapper">
 
@@ -161,6 +168,9 @@ function test1(thumb) {
 				<li><a href="chart.jsp" class="icon style2 fa-bar-chart"><span class="label">감정그래프</span></a></li>
 			</ul>
 		</header>
+		
+		<button class="w3-button w3-teal w3-center" onclick="document.getElementById('confirmModal').style.display='block'">NNB</button>
+	
 
 <!-- ================ Ref code ================ -->
 				<!-- Main -->
