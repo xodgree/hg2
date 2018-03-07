@@ -94,7 +94,7 @@ function test1(thumb) {
 				<!-- Main -->
 				 <table class="w3-table-all" width="700">
       <tr class="w3-babypink" style="background-color:rgba(255, 0, 0, 0.4);">
-         <td>날짜</td>
+        <!--  <td>날짜</td>
          <td>제목</td>
          <td>첨부파일</td>
          <td >감정</td>
@@ -103,11 +103,11 @@ function test1(thumb) {
          <tr>
          <td>${article.regdate}</td>
          <td>${article.title}</td>
-		  <td>${article.imagename}</td>
-		  <td>${article.emotion}</td>
-		  <td>${article.useremail}</td>
-		<tr>
-      </tr></c:forEach>
+         		  <td>${article.imagename}</td>
+         		  <td>${article.emotion}</td>
+         		  <td>${article.useremail}</td>
+         		<tr>
+               </tr></c:forEach> -->
    </table>
 				<section style="display:none">
 
@@ -176,6 +176,7 @@ function test1(thumb) {
 								</div>
 								 <div id="thumb_container_row3">
 									<a href="/HugHug2/assets/assets_main/images/fulls/06.jpg">
+								
 										<img src="/HugHug2/assets/assets_main/images/thumbs/06.jpg" alt="" />
 										<h3>2018 . 02 . 17 SAT</h3>
 									</a>

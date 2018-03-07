@@ -32,6 +32,9 @@ public class ProjectController extends Action{
 			HttpSession session = request.getSession();
 			String useremail = (String) session.getAttribute("userEmail");
 			String boardid = request.getParameter("boardid");
+			String opt = request.getParameter("opt");//검색옵션 제목,내용,감정
+			String condition = request.getParameter("condition");//검색내용
+
 			   if(boardid == null)
 				   boardid ="1";
 
@@ -48,10 +51,15 @@ public class ProjectController extends Action{
 			   
 			   List articleList = null;
 			  DiaryDBBean dbPro = DiaryDBBean.getInstance();
-			   count = dbPro.getDataCount(useremail);
+			   count = dbPro.getSearchCount(useremail, opt, condition);
 			   if(count > 0){
-			      articleList = dbPro.articleList(startRow, endRow, useremail);}
-			        // number=count - (currentPage-1)*pageSize;
+				   
+				   System.out.println("startRow==="+startRow);
+				   System.out.println("startRow==="+endRow);
+			      articleList = dbPro.articleList(startRow, endRow, useremail,opt,condition);}
+
+			   number=count - (currentPage-1)*pageSize;
+			   System.out.println("number=="+number);
 			
 			//페이지 처리
 			   int bottomLine =3;
@@ -77,6 +85,39 @@ public class ProjectController extends Action{
 			   //response.sendRedirect(request.getContextPath() + "/mb_view/list.jsp");
 			   return "/view/searchMain.jsp";
 		}
+		
+		/*검색 게시판
+		public String searchList(HttpServletRequest request, HttpServletResponse response)  throws Throwable { 
+			HttpSession session = request.getSession();
+			String useremail = (String) session.getAttribute("userEmail");
+			String boardid = request.getParameter("boardid");
+	
+
+			   if(boardid == null)
+				   boardid ="1";
+
+			   int pageSize=5;
+			   SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+			   String pageNum = request.getParameter("pageNum");
+			   if(pageNum==null || pageNum==""){
+			      pageNum = "1";}
+			   int currentPage = Integer.parseInt(pageNum);
+			   int startRow = (currentPage-1)*pageSize+1;
+			   int endRow = currentPage* pageSize;
+			   int count = 0;
+			   int number = 0;
+			   
+			   List articleList = null;
+			  DiaryDBBean dbPro = DiaryDBBean.getInstance();
+			   count = dbPro.getDataCount(useremail);
+			   if(count > 0){
+				   
+				   System.out.println("startRow==="+startRow);
+				   System.out.println("startRow==="+endRow);
+			      articleList = dbPro.articleList(startRow, endRow, useremail);}
+
+			   number=count - (currentPage-1)*pageSize;
+			   System.out.println("number=="+number); */
 	
 /*	//검색 시
 	public String searchMain(HttpServletRequest request,
@@ -166,7 +207,7 @@ public String Main(HttpServletRequest request,
      request.setAttribute("articleList", articleList);
      request.setAttribute("count", count);
     System.out.println(articleList);
-	return  "/view/Main.jsp"; 
+	return  "/view/main_modal.jsp"; 
 			} 
 
 	//일기 쓰기
