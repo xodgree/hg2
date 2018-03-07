@@ -112,8 +112,8 @@ function test1(thumb) {
 
 <body>
 <!-- modal div -->
-<div id="diaryModal" class="w3-modal">
-	<div class="w3-modal-content w3-card-4 w3-animate-opacity" style="width:50%; min-width:300px; max-width:500px;">
+<div id="diaryModal" class="w3-modal w3-animate-opacity">
+	<div class="w3-modal-content w3-card-4" style="width:50%; min-width:300px; max-width:500px;">
 		<header class="w3-container w3-teal"> 
 			<span onclick="document.getElementById('diaryModal').style.display='none'" class="w3-button w3-display-topright">&times;</span>
 			<h2>Modal Title</h2>
@@ -221,8 +221,8 @@ function test1(thumb) {
 	<!-- 데이터베이스로부터 최근 일기 7개를 받아서 화면에 뿌려줍니다. -->
 	<c:forEach var="article" items="${articleList}">
 		<script type="text/javascript">
-			/* var article = generateArticle(${article.imagename}, ${article.regdate});
-			attachToPage(article); */
+			var article = generateArticle(${article.imagename}, ${article.regdate});
+			attachToPage(article);
 		</script>
 	</c:forEach>
 
