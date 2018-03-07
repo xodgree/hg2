@@ -11,7 +11,15 @@ public class DiaryDataBean {
 	private String imagename;	//첨부 이미지 이름
 	private String emotion;		//감정 
 	private String useremail;	//사용자 이메일 (일기마다 다 있어야 함.)
+	private String title;		//제목
+
 	
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
+	}
 	public int getNum() {
 		return num;
 	}
@@ -48,12 +56,13 @@ public class DiaryDataBean {
 	public void setUseremail(String useremail) {
 		this.useremail = useremail;
 	}
-	
 	@Override
 	public String toString() {
 		return "DiaryDataBean [num=" + num + ", regdate=" + regdate + ", content=" + content + ", imagename="
-				+ imagename + ", emotion=" + emotion + ", useremail=" + useremail + "]";
+				+ imagename + ", emotion=" + emotion + ", useremail=" + useremail + ", title=" + title + "]";
 	}
+	
+
 	
 
 	

@@ -22,7 +22,8 @@
 			<section id="main">
 				<!-- input regdate -->
 				<div class="inner inputbox" style="text-align: center;">
-					Date: <input type="date" name="regdate" form="submitForm" style="border: 0; width: 400px;">
+					<!-- Date: <input type="date" name="regdate" form="submitForm" style="border: 0; width: 400px;"> -->
+					제목 <input type="text" name ="title"  form="submitForm">
 				</div> 
 
 				<!-- Input Message -->
@@ -65,13 +66,13 @@
 				<input type="hidden" name="useremail" value="${useremail}">
 				
 				<div style="text-align: center; margin-top: 10px; margin-bottom: 10px;">
-					<form id="submitForm" action="${pageContext.request.contextPath}/board/diaryWritePro" method="post" enctype="multipart/form-data"></form>
+					<form id="submitForm" action="diaryWritePro" method="post" enctype="multipart/form-data"></form>
 					
 					<!-- input submit rewrite -->
 					<input type="reset" form="submitForm" class="button special" value="Rewrite">
 					
 					<!-- input submit confirm-->
-					<input type="submit" form="submitForm" class="buttion special">
+					<input type="submit" form="submitForm" class="buttion special" value ="작성">
 
 					<!-- input submit Go to Main-->
 					<a href="Main" class="button special">Go to Main</a>

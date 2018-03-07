@@ -3,6 +3,24 @@
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
+<!-- 합쳐지고 최소화된 최신 CSS -->
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- font awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<!-- 부가적인 테마 -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+
+<!-- 합쳐지고 최소화된 최신 자바스크립트 -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+ 
+<!-- list.css -->
+<link rel="stylesheet" href ="/HugHug2/view/list.css">
+
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
@@ -56,6 +74,10 @@ function test1(thumb) {
 
 	rowIdx = (rowIdx % rowCount) + 1;
 }
+
+$(document).ready(function(){
+    $(".form-control").popover({title: "Search Here", placement: "top"});
+   })
 </script>
 
 <body>
@@ -94,6 +116,7 @@ function test1(thumb) {
 				<!-- Main -->
 				 <table class="w3-table-all" width="700">
       <tr class="w3-babypink" style="background-color:rgba(255, 0, 0, 0.4);">
+      
          <td>날짜</td>
          <td>제목</td>
          <td>첨부파일</td>
@@ -109,6 +132,42 @@ function test1(thumb) {
 		<tr>
       </tr></c:forEach>
    </table>
+    <!--페이지 처리 -->
+    <div style="text-align: center; margin-bottom: 10px;"> 
+ 		<c:if test="${count>0}">
+		     
+			<c:if test="${startPage} > ${bottomLine}">
+			   <a href="searchList?pageNum=${startPage - bottomLine}">[이전]</a>
+			   </c:if>
+			   
+			    <c:forEach var="i" begin="${startPage}" end="${endPage}">   
+			   		<a href="searchList?pageNum=${i}">
+				   <c:if test="${i !=  currentPage}">[${i}]</c:if>
+				   <c:if test="${i ==  currentPage}">
+				   <font color='red'>[${i}]</font></c:if></a>
+			   </c:forEach>
+			   
+			   <c:if test="${endPage < pageCount}">
+			      <a href="searchList?pageNum=${startPage+bottomLine}">[다음]</a>
+			   </c:if>  
+		</c:if> 
+   </div>  
+
+<!-- 회원 검색 -->
+<div class="container-fluid">
+   <div class="col-md-4 col-md-offset-4">
+      <label> Search </label>
+         <div class="form-group">
+            <div class="input-group">
+               <input type="text" class="form-control input-md" name="search">
+                  <div class="input-group-btn">
+                     <button type="button" onclick="document.location.href='Search?'" class="btn btn-md btn-danger disabled"> 
+                     <i class ="fa fa-search"></i></button>
+                  </div>
+            </div>
+         </div>
+   </div>
+</div>
 				<section style="display:none">
 
 						<!-- Thumbnails -->

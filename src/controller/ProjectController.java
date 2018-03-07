@@ -1,13 +1,18 @@
 package controller;
 //컨트롤러
 import java.text.SimpleDateFormat;
+import java.util.Enumeration;
 import java.util.List;
+import java.util.Random;
 
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import com.sist.msk.Action;
 
 import diaryDb.DiaryDBBean;
@@ -15,21 +20,110 @@ import diaryDb.DiaryDataBean;
 import memberDb.MemberDBBean;
 import memberDb.MemberDataBean;
 
+/*for fileupload*/
+import javax.servlet.ServletContext;
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 public class ProjectController extends Action{
 
+		//검색 게시판
+		public String searchList(HttpServletRequest request, HttpServletResponse response)  throws Throwable { 
+			HttpSession session = request.getSession();
+			String useremail = (String) session.getAttribute("userEmail");
+			String boardid = request.getParameter("boardid");
+			   if(boardid == null)
+				   boardid ="1";
+
+			   int pageSize=5;
+			   SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+			   String pageNum = request.getParameter("pageNum");
+			   if(pageNum==null || pageNum==""){
+			      pageNum = "1";}
+			   int currentPage = Integer.parseInt(pageNum);
+			   int startRow = (currentPage-1)*pageSize+1;
+			   int endRow = currentPage* pageSize;
+			   int count = 0;
+			   int number = 0;
+			   
+			   List articleList = null;
+			  DiaryDBBean dbPro = DiaryDBBean.getInstance();
+			   count = dbPro.getDataCount(useremail);
+			   if(count > 0){
+			      articleList = dbPro.articleList(startRow, endRow, useremail);}
+			        // number=count - (currentPage-1)*pageSize;
+			
+			//페이지 처리
+			   int bottomLine =3;
+			   int pageCount=count/pageSize+(count%pageSize==0?0:1);
+			   int startPage = 1+(currentPage-1)/bottomLine*bottomLine;
+			   int endPage = startPage+bottomLine-1;
+			   if(endPage>pageCount) endPage = pageCount;
+			System.out.println(count);
+			System.out.println(pageCount);
+			System.out.println(startPage);
+			System.out.println(endPage);
+			request.setAttribute("boardid", boardid);
+			request.setAttribute("count", count);
+			request.setAttribute("articleList", articleList);
+			request.setAttribute("startPage", startPage);
+			request.setAttribute("endPage", endPage);
+			request.setAttribute("bottomLine", bottomLine);	
+			request.setAttribute("currentPage", currentPage);
+			//request.setAttribute("number", number);
+			request.setAttribute("pageCount", pageCount);
+			
+
+			   //response.sendRedirect(request.getContextPath() + "/mb_view/list.jsp");
+			   return "/view/searchMain.jsp";
+		}
+	
+/*	//검색 시
+	public String searchMain(HttpServletRequest request,
+			HttpServletResponse response)  throws Throwable { 
+		HttpSession session = request.getSession();
+		String useremail = (String) session.getAttribute("userEmail");
+		 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+	     List articleList = null;
+	     DiaryDBBean dbPro = DiaryDBBean.getInstance();
+	     int count = 0;
+			 count = dbPro.getDataCount(useremail, 1, 7);
+			 
+			  if(count > 0){
+				  articleList = dbPro.articleList2(1, 7, useremail);}
+			  
+	     request.setAttribute("articleList", articleList);
+	     request.setAttribute("count", count);
+	    System.out.println(articleList);
+		 return "/view/searchMain.jsp";
+			}*/
+//차트
+	public String chart(HttpServletRequest request,
+			HttpServletResponse response)  throws Throwable { 
+		HttpSession session = request.getSession();
+		String useremail = (String) session.getAttribute("userEmail");
+		
+		DiaryDBBean dbPro = DiaryDBBean.getInstance();
+		List graphList = dbPro.graphList(1, 7, useremail);
+		request.setAttribute("graphList", graphList);
+		System.out.println(graphList);
+		System.out.println("1");
+		 return "/view/graphTest.jsp";
+	}
+	
 //일기 7개 뿌리기.	
 	public String sevenList(HttpServletRequest request,
 			HttpServletResponse response)  throws Throwable { 
-			
+		HttpSession session = request.getSession();
+		String useremail = (String) session.getAttribute("userEmail");
 	        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 	        List articleList = null;
 	        DiaryDBBean dbPro = DiaryDBBean.getInstance();
 	        int count = 0;
-			 count = dbPro.getDataCount();
+			 count = dbPro.getDataCount(useremail);
 			 
 			  if(count > 0){
-				  articleList = dbPro.articleList2(1, 7);}
+				  articleList = dbPro.articleList2(1, 7, useremail);}
 			  
 	        request.setAttribute("articleList", articleList);
 	        request.setAttribute("count", count);
@@ -58,14 +152,16 @@ public String read(HttpServletRequest request,
 	
 public String Main(HttpServletRequest request,
 		HttpServletResponse response)  throws Throwable { 
+	HttpSession session = request.getSession();
+	String useremail = (String) session.getAttribute("userEmail");
 	 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
      List articleList = null;
      DiaryDBBean dbPro = DiaryDBBean.getInstance();
      int count = 0;
-		 count = dbPro.getDataCount();
+		 count = dbPro.getDataCount(useremail);
 		 
 		  if(count > 0){
-			  articleList = dbPro.articleList2(1, 7);}
+			  articleList = dbPro.articleList2(1, 7, useremail);}
 		  
      request.setAttribute("articleList", articleList);
      request.setAttribute("count", count);
@@ -88,10 +184,29 @@ public String diaryWrite(HttpServletRequest request, HttpServletResponse respons
 		return  "/view/diaryWrite.jsp"; 
 		} 
 	
-	//일기 쓰기 pro
+//일기 쓰기 pro
 	public String diaryWritePro(HttpServletRequest request, HttpServletResponse response)  throws Throwable { 
-		
+		request.setCharacterEncoding("euc-kr");
 		HttpSession session = request.getSession();
+		
+		/*----- image upload -----*/
+		String realFolder = "";
+		String imagename = "";
+		int maxSize = 1024 * 1024 * 10;
+		String encType = "euc-kr";
+		String uploadPath = "images";
+		ServletContext scontext = getServletContext();
+		realFolder = scontext.getRealPath(uploadPath);
+		MultipartRequest multi = new MultipartRequest(request, realFolder, maxSize, encType, new DefaultFileRenamePolicy());
+		
+		try {
+			Enumeration<?> files = multi.getFileNames();
+			String nextfile = (String)files.nextElement();
+			imagename = multi.getFilesystemName(nextfile);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		
 		//세션에 저장된 이메일 주소를 가져옴.
 		String useremail = (String) session.getAttribute("userEmail");
 				
@@ -105,23 +220,30 @@ public String diaryWrite(HttpServletRequest request, HttpServletResponse respons
 		
 		DiaryDataBean diary = new DiaryDataBean();
 		//diary.setNum(Integer.parseInt(request.getParameter("num")));
-		diary.setImagename(request.getParameter("imagename"));
-		diary.setEmotion(request.getParameter("emotion"));
-		diary.setContent(request.getParameter("content"));
+		diary.setImagename(imagename);
+		diary.setEmotion(multi.getParameter("emotion"));
+		diary.setContent(multi.getParameter("content"));
+		diary.setTitle(multi.getParameter("title"));
 
-		System.out.println("이미지11==="+request.getParameter("imagename"));
-		System.out.println("이미지22==="+request.getParameter("emotion"));
+		System.out.println("이미지11==="+imagename);
+		System.out.println("이미지22==="+multi.getParameter("emotion"));
 		System.out.println("이미지33==="+useremail);
-		System.out.println("이미지44==="+request.getParameter("content"));
+		System.out.println("이미지44==="+multi.getParameter("content"));
+		System.out.println("이미지44==="+multi.getParameter("title"));
 	
 	DiaryDBBean dbPro = DiaryDBBean.getInstance();
 		dbPro.insertArticle(diary,useremail);
 		String emotion = diary.getEmotion();
-		
-		request.setAttribute("emotion", emotion);	//감정 보냄.
-	
+		//request.setAttribute("emotion", emotion);	//감정 보냄.
+		//감정 코멘트
+		List commentList = dbPro.commentList(emotion);
+		Random r = new Random();
+		int commentnum = r.nextInt(commentList.size());
+		String comment = (String) commentList.get(commentnum);
+		request.setAttribute("comment", comment);
 		return  "/view/diaryWritePro.jsp"; 	
 		} 
+	
 	
 	
 	//메인(로그인화면)
