@@ -145,7 +145,7 @@ function test1(thumb) {
 
 	<!-- Header -->
 		<header id="header">
-			<span class="avatar"><img src="/HugHug2/assets/assets_main/images/avatar.jpg" alt="" /></span>
+			<span class="avatar"><a href="Main"><img src="/HugHug2/assets/assets_main/images/avatar.jpg" alt="" /></a></span>
 			<div style="margin-bottom:25px; margin-top:-20px;">
 			
 			<a href="${pageContext.request.contextPath}/board/mypage">mypage</a>
@@ -161,22 +161,21 @@ function test1(thumb) {
 			
 			<ul class="icons">
 				<!-- 일기쓰기 페이지 적용하였습니다. jsp를 바로 호출하고 있습니다. 컨트롤러를 통해서 이동하려면 경로를 수정해야 합니다. -->
-				<li><a href="diaryWrite.jsp" class="icon style2 fa-pencil-square-o"><span class="label">일기쓰기</span></a></li>
-				<li><a href="#" class="icon style2 fa-search"><span class="label">검색</span></a></li>
+				<li><a href="diaryWrite" class="icon style2 fa-pencil-square-o"><span class="label">일기쓰기</span></a></li>
+				<li><a href="searchList" class="icon style2  fa-list-ul"><span class="label">검색</span></a></li>
 				
 				<!-- 감정 그래프 페이지 적용하였습니다. jsp를 바로 호출하고 있습니다. 컨트롤러를 통해서 이동하려면 경로를 수정해야 합니다. -->
-				<li><a href="chart.jsp" class="icon style2 fa-bar-chart"><span class="label">감정그래프</span></a></li>
+				<li><a href="chart" class="icon style2 fa-bar-chart"><span class="label">감정그래프</span></a></li>
 			</ul>
 		</header>
 		
-		<button class="w3-button w3-teal w3-center" onclick="document.getElementById('confirmModal').style.display='block'">NNB</button>
 	
 
 <!-- ================ Ref code ================ -->
 				<!-- Main -->
 				 <table class="w3-table-all" width="700">
       <tr class="w3-babypink" style="background-color:rgba(255, 0, 0, 0.4);">
-         <td >번호</td>
+        <!--  <td >번호</td>
          <td >날짜</td>
          <td >내용</td>
          <td>첨부파일</td>
@@ -187,11 +186,11 @@ function test1(thumb) {
          <td>${article.num}</td>
          <td>${article.regdate}</td>
          <td>${article.content}</td>
-		  <td>${article.imagename}</td>
-		  <td>${article.emotion}</td>
-		  <td>${article.useremail}</td>
-		<tr>
-      </tr></c:forEach>
+         		  <td>${article.imagename}</td>
+         		  <td>${article.emotion}</td>
+         		  <td>${article.useremail}</td>
+         		<tr>
+               </tr></c:forEach> -->
    </table>
 <!-- ================ Ref code ================ -->
    

@@ -2,22 +2,6 @@
     pageEncoding="EUC-KR"%>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-
-<!-- 합쳐지고 최소화된 최신 CSS -->
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
-<!-- font awesome -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-<!-- 부가적인 테마 -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-
-<!-- 합쳐지고 최소화된 최신 자바스크립트 -->
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
- 
 <!-- list.css -->
 <link rel="stylesheet" href ="/HugHug2/view/list.css">
 
@@ -27,7 +11,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="stylesheet" href="/HugHug2/assets/assets_main/css/main.css" />
 
-<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script> 
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+ 
+
+
 
 <title>Visualize by TEMPLATED</title>
 </head>
@@ -74,10 +63,6 @@ function test1(thumb) {
 
 	rowIdx = (rowIdx % rowCount) + 1;
 }
-
-$(document).ready(function(){
-    $(".form-control").popover({title: "Search Here", placement: "top"});
-   })
 </script>
 
 <body>
@@ -106,7 +91,7 @@ $(document).ready(function(){
 						<ul class="icons">
 							<!-- 일기쓰기 페이지 적용하였습니다. jsp를 바로 호출하고 있습니다. 컨트롤러를 통해서 이동하려면 경로를 수정해야 합니다. -->
 							<li><a href="diaryWrite" class="icon style2 fa-pencil-square-o"><span class="label">일기쓰기</span></a></li>
-							<li><a href="searchList" class="icon style2 fa-search"><span class="label">검색</span></a></li>
+							<li><a href="searchList" class="icon style2 fa-list-ul"><span class="label">검색</span></a></li>
 							
 							<!-- 감정 그래프 페이지 적용하였습니다. jsp를 바로 호출하고 있습니다. 컨트롤러를 통해서 이동하려면 경로를 수정해야 합니다. -->
 							<li><a href="chart" class="icon style2 fa-bar-chart"><span class="label">감정그래프</span></a></li>
@@ -124,11 +109,12 @@ $(document).ready(function(){
          <td >사용자메일</td>
          <c:forEach var="article" items="${articleList}">
          <tr>
-         <td>${article.regdate}</td>
-         <td>${article.title}</td>
-		  <td>${article.imagename}</td>
-		  <td>${article.emotion}</td>
-		  <td>${article.useremail}</td>
+         
+         <td id = "regdate">${article.regdate}</td>
+         <td id = "title">${article.title}</td>
+		  <td id = "imagename">${article.imagename}</td>
+		  <td id = "emotion">${article.emotion}</td>
+		  <td id = "useremail">${article.useremail}</td>
 		<tr>
       </tr></c:forEach>
    </table>
@@ -159,11 +145,19 @@ $(document).ready(function(){
       <label> Search </label>
          <div class="form-group">
             <div class="input-group">
-               <input type="text" class="form-control input-md" name="search">
+            <form method="post" action="searchList">
+            <select name="opt">
+            	<option value = "0">제목</option>
+            	<option value = "1">내용</option>
+            	<option value = "2">제목+내용</option>
+            	<option value = "3">감정</option>
+            	</select>
+               <input type="text" class="form-control input-md" name="condition">
                   <div class="input-group-btn">
-                     <button type="button" onclick="document.location.href='Search?'" class="btn btn-md btn-danger disabled"> 
+                     <button type="submit" name = "condition" class="btn btn-md btn-danger disabled"> 
                      <i class ="fa fa-search"></i></button>
                   </div>
+                  </form>
             </div>
          </div>
    </div>
@@ -254,7 +248,8 @@ $(document).ready(function(){
 
 			</div>
 		<!-- Scripts -->
-			<script src="/HugHug2/assets/assets_main/js/jquery.min.js"></script>
+		<script src="/HugHug2/assets/assets_main/js/jquery.min.js"></script>
+		
 			<script src="/HugHug2/assets/assets_main/js/jquery.poptrox.min.js"></script>
 			<script src="/HugHug2/assets/assets_main/js/skel.min.js"></script>
 			<script src="/HugHug2/assets/assets_main/js/main.js"></script>
