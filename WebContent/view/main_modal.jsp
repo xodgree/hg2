@@ -52,6 +52,7 @@ $(window).scroll(function() {
 });
 
 function getRecentDiary(articles) {
+ 
 /* 	<c:forEach var="article" items="${articles}" varStatus="status">
 	</c:forEach> */
 }
@@ -110,25 +111,32 @@ function test1(thumb) {
 </script>
 
 <body>
-	<!-- modal div -->
-	  <div id="diaryModal" class="w3-modal">
-	    <div class="w3-modal-content w3-card-4 w3-animate-opacity" style="width:50%; min-width:300px; max-width:500px;">
-	      <header class="w3-container w3-teal"> 
-	        <span onclick="document.getElementById('diaryModal').style.display='none'" 
-	        class="w3-button w3-display-topright">&times;</span>
-	        <h2>Modal Header</h2>
-	      </header>
-	      <div class="w3-center">
-	        <img id="diaryImage" style="width:100%;">
-	      </div>
-	      <footer class="w3-container w3-teal">
-	        <p>Modal FooterModal FooterModal FooterModal FooterModal FooterModal FooterModal FooterModal Footer</p>
-	        <p>Modal FooterModal FooterModal FooterModal FooterModal FooterModal FooterModal FooterModal Footer</p>
-	        <p>Modal FooterModal FooterModal FooterModal FooterModal FooterModal FooterModal FooterModal Footer</p>
-	        <p>Modal FooterModal FooterModal FooterModal FooterModal FooterModal FooterModal FooterModal Footer</p>
-	      </footer>
-	    </div>
-	  </div>
+<!-- modal div -->
+<div id="diaryModal" class="w3-modal">
+	<div class="w3-modal-content w3-card-4 w3-animate-opacity" style="width:50%; min-width:300px; max-width:500px;">
+		<header class="w3-container w3-teal"> 
+			<span onclick="document.getElementById('diaryModal').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+			<h2>Modal Title</h2>
+		</header>
+	
+		<div class="w3-center">
+			<img id="diaryImage" style="width:100%;">
+		</div>
+	
+		<!-- diary content -->	
+		<footer class="w3-container w3-teal">
+			<p>Modal FooterModal FooterModal FooterModal FooterModal FooterModal FooterModal FooterModal Footer</p>
+			<p>Modal FooterModal FooterModal FooterModal FooterModal FooterModal FooterModal FooterModal Footer</p>
+			<p>Modal FooterModal FooterModal FooterModal FooterModal FooterModal FooterModal FooterModal Footer</p>
+			<p>Modal FooterModal FooterModal FooterModal FooterModal FooterModal FooterModal FooterModal Footer</p>
+		</footer>
+	</div>
+	<div class="w3-bar w3-center w3-padding">
+		<button class="w3-button w3-teal">Confirm</button>
+		<button class="w3-button w3-teal">Rewrite</button>
+		<button class="w3-button w3-teal">Delete</button>
+	</div>
+</div>
 	  
 	<!-- Wrapper -->
 	<div id="wrapper">
@@ -213,8 +221,8 @@ function test1(thumb) {
 	<!-- 데이터베이스로부터 최근 일기 7개를 받아서 화면에 뿌려줍니다. -->
 	<c:forEach var="article" items="${articleList}">
 		<script type="text/javascript">
-			var article = generateArticle(${article.imagename}, ${article.regdate});
-			attachToPage(article);
+			/* var article = generateArticle(${article.imagename}, ${article.regdate});
+			attachToPage(article); */
 		</script>
 	</c:forEach>
 
