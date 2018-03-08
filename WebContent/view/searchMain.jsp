@@ -75,7 +75,7 @@ function test1(thumb) {
 						<span class="avatar"><a href="Main"><img src="/HugHug2/assets/assets_main/images/avatar.jpg" alt="" /></a></span>
 						<div style="margin-bottom:25px; margin-top:-20px;">
 						
-						<a href="${pageContext.request.contextPath}/board/mypage">mypage</a>
+						<a href="${pageContext.request.contextPath}/board/myPage">mypage</a>
 						 &nbsp;  &nbsp;  &nbsp;
 						<a href="${pageContext.request.contextPath}/board/Logout">logout</a>
 						</div>
@@ -162,83 +162,7 @@ function test1(thumb) {
          </div>
    </div>
 </div>
-				<section style="display:none">
-
-						<!-- Thumbnails -->
-							<section class="thumbnails">
-								<div>
-									<a id="dummy_thumb" href="/HugHug2/assets/assets_main/images/fulls/01.jpg">
-										<img src="/HugHug2/assets/assets_main/images/thumbs/01.jpg" alt="" />
-										<h3>2018 . 02 . 12 MON</h3>
-									</a>
-									<a href="/HugHug2/assets/assets_main/images/fulls/02.jpg">
-										<img src="/HugHug2/assets/assets_main/images/thumbs/02.jpg" alt="" />
-										<h3>2018 . 02 . 13 TUE</h3>
-									</a>
-								</div>
-								<div>
-									<a href="/HugHug2/assets/assets_main/images/fulls/03.jpg">
-										<img src="/HugHug2/assets/assets_main/images/thumbs/03.jpg" alt="" />
-										<h3>2018 . 02 . 14 WED</h3>
-									</a>
-									<a href="/HugHug2/assets/assets_main/images/fulls/05.jpg">
-										<img src="/HugHug2/assets/assets_main/images/thumbs/05.jpg" alt="" />
-										<h3>2018 . 02 . 16 FRI</h3>
-									</a>
-								</div>
-								<div>
-									<a href="/HugHug2/assets/assets_main/images/fulls/06.jpg">
-										<img src="/HugHug2/assets/assets_main/images/thumbs/06.jpg" alt="" />
-										<h3>2018 . 02 . 17 SAT</h3>
-									</a>
-									<a href="/HugHug2/assets/assets_main/images/fulls/07.jpg">
-										<img src="/HugHug2/assets/assets_main/images/thumbs/07.jpg" alt="" />
-										<h3>2018 . 02 . 18 SUN</h3>
-									</a>
-								</div>
-							</section>
-				</section>
-						
-					<section id="main">
-
-						<!-- Thumbnails -->
-							<section id="thumbnailImages" class="thumbnails">
-								<div id="thumb_container_row1">
-									<a href="/HugHug2/assets/assets_main/images/fulls/01.jpg">
-										<img src="/HugHug2/assets/assets_main/images/thumbs/01.jpg" alt="" />
-										<h3>2018 . 02 . 12 MON</h3>
-									</a>
-									<a href="/HugHug2/assets/assets_main/images/fulls/02.jpg">
-										<img src="/HugHug2/assets/assets_main/images/thumbs/02.jpg" alt="" />
-										<h3>2018 . 02 . 13 TUE</h3>
-									</a>
-								</div>
-								<div id="thumb_container_row2">
-									<a href="/HugHug2/assets/assets_main/images/fulls/03.jpg">
-										<img src="/HugHug2/assets/assets_main/images/thumbs/03.jpg" alt="" />
-										<h3>2018 . 02 . 14 WED</h3>
-									</a>
-									<a href="/HugHug2/assets/assets_main/images/fulls/04.jpg">
-										<img src="/HugHug2/assets/assets_main/images/thumbs/04.jpg" alt="" />
-										<h3>2018 . 02 . 15 THU</h3>
-									</a>
-									<a href="/HugHug2/assets/assets_main/images/fulls/05.jpg">
-										<img src="/HugHug2/assets/assets_main/images/thumbs/05.jpg" alt="" />
-										<h3>2018 . 02 . 16 FRI</h3>
-									</a>
-								</div>
-								 <div id="thumb_container_row3">
-									<a href="/HugHug2/assets/assets_main/images/fulls/06.jpg">
-										<img src="/HugHug2/assets/assets_main/images/thumbs/06.jpg" alt="" />
-										<h3>2018 . 02 . 17 SAT</h3>
-									</a>
-									<a href="/HugHug2/assets/assets_main/images/fulls/07.jpg">
-										<img src="/HugHug2/assets/assets_main/images/thumbs/07.jpg" alt="" />
-										<h3>2018 . 02 . 18 SUN</h3>
-									</a>
-								</div>
-							</section>
-					</section>
+				
 
 
 				<!-- Footer -->

@@ -26,7 +26,177 @@ import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 public class ProjectController extends Action{
+	//메인
+	public String Main(HttpServletRequest request,
+			HttpServletResponse response)  throws Throwable { 
+		HttpSession session = request.getSession();
+		String useremail = (String) session.getAttribute("userEmail");
+		 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+	     List articleList = null;
+	     DiaryDBBean dbPro = DiaryDBBean.getInstance();
+	     int count = 0;
+			 count = dbPro.getDataCount(useremail);
+			 
+			  if(count > 0){
+				  articleList = dbPro.articleList2(1, 7, useremail);}
+			  
+	     request.setAttribute("articleList", articleList);
+	     request.setAttribute("count", count);
+	     
+	    System.out.println(articleList);
+		return  "/view/main_modal.jsp"; 
+				} 
+	
+	//회원 탈퇴
+	public String memberDelete(HttpServletRequest request,
+			 HttpServletResponse response)  throws Throwable {
+		HttpSession session = request.getSession();
+		String useremail = (String) session.getAttribute("userEmail");
+		MemberDBBean member = MemberDBBean.getInstance();
+		member.deleteMypage(useremail);
+			response.sendRedirect("/HugHug2/board/login");
+			 return null; 
+			} 
+	//마이페이지 수정pro
+	public String myPageUpdatePro(HttpServletRequest request,
+			 HttpServletResponse response)  throws Throwable { 
+		HttpSession session = request.getSession();
+		String useremail = (String) session.getAttribute("userEmail");
+		String userName = MemberDBBean.getInstance().MainName(useremail);
+		session.setAttribute("userName", userName);
+		MemberDataBean member = new MemberDataBean();
+		member.setName(request.getParameter("name"));
+	
+		MemberDBBean dbPro = MemberDBBean.getInstance();
+		dbPro.updateMypage(member,useremail);
+		
+	
+			 return  "/board/myPage"; 
+			} 
+	
+	//마이페이지 수정
+		public String myPageUpdate(HttpServletRequest request,
+				 HttpServletResponse response)  throws Throwable { 
+			HttpSession session = request.getSession();
+			String useremail = (String) session.getAttribute("userEmail");
+			try{
+				MemberDBBean dbPro = MemberDBBean.getInstance();
+				MemberDataBean member = dbPro.getMember(useremail);
+				request.setAttribute("member", member);
+		
+			}catch(Exception e){
+				
+			}
+				 return  "/view/myPageUpdate.jsp"; 
+				} 
+		
+	//마이페이지
+	public String myPage(HttpServletRequest request,
+			 HttpServletResponse response)  throws Throwable { 
+		HttpSession session = request.getSession();
+		String useremail = (String) session.getAttribute("userEmail");
+		try{
+			MemberDBBean dbPro = MemberDBBean.getInstance();
+			MemberDataBean member = dbPro.getMember(useremail);
+			request.setAttribute("member", member);
+	
+		}catch(Exception e){
+			
+		}
+			 return  "/view/myPage.jsp"; 
+			} 
+	
+	//일기 수정
+	public String diaryUpdateForm(HttpServletRequest request,
+			 HttpServletResponse response)  throws Throwable { 
+	
+		//int num = Integer.parseInt(request.getParameter("num"));
+		int num = 104;
+		try{
+			DiaryDBBean dbPro = DiaryDBBean.getInstance();
+			DiaryDataBean diary = dbPro.getContent(num,"update");
+			request.setAttribute("diary", diary);
+			request.setAttribute("num", num);
+	
+		}catch(Exception e){
+			
+		}
+	
+			 return  "/view/diaryUpdateForm.jsp"; 
+			} 
+	
 
+	public String diaryUpdatePro(HttpServletRequest request, HttpServletResponse response)  throws Throwable { 
+		
+		/*
+		 <jsp:useBean id="member" class="memberDb.MemberDataBean">
+		<jsp:setProperty name = "member" property="*"/>
+		</jsp:useBean>
+			아래 처럼 바꿔줌.
+		 * */
+	HttpSession session = request.getSession();
+		
+		/*----- image upload -----*/
+		String realFolder = "";
+		String imagename = "";
+		int maxSize = 1024 * 1024 * 10;
+		String encType = "euc-kr";
+		String uploadPath = "images";
+		ServletContext scontext = getServletContext();
+		realFolder = scontext.getRealPath(uploadPath);
+		MultipartRequest multi = new MultipartRequest(request, realFolder, maxSize, encType, new DefaultFileRenamePolicy());
+		
+		try {
+			Enumeration<?> files = multi.getFileNames();
+			String nextfile = (String)files.nextElement();
+			imagename = multi.getFilesystemName(nextfile);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		//세션에 저장된 이메일 주소를 가져옴.
+		String useremail = (String) session.getAttribute("userEmail");
+				
+		/*
+		 * 일기 작성 누르면 여기로 옴.
+		 * 여기서는 db와 연결해서 작성한 데이터 db에 insert하고 난 다음. diaryWriteDb에서 코멘트 창을 띄어줌.
+		 * maindb로 보내서 리스트 받아서 뿌리게 한다음에 main으로 가게함.
+		 * */ 
+		//db와 연결해서 insert하기.
+		
+		
+		DiaryDataBean diary = new DiaryDataBean();
+		//diary.setNum(Integer.parseInt(request.getParameter("num")));
+		diary.setImagename(imagename);
+		diary.setContent(multi.getParameter("content"));
+		diary.setTitle(multi.getParameter("title"));
+		diary.setNum(104);
+		
+	
+	DiaryDBBean dbPro = DiaryDBBean.getInstance();
+	dbPro.update(diary);
+
+
+		/*DiaryDataBean diary = new DiaryDataBean();
+		diary.setTitle(request.getParameter("title"));
+		diary.setContent(request.getParameter("content"));
+		diary.setImagename(request.getParameter("imagename"));
+		//diary.setNum(Integer.parseInt(request.getParameter("num")));
+		diary.setNum(104);
+		DiaryDBBean dbPro = DiaryDBBean.getInstance();
+		dbPro.update(diary);*/
+		return  "/view/diaryUpdatePro.jsp"; 
+		}
+	
+		//일기 삭제
+		public String DeletediaryPro(HttpServletRequest request,
+				 HttpServletResponse response)  throws Throwable {
+
+			int num = Integer.parseInt(request.getParameter("num")); //deleteForm 에서 넘어온 데이터
+			DiaryDBBean diary = DiaryDBBean.getInstance();
+			diary.delete(num);
+				 return  "/board/Main"; 
+				}
 		//검색 게시판
 		public String searchList(HttpServletRequest request, HttpServletResponse response)  throws Throwable { 
 			HttpSession session = request.getSession();
@@ -60,6 +230,7 @@ public class ProjectController extends Action{
 
 			   number=count - (currentPage-1)*pageSize;
 			   System.out.println("number=="+number);
+			
 			
 			//페이지 처리
 			   int bottomLine =3;
@@ -191,24 +362,7 @@ public String read(HttpServletRequest request,
 	return  "/view/read.jsp"; 
 			}  
 	
-public String Main(HttpServletRequest request,
-		HttpServletResponse response)  throws Throwable { 
-	HttpSession session = request.getSession();
-	String useremail = (String) session.getAttribute("userEmail");
-	 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-     List articleList = null;
-     DiaryDBBean dbPro = DiaryDBBean.getInstance();
-     int count = 0;
-		 count = dbPro.getDataCount(useremail);
-		 
-		  if(count > 0){
-			  articleList = dbPro.articleList2(1, 7, useremail);}
-		  
-     request.setAttribute("articleList", articleList);
-     request.setAttribute("count", count);
-    System.out.println(articleList);
-	return  "/view/main_modal.jsp"; 
-			} 
+
 
 	//일기 쓰기
 public String diaryWrite(HttpServletRequest request, HttpServletResponse response)  throws Throwable { 

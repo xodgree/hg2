@@ -73,11 +73,11 @@
 							</a>
 						</div>
 
-						<div class = "col-4 centered-text">
+						<!-- <div class = "col-4 centered-text">
 							<a href="findPasswd" class="txt2">
 								비밀번호 찾기
 							</a>						
-						</div>
+						</div> -->
 					</div>
 				</form>
 			</div>

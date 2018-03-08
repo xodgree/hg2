@@ -121,7 +121,7 @@ function test1(thumb) {
 		</div>
 		<div class="w3-bar w3-center w3-padding txt_ko">
 			<button class="w3-button w3-teal" onclick="document.getElementById('diaryModal').style.display='none'">Confirm</button>
-			<button class="w3-button w3-teal">Rewrite</button>
+			<button class="w3-button w3-teal" onclick="location.href = 'diaryUpdateForm'">Rewrite</button>
 			<button class="w3-button w3-teal" onclick="document.getElementById('confirmModal').style.display='block'">Delete</button>
 		</div>
 	</div>
@@ -134,11 +134,11 @@ function test1(thumb) {
 			</div>
 			<div class="w3-bar w3-center w3-padding">
 				<button class="w3-button w3-teal"onclick="document.getElementById('confirmModal').style.display='none'">No</button>
-				<button class="w3-button w3-red" onclick="document.getElementById('confirmModal').style.display='none'; document.getElementById('diaryModal').style.display='none';">Yes</button>
+				<button class="w3-button w3-red" onclick="document.getElementById('confirmModal').style.display='none'; document.getElementById('diaryModal').style.display='none'; location.href = 'DeletediaryPro?num=${article.num}';" >Yes</button>
 			</div>
 		</div>
 		
-	</div>
+	</div> 
 	
 	<!-- Wrapper -->
 	<div id="wrapper">
@@ -148,7 +148,7 @@ function test1(thumb) {
 			<span class="avatar"><a href="Main"><img src="/HugHug2/assets/assets_main/images/avatar.jpg" alt="" /></a></span>
 			<div style="margin-bottom:25px; margin-top:-20px;">
 			
-			<a href="${pageContext.request.contextPath}/board/mypage">mypage</a>
+			<a href="${pageContext.request.contextPath}/board/myPage">mypage</a>
 			 &nbsp;  &nbsp;  &nbsp;
 			<a href="${pageContext.request.contextPath}/board/Logout">logout</a>
 			</div>
@@ -225,9 +225,13 @@ function test1(thumb) {
 	</section>
 
 	<!-- 데이터베이스로부터 최근 일기 7개를 받아서 화면에 뿌려줍니다. -->
+		<c:if test="${articleList == null}">
+			<div style="text-align:center"><span style="font-size: 20pt">
+					데이터가 없습니다. 일기를 써주세용!</span></div>
+	</c:if>
 	<c:forEach var="article" items="${articleList}">
 		<script type="text/javascript">
-			attachToPage("${article.imagename}", "${article.regdate}", "${article.title}", "${article.content}");
+			attachToPage("${article.imagename}", "${article.regdate}", "${article.title}", "${article.content}", "${article.num}");
 		</script>
 	</c:forEach>
 

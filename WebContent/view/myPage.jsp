@@ -29,74 +29,53 @@
 	<link rel="stylesheet" type="text/css" href="/HugHug2/assets/assets_signup/css/util.css">
 	<link rel="stylesheet" type="text/css" href="/HugHug2/assets/assets_signup/css/main.css">
 <!--===============================================================================================-->
-<title>signUp</title>
+<title>Mypage</title>
 </head>
 
 <body>
 	<div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100 p-l-50 p-r-50 p-t-72 p-b-50">
-				<form class="login100-form validate-form" method = "post" name ="writeform" action="signUpDb">
+				<form class="login100-form validate-form" method = "post" name ="myPage" action="myPageUpdate">
 					<span class="login100-form-title p-b-59">
-						Sign Up
+						My Page
 					</span>
 					
-					 <input type ="hidden" name = "num" value ="${num}">
 					 
 					<div class="wrap-input100 validate-input" data-validate="Name is required">
 						<span class="label-input100">Username</span>
-						<!-- ����� ���� input -->
-						<input class="input100" type="text" name="name" placeholder="Name...">
+	
+						<p>
+						<br>
+						${member.name}
 						<span class="focus-input100"></span>
 					</div>
 
 					<div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
 						<span class="label-input100">Email</span>
-						<!-- ����� �̸��� input -->
-						<input class="input100" type="text" name="email" placeholder="Email addess...">
+				
+						<p>
+						<br>
+						${member.email}
 						<span class="focus-input100"></span>
 					</div>
 
-					<div class="wrap-input100 validate-input" data-validate = "Password is required">
-						<span class="label-input100">Password</span>
-						<!-- ����� ��й�ȣ input -->
-						<input class="input100" type="password" name="passwd" placeholder="*************">
-						<span class="focus-input100"></span>
-					</div>
 
-					<div class="wrap-input100 validate-input" data-validate = "Repeat Password is required">
-						<span class="label-input100">Repeat Password</span>
-						<!-- ����� ��й�ȣ ��Ȯ�� input -->
-						<input class="input100" type="password" name="re_passwd" placeholder="*************">
-						<span class="focus-input100"></span>
-					</div>
-
-					<div class="flex-m w-full p-b-33">
-						<div class="contact100-form-checkbox">
-							<input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
-							<label class="label-checkbox100" for="ckb1">
-								<span class="txt1">
-									I agree to the
-									<a href="#" class="txt2 hov1">
-										Terms of User
-									</a>
-								</span>
-							</label>
-						</div>
-					</div>
+		
 
 					<div class="container-login100-form-btn">
 						<div class="wrap-login100-form-btn">
 							<div class="login100-form-bgbtn"></div>
-							<!-- ȸ������ "���" ��ư  -->
+			
 							<button class="login100-form-btn">
-								Sign Up
+								����
 							</button>
 						</div>
+						
 
-						<!-- login �������� ���ư��� ��ũ -->
-						<a href="login" class="dis-block txt3 hov1 p-r-30 p-t-10 p-b-10 p-l-30">
-							Sign in
+	
+						<a href="Main" class="dis-block txt3 hov1 p-r-30 p-t-10 p-b-10 p-l-30">
+							Main
 							<i class="fa fa-long-arrow-right m-l-5"></i>
 						</a>
 					</div>

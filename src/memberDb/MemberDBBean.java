@@ -203,6 +203,38 @@ public class MemberDBBean {
 			}
 		}
 		
+		//회원 보기 메소드 (getArticle)
+				public MemberDataBean getMember(String useremail) {
+					Connection conn = null;
+					PreparedStatement pstmt = null;
+					ResultSet rs = null;
+					MemberDataBean member = null;
+					String sql ="";
+					try {
+						conn = getConnection();
+						sql = "select * from members where email =?";
+						pstmt = conn.prepareStatement(sql);
+						pstmt.setString(1, useremail);
+						rs = pstmt.executeQuery();
+						
+						if(rs.next()) {
+							member = new MemberDataBean();
+							member.setNum(rs.getInt("num"));
+							member.setEmail(rs.getString("email"));
+							member.setName(rs.getString("name"));
+							member.setPasswd(rs.getString("passwd"));
+							member.setRegdate(rs.getTimestamp("regdate"));
+				
+						}
+					}catch(Exception e) {
+						e.printStackTrace();
+					}finally {
+						close(conn,rs,pstmt);
+					}
+					return member;
+					
+				}
+		
 		//글 보기 메소드 (getArticle)
 		public MemberDataBean getContent(int num,String chk) {
 			Connection conn = null;
@@ -234,6 +266,26 @@ public class MemberDBBean {
 			return member;
 			
 		}
+		
+		//글 수정 메소드
+				public void updateMypage(MemberDataBean member,String useremail) {
+					Connection conn =null;
+					PreparedStatement pstmt = null;
+					int pwdck = 0;	//비밀번호 체크?
+					try {
+						conn = getConnection();
+						String sql = "update members set name=? where email = ?";
+						pstmt = conn.prepareStatement(sql);
+						pstmt.setString(1, member.getName());
+						pstmt.setString(2, useremail);
+						pwdck = pstmt.executeUpdate();
+					}catch(Exception e) {
+						e.printStackTrace();
+					}finally {
+						close(conn,null,pstmt);
+					}
+					return ;
+				}
 		
 		//글 수정 메소드
 		public int updatemember(MemberDataBean member) {
@@ -276,6 +328,25 @@ public class MemberDBBean {
 				close(conn,rs,pstmt);
 			}return x;
 		}
+		//마이페이지에서 탈퇴 메소드
+				public int deleteMypage(String useremail)throws Exception{
+					Connection conn = null;
+					PreparedStatement pstmt = null;
+					ResultSet rs = null;
+					String sql = "delete from members where email=?";
+					int x = -1;
+					try {
+						conn = getConnection();
+						pstmt = conn.prepareStatement(sql);
+						pstmt.setString(1, useremail);
+						x = pstmt.executeUpdate();
+					}catch(Exception ex) {
+						ex.printStackTrace();
+					}finally {
+						close(conn,rs,pstmt);
+					}return x;
+				}
+		
 		//로그인 메소드
 		public int login(String inputEmail,String inputPasswd)throws Exception{
 			Connection conn = null;

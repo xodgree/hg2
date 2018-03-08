@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+
 public class DiaryDBBean {
 	//싱글톤
 	private static DiaryDBBean instance = new DiaryDBBean();	//객체 생성, 레퍼런스변수 static 설정 -> 1개로 공유.
@@ -46,7 +47,44 @@ public class DiaryDBBean {
 		   // 접속 정보를 return합니다.
 		   return con;
 		   }
-	
+	//삭제 메소드
+		public int delete(int num) {
+			Connection conn = null;
+			String sql = "delete from diarys where num = ?";
+			PreparedStatement ps = null;
+			int result = -1;
+			conn = getConnection();
+			try {
+				ps = conn.prepareStatement(sql);
+				ps.setInt(1, num);
+				result = ps.executeUpdate();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return result;
+		}
+		
+		//수정 메소드
+		public int update(DiaryDataBean diary) {
+			Connection con = null;
+			String sql = "update diarys set title = ?,content=?,imagename=? where num = ?";
+			PreparedStatement ps = null;
+			con = getConnection();
+			int result = -1;
+			try {
+				ps = con.prepareStatement(sql);
+				ps.setString(1, diary.getTitle());
+				ps.setString(2, diary.getContent());
+				ps.setString(3, diary.getImagename());
+				ps.setInt(4, diary.getNum());
+				result = ps.executeUpdate();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return result;
+		}
 /*	//Count 세는 메소드 1
 			public int getDataCount() {
 //				String sql = "select nvl(count(*),0) from diarys";
@@ -433,6 +471,8 @@ public class DiaryDBBean {
 				}catch(SQLException ex) {
 			}
 		}
+		
+		
 		
 		//글 보기 메소드 (getArticle)
 				public DiaryDataBean getContent(int num,String chk) {
