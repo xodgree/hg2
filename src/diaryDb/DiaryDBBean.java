@@ -28,9 +28,9 @@ public class DiaryDBBean {
 		   Connection con = null;			
 		   try {
 			   //DB의 URL,계정ID,PW
-		      String jdbcUrl = "jdbc:oracle:thin:@localhost:1521:xe";	
-		      String dbUser = "mooneegee";
-		      String dbPass = "1227";
+		      String jdbcUrl = "jdbc:oracle:thin:@localhost:1521:orcl";	
+		      String dbUser = "scott";
+		      String dbPass = "tiger";
 		      
 		      // 리플렌션(reflection) 동적 로딩에 대한 코드
 		      Class.forName("oracle.jdbc.driver.OracleDriver");

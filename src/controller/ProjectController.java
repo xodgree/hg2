@@ -1,5 +1,5 @@
 package controller;
-//ÄÁÆ®·Ñ·¯
+
 import java.text.SimpleDateFormat;
 import java.util.Enumeration;
 import java.util.List;
@@ -31,7 +31,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 
 public class ProjectController extends Action{
-	//¸ÞÀÎ
+
 	public String Main(HttpServletRequest request,
 			HttpServletResponse response)  throws Throwable { 
 		HttpSession session = request.getSession();
@@ -52,7 +52,7 @@ public class ProjectController extends Action{
 		return  "/view/main_modal.jsp"; 
 				} 
 	
-	//È¸¿ø Å»Åð
+
 	public String memberDelete(HttpServletRequest request,
 			 HttpServletResponse response)  throws Throwable {
 		HttpSession session = request.getSession();
@@ -65,7 +65,7 @@ public class ProjectController extends Action{
 			 
 		return "/board/login"; 
 			} 
-	//¸¶ÀÌÆäÀÌÁö ¼öÁ¤pro
+
 	public String myPageUpdatePro(HttpServletRequest request,
 			 HttpServletResponse response)  throws Throwable { 
 		HttpSession session = request.getSession();
@@ -83,7 +83,7 @@ public class ProjectController extends Action{
 			 return  "/board/myPage"; 
 			} 
 	
-	//¸¶ÀÌÆäÀÌÁö ¼öÁ¤
+
 		public String myPageUpdate(HttpServletRequest request,
 				 HttpServletResponse response)  throws Throwable { 
 			HttpSession session = request.getSession();
@@ -99,7 +99,7 @@ public class ProjectController extends Action{
 				 return  "/view/myPageUpdate.jsp"; 
 				} 
 		
-	//¸¶ÀÌÆäÀÌÁö
+	
 	public String myPage(HttpServletRequest request,
 			 HttpServletResponse response)  throws Throwable { 
 		HttpSession session = request.getSession();
@@ -115,7 +115,7 @@ public class ProjectController extends Action{
 			 return  "/view/myPage.jsp"; 
 			} 
 	
-	//ÀÏ±â ¼öÁ¤
+	
 	public String diaryUpdateForm(HttpServletRequest request,
 			 HttpServletResponse response)  throws Throwable { 
 	
@@ -142,7 +142,7 @@ public class ProjectController extends Action{
 		 <jsp:useBean id="member" class="memberDb.MemberDataBean">
 		<jsp:setProperty name = "member" property="*"/>
 		</jsp:useBean>
-			¾Æ·¡ Ã³·³ ¹Ù²ãÁÜ.
+			
 		 * */
 	HttpSession session = request.getSession();
 		
@@ -164,15 +164,9 @@ public class ProjectController extends Action{
 			e.printStackTrace();
 		}
 		
-		//¼¼¼Ç¿¡ ÀúÀåµÈ ÀÌ¸ÞÀÏ ÁÖ¼Ò¸¦ °¡Á®¿È.
 		String useremail = (String) session.getAttribute("userEmail");
 				
-		/*
-		 * ÀÏ±â ÀÛ¼º ´©¸£¸é ¿©±â·Î ¿È.
-		 * ¿©±â¼­´Â db¿Í ¿¬°áÇØ¼­ ÀÛ¼ºÇÑ µ¥ÀÌÅÍ db¿¡ insertÇÏ°í ³­ ´ÙÀ½. diaryWriteDb¿¡¼­ ÄÚ¸àÆ® Ã¢À» ¶ç¾îÁÜ.
-		 * maindb·Î º¸³»¼­ ¸®½ºÆ® ¹Þ¾Æ¼­ »Ñ¸®°Ô ÇÑ´ÙÀ½¿¡ mainÀ¸·Î °¡°ÔÇÔ.
-		 * */ 
-		//db¿Í ¿¬°áÇØ¼­ insertÇÏ±â.
+		
 		
 		
 		DiaryDataBean diary = new DiaryDataBean();
@@ -197,22 +191,22 @@ public class ProjectController extends Action{
 		return  "/view/diaryUpdatePro.jsp"; 
 		}
 	
-		//ÀÏ±â »èÁ¦
+		
 		public String DeletediaryPro(HttpServletRequest request,
 				 HttpServletResponse response)  throws Throwable {
 
-			int num = Integer.parseInt(request.getParameter("num")); //deleteForm ¿¡¼­ ³Ñ¾î¿Â µ¥ÀÌÅÍ
+			int num = Integer.parseInt(request.getParameter("num")); //deleteForm 
 			DiaryDBBean diary = DiaryDBBean.getInstance();
 			diary.delete(num);
 				 return  "/board/Main"; 
 				}
-		//°Ë»ö °Ô½ÃÆÇ
+		
 		public String searchList(HttpServletRequest request, HttpServletResponse response)  throws Throwable { 
 			HttpSession session = request.getSession();
 			String useremail = (String) session.getAttribute("userEmail");
 			String boardid = request.getParameter("boardid");
-			String opt = request.getParameter("opt");//°Ë»ö¿É¼Ç Á¦¸ñ,³»¿ë,°¨Á¤
-			String condition = request.getParameter("condition");//°Ë»ö³»¿ë
+			String opt = request.getParameter("opt");
+			String condition = request.getParameter("condition");
 
 			   if(boardid == null)
 				   boardid ="1";
@@ -241,7 +235,7 @@ public class ProjectController extends Action{
 			   System.out.println("number=="+number);
 			
 			
-			//ÆäÀÌÁö Ã³¸®
+			
 			   int bottomLine =3;
 			   int pageCount=count/pageSize+(count%pageSize==0?0:1);
 			   int startPage = 1+(currentPage-1)/bottomLine*bottomLine;
@@ -266,59 +260,7 @@ public class ProjectController extends Action{
 			   return "/view/searchMain.jsp";
 		}
 		
-		/*°Ë»ö °Ô½ÃÆÇ
-		public String searchList(HttpServletRequest request, HttpServletResponse response)  throws Throwable { 
-			HttpSession session = request.getSession();
-			String useremail = (String) session.getAttribute("userEmail");
-			String boardid = request.getParameter("boardid");
-	
-
-			   if(boardid == null)
-				   boardid ="1";
-
-			   int pageSize=5;
-			   SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-			   String pageNum = request.getParameter("pageNum");
-			   if(pageNum==null || pageNum==""){
-			      pageNum = "1";}
-			   int currentPage = Integer.parseInt(pageNum);
-			   int startRow = (currentPage-1)*pageSize+1;
-			   int endRow = currentPage* pageSize;
-			   int count = 0;
-			   int number = 0;
-			   
-			   List articleList = null;
-			  DiaryDBBean dbPro = DiaryDBBean.getInstance();
-			   count = dbPro.getDataCount(useremail);
-			   if(count > 0){
-				   
-				   System.out.println("startRow==="+startRow);
-				   System.out.println("startRow==="+endRow);
-			      articleList = dbPro.articleList(startRow, endRow, useremail);}
-
-			   number=count - (currentPage-1)*pageSize;
-			   System.out.println("number=="+number); */
-	
-/*	//°Ë»ö ½Ã
-	public String searchMain(HttpServletRequest request,
-			HttpServletResponse response)  throws Throwable { 
-		HttpSession session = request.getSession();
-		String useremail = (String) session.getAttribute("userEmail");
-		 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-	     List articleList = null;
-	     DiaryDBBean dbPro = DiaryDBBean.getInstance();
-	     int count = 0;
-			 count = dbPro.getDataCount(useremail, 1, 7);
-			 
-			  if(count > 0){
-				  articleList = dbPro.articleList2(1, 7, useremail);}
-			  
-	     request.setAttribute("articleList", articleList);
-	     request.setAttribute("count", count);
-	    System.out.println(articleList);
-		 return "/view/searchMain.jsp";
-			}*/
-//Â÷Æ®
+		
 	
 	public String chart(HttpServletRequest request,
 			HttpServletResponse response)  throws Throwable { 
@@ -357,25 +299,24 @@ public class ProjectController extends Action{
 		for(int i = 0; i < list.size(); i++) {
 			DiaryDataBean bean = (DiaryDataBean)list.get(i);
 			
-			if(bean.getEmotion() == "기쁨")
+			if(bean.getEmotion() == "���")
 				joy += 1; 
-			else if (bean.getEmotion() == "보통")
+			else if (bean.getEmotion() == "����")
 				soso += 1;
-			else if (bean.getEmotion() == "나쁨")
+			else if (bean.getEmotion() == "����")
 				sad += 1;
 			
 			System.out.println(i);
 		}
 		
 		JsonObject data = new JsonObject();
-		data.addProperty("기쁨", Integer.toString(joy));
-		data.addProperty("보통", Integer.toString(soso));
-		data.addProperty("나쁨", Integer.toString(sad));
+		data.addProperty("���", Integer.toString(joy));
+		data.addProperty("����", Integer.toString(soso));
+		data.addProperty("����", Integer.toString(sad));
 		
 		return data.toString();
 	}
 	
-//ÀÏ±â 7°³ »Ñ¸®±â.	
 	public String sevenList(HttpServletRequest request,
 			HttpServletResponse response)  throws Throwable { 
 		HttpSession session = request.getSession();
@@ -394,10 +335,9 @@ public class ProjectController extends Action{
            System.out.println(articleList);
 	        return "/view/list.jsp";
 	     }	
-//ÀÏ±â º¸´Â ÆäÀÌÁö
 public String read(HttpServletRequest request,
 		HttpServletResponse response)  throws Throwable {
-	//ÀÏ±â ¹Þ¾Æ¿Í¼­ »Ñ¸®±â
+
 	//int num =Integer.parseInt(request.getParameter("num"));
 	int num = 1;
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm");
@@ -416,14 +356,12 @@ public String read(HttpServletRequest request,
 	
 
 
-	//ÀÏ±â ¾²±â
 public String diaryWrite(HttpServletRequest request, HttpServletResponse response)  throws Throwable { 
 	HttpSession session = request.getSession();
 	/*int num = 0;
 	if(request.getParameter("num")!=null){
 		num = Integer.parseInt(request.getParameter("num"));
 	};*/
-	//useremailµµ º¸³»¾ßÇÔ.
 	String useremail = (String) session.getAttribute("userEmail");
 	
 	request.setAttribute("useremail", useremail);
@@ -431,7 +369,6 @@ public String diaryWrite(HttpServletRequest request, HttpServletResponse respons
 		return  "/view/diaryWrite.jsp"; 
 		} 
 	
-//ÀÏ±â ¾²±â pro
 	public String diaryWritePro(HttpServletRequest request, HttpServletResponse response)  throws Throwable { 
 		request.setCharacterEncoding("euc-kr");
 		HttpSession session = request.getSession();
@@ -454,15 +391,7 @@ public String diaryWrite(HttpServletRequest request, HttpServletResponse respons
 			e.printStackTrace();
 		}
 		
-		//¼¼¼Ç¿¡ ÀúÀåµÈ ÀÌ¸ÞÀÏ ÁÖ¼Ò¸¦ °¡Á®¿È.
 		String useremail = (String) session.getAttribute("userEmail");
-				
-		/*
-		 * ÀÏ±â ÀÛ¼º ´©¸£¸é ¿©±â·Î ¿È.
-		 * ¿©±â¼­´Â db¿Í ¿¬°áÇØ¼­ ÀÛ¼ºÇÑ µ¥ÀÌÅÍ db¿¡ insertÇÏ°í ³­ ´ÙÀ½. diaryWriteDb¿¡¼­ ÄÚ¸àÆ® Ã¢À» ¶ç¾îÁÜ.
-		 * maindb·Î º¸³»¼­ ¸®½ºÆ® ¹Þ¾Æ¼­ »Ñ¸®°Ô ÇÑ´ÙÀ½¿¡ mainÀ¸·Î °¡°ÔÇÔ.
-		 * */ 
-		//db¿Í ¿¬°áÇØ¼­ insertÇÏ±â.
 		
 		
 		DiaryDataBean diary = new DiaryDataBean();
@@ -472,17 +401,10 @@ public String diaryWrite(HttpServletRequest request, HttpServletResponse respons
 		diary.setContent(multi.getParameter("content"));
 		diary.setTitle(multi.getParameter("title"));
 
-		System.out.println("ÀÌ¹ÌÁö11==="+imagename);
-		System.out.println("ÀÌ¹ÌÁö22==="+multi.getParameter("emotion"));
-		System.out.println("ÀÌ¹ÌÁö33==="+useremail);
-		System.out.println("ÀÌ¹ÌÁö44==="+multi.getParameter("content"));
-		System.out.println("ÀÌ¹ÌÁö44==="+multi.getParameter("title"));
 	
 	DiaryDBBean dbPro = DiaryDBBean.getInstance();
 		dbPro.insertArticle(diary,useremail);
 		String emotion = diary.getEmotion();
-		//request.setAttribute("emotion", emotion);	//°¨Á¤ º¸³¿.
-		//°¨Á¤ ÄÚ¸àÆ®
 		List commentList = dbPro.commentList(emotion);
 		Random r = new Random();
 		int commentnum = r.nextInt(commentList.size());
@@ -493,14 +415,12 @@ public String diaryWrite(HttpServletRequest request, HttpServletResponse respons
 	
 	
 	
-	//¸ÞÀÎ(·Î±×ÀÎÈ­¸é)
 	public String login(HttpServletRequest request, HttpServletResponse response)  throws Throwable { 
 		//request.getSession().invalidate();
 		
 		return  "/view/login.jsp"; 
 			} 
 	
-	//·Î±×ÀÎ È®ÀÎ
 	public String LoginDb(HttpServletRequest request, HttpServletResponse response)  throws Throwable {
 		String inputEmail = null;
 		String inputPasswd = null;
@@ -512,12 +432,10 @@ public String diaryWrite(HttpServletRequest request, HttpServletResponse respons
 			Object tempEmail = session.getAttribute("userEmail");
 			Object tempPass = session.getAttribute("userPasswd");
 			
-			// ¸¸¾à ·Î±×ÀÎÀÌ ¼º°øµÇ¾î¼­ inputEmailÀÌ ÀÖ´Ù¸é
 			if( tempEmail != null && tempPass != null) {
 				inputEmail = tempEmail.toString();
 				inputPasswd = tempPass.toString();
 			} else {
-				// ·Î±×ÀÎ È­¸é¿¡¼­ ³Ñ¾î¿Ã °æ¿ì¿¡´Â ÆÄ¶ó¹ÌÅÍ·Î Àü´ÞÇÏ±â ¶§¹®¿¡
 				inputEmail = request.getParameter("inputEmail");
 				inputPasswd = request.getParameter("inputPasswd");
 			}
@@ -532,15 +450,8 @@ public String diaryWrite(HttpServletRequest request, HttpServletResponse respons
 		}
 		
 		if(result == 1){
-			/* result°¡ 1ÀÌ ¸Â°í, emailÀÌ admin@hughug.comÀÌ¸é È¸¿ø°ü¸® ÆäÀÌÁö·Î º¸³À´Ï´Ù. 
-			result°¡ 1ÀÌ ¸Â°í, emailÀÌ adimÀÌ ¾Æ´Ï¸é ¸ÞÀÎ.jsp·Î ÀÌµ¿ÇÕ´Ï´Ù. */
-			
-			// ·Î±×ÀÎÀÌ ¼º°øÇÏ¸é attribute¸¦ ¼³Á¤ÇØÁÝ´Ï´Ù.
-			// admin, user ¸ðµÎ
 			String userName = MemberDBBean.getInstance().MainName(inputEmail);
 			
-			// ·Î±×ÀÎ ¼º°øÇÏ¸é ¿©±â¼­ ¾îÆ®¸®ºäÆ® ÁöÁ¤ÇÕ´Ï´Ù.
-			// userEmail, userName, userPasswd Ç×¸ñÀ¸·Î getAttribute¸¦ ¹Þ½À´Ï´Ù.
 			session.setAttribute("userEmail", inputEmail);
 			session.setAttribute("userName", userName);
 			session.setAttribute("userPasswd", inputPasswd);
@@ -553,14 +464,12 @@ public String diaryWrite(HttpServletRequest request, HttpServletResponse respons
 			}
 		}
 		else {
-			// ·Î±×ÀÎ ½ÇÆÐÇÒ ¶§
 			request.setAttribute("result", result);
 			return  "/view/loginDb.jsp"; 
 		} 
 		
 	}
 	
-	//È¸¿ø°¡ÀÔ
 	public String signUp(HttpServletRequest request,
 			 HttpServletResponse response)  throws Throwable { 
 		int num = 0;
@@ -571,7 +480,6 @@ public String diaryWrite(HttpServletRequest request, HttpServletResponse respons
 			 return  "/view/signUp.jsp"; 
 			} 
 	
-	//È¸¿ø°¡ÀÔ action
 	public String signUpDb(HttpServletRequest request,
 			 HttpServletResponse response)  throws Throwable {
 		MemberDataBean member = new MemberDataBean();
@@ -586,8 +494,6 @@ public String diaryWrite(HttpServletRequest request, HttpServletResponse respons
 			 return  "/view/login.jsp"; 
 			} 	
 	
-//È¸¿ø°ü¸® °Ô½ÃÆÇ
-	//¸ñ·Ï
 	public String list(HttpServletRequest request, HttpServletResponse response)  throws Throwable { 
 
 		String boardid = request.getParameter("boardid");
@@ -611,7 +517,6 @@ public String diaryWrite(HttpServletRequest request, HttpServletResponse respons
 		      articleList = dbPro.articleList(startRow, endRow);}
 		         number=count - (currentPage-1)*pageSize;
 		
-		//ÆäÀÌÁö Ã³¸®
 		   int bottomLine =3;
 		   int pageCount=count/pageSize+(count%pageSize==0?0:1);
 		   int startPage = 1+(currentPage-1)/bottomLine*bottomLine;
@@ -631,12 +536,10 @@ public String diaryWrite(HttpServletRequest request, HttpServletResponse respons
 		   return "/mb_view/list.jsp";
 	}
 	
-	//È¸¿øº¸±â
 	public String viewContent(HttpServletRequest request,
 			 HttpServletResponse response)  throws Throwable { 
 		
 		int num =Integer.parseInt(request.getParameter("num"));
-		//ÆäÀÌÁö ¹øÈ£ ³Ñ±â±â
 		String pageNum = request.getParameter("pageNum");
 		if(pageNum == null || pageNum == ""){
 			pageNum = "1";
@@ -655,7 +558,6 @@ public String diaryWrite(HttpServletRequest request, HttpServletResponse respons
 		return  "/mb_view/viewContent.jsp"; 
 	}
 	
-	//¼öÁ¤
 	public String updateForm(HttpServletRequest request,
 			 HttpServletResponse response)  throws Throwable { 
 	
@@ -675,12 +577,7 @@ public String diaryWrite(HttpServletRequest request, HttpServletResponse respons
 	
 	
 	public String updatePro(HttpServletRequest request, HttpServletResponse response)  throws Throwable { 
-		/*
-		 <jsp:useBean id="member" class="memberDb.MemberDataBean">
-		<jsp:setProperty name = "member" property="*"/>
-		</jsp:useBean>
-			¾Æ·¡ Ã³·³ ¹Ù²ãÁÜ.
-		 * */
+
 		
 		MemberDataBean member = new MemberDataBean();
 		member.setEmail(request.getParameter("email"));
@@ -700,7 +597,6 @@ public String diaryWrite(HttpServletRequest request, HttpServletResponse respons
 		return  "/mb_view/updatePro.jsp"; 
 		}
 	
-	//»èÁ¦
 	public String deleteForm(HttpServletRequest request,
 			 HttpServletResponse response)  throws Throwable { 
 		
@@ -721,7 +617,7 @@ public String diaryWrite(HttpServletRequest request, HttpServletResponse respons
 		if(pageNum==null || pageNum==""){
 		   pageNum = "1";   }
 
-		int num = Integer.parseInt(request.getParameter("num")); //deleteForm ¿¡¼­ ³Ñ¾î¿Â µ¥ÀÌÅÍ
+		int num = Integer.parseInt(request.getParameter("num")); 
 		String passwd = request.getParameter("passwd");
 		MemberDBBean dbPro = MemberDBBean.getInstance();
 		int check = dbPro.deletemember(num, passwd);
@@ -732,13 +628,12 @@ public String diaryWrite(HttpServletRequest request, HttpServletResponse respons
 			 return  "/mb_view/deletePro.jsp"; 
 			}
 	
-	//°Ë»ö
 	public String Search(HttpServletRequest request,
 			 HttpServletResponse response)  throws Throwable { 
 			 return  "/mb_view/Search.jsp"; 
 			} 
 	
-	//·Î±×¾Æ¿ô
+	
 	public String Logout(HttpServletRequest request,
 			 HttpServletResponse response)  throws Throwable { 
 		request.getSession().invalidate();
