@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
-<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-
 <html>
 
 <head>
@@ -13,10 +11,14 @@
 	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 	
 	<style>
+	canvas{
+		-moz-user-select: none;
+		-webkit-user-select: none;
+		-ms-user-select: none;
+	}
 	.center {
 	    margin: auto;
 	    width: 50%;
-	    border: 3px solid green;
 	    padding: 30px;
 	}
 	body {
@@ -44,62 +46,55 @@
 	</style>
 </head>
 
-<script>
-function addData() {
-	var wChart = document.getElementById('weekly-chart-area');
-}
-
-function removeData(chart) {
-	/* var wChart = document.getElementById('weekly-chart-area'); */
-	wChart.data.labels.pop();
-}
-</script>
-
 <body class="txt_ko">
-	<h1 class="chart_title">통통해</h1>
+	<h1 class="chart_title">지금까지 나는</h1>
 	<div class="w3-padding center">
 		<div class="w3-padding">
-			
-			<canvas id="weekly-chart-area" width="50%">
-				
-			</canvas>
+			<canvas id="weekly-chart-area" width="50%"></canvas>
 		</div>
-		
+		<div class="w3-margin"></div>
 		<div class="w3-padding">
 			<canvas id="monthly-chart-area" width="50%"></canvas>
 		</div>
 	</div>
-	
-	<button class="w3-button" onclick="removeData(document.getElementById('weekly-chart-area'));">gogo</button>
-	
 	<script>
-		var weeklydatas = ${weeklyGraphList};
-		var monthlydatas = ${monthlyGraphList};
-
-		console.log(weeklydatas);
-		console.log(monthlydatas);
+		var weeklydatas = JSON.parse('${weeklyGraphList}');
+		var monthlydatas = JSON.parse('${monthlyGraphList}');
 		
-		// 주간 선 차트
-		var MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+		console.log(weeklydatas);
+		var weeklyregdate = [];
+		var weeklyemotion = [];
+		var monthlyScore = [];
+
+		for(var i = 0; i < Object.keys(weeklydatas).length; i++) {
+			var obj = weeklydatas[i];
+			
+			weeklyregdate.push(obj["regdate"]);
+			
+			var emo = obj["emotion"];
+			
+			if(emo == "기쁨") {
+				weeklyemotion.push(50);
+			} else if(emo == "보통") {
+				weeklyemotion.push(30);
+			} else if(emo == "나쁨"){
+				weeklyemotion.push(10);
+			}
+		}
+		
+		console.log(weeklyregdate);
+		console.log(weeklyemotion);
+		
+		for(var i = 0; i < Object.keys(monthlydatas).length; i++) {
+			monthlyScore.push(monthlydatas[i]);
+			console.log(monthlyScore);
+		}
+		
 		var week_config = {
 			type: 'line',
 			data: {
-				labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-				datasets: [{
-					label: 'Emotion Graph',
-					backgroundColor: window.chartColors.green,
-					borderColor: window.chartColors.green,
-					data: [
-						0,
-						10,
-						50,
-						20,
-						75,
-						30,
-						40
-					],
-					fill: false,
-				}]
+				labels: [],
+				datasets: [],
 			},
 			options: {
 				legend: {
@@ -115,7 +110,7 @@ function removeData(chart) {
 					fontSize: 30,
 					fontStyle: 'bold',
 					fontColor: '#fff',
-					text: 'Weekly'
+					text: '최근'
 				},
 				tooltips: {
 					mode: 'index',
@@ -159,60 +154,99 @@ function removeData(chart) {
 				},
 			}
 		};
-
+		
 		var month_config = {
-			type: 'doughnut',
-			data: {
-				datasets: [{
-					data: [
-						/* 감정 별 비율이 이곳에 들어갑니다. */
-						6,
-						3,
-						1
-					],
-					backgroundColor: [
-						window.chartColors.blue,
-						window.chartColors.orange,
-						window.chartColors.green,
-					],
-					label: 'Dataset 1',
-				}],
-				labels: [
-					'Happy',
-					'So so',
-					'Sad',
-				]
-			},
-			options: {
-				/* responsive: false, */
-				legend: {
-					labels: {
-						fontColor: '#fff'
+				type: 'doughnut',
+				data: {
+					labels: [
+						'좋아요',
+						'괜찮아요',
+						'나빠요',
+					]
+				},
+				options: {
+					/* responsive: false, */
+					legend: {
+						labels: {
+							fontColor: '#fff'
+						}
+					},
+					title: {
+						display: true,
+						fontFamily: 'Helvetica',
+						fontSize: 30,
+						fontColor: '#fff',
+						fontStyle: 'bold',
+						text: '모두',
+					},
+					animation: {
+						animateScale: true,
+						animateRotate: true
 					}
-				},
-				title: {
-					display: true,
-					fontFamily: 'Helvetica',
-					fontSize: 30,
-					fontColor: '#fff',
-					fontStyle: 'bold',
-					text: 'Monthly',
-				},
-				animation: {
-					animateScale: true,
-					animateRotate: true
 				}
-			}
-		};
-
+			};
+		
+		var ctx_week = document.getElementById('weekly-chart-area').getContext('2d');
+		var ctx_month = document.getElementById('monthly-chart-area').getContext('2d');
+		window.myLine = new Chart(ctx_week, week_config);
+		window.myDoughnut = new Chart(ctx_month, month_config);
+		
 		window.onload = function() {
-			var ctx_week = document.getElementById('weekly-chart-area').getContext('2d');
-			var ctx_month = document.getElementById('monthly-chart-area').getContext('2d');
+			/* ******* weekly ******* */
 			
-			window.myLine = new Chart(ctx_week, week_config);
-			window.myDoughnut = new Chart(ctx_month, month_config)
+			week_config.data.labels = weeklyregdate;
+			week_config.data.datasets.forEach(function(dataset) {
+				dataset.data.push(randomScalingFactor());
+			});
+			
+			var newWeekDataset = {
+					label: '감정 곡선',
+					backgroundColor: '#fcc',
+					borderColor: '#fcc',
+					data: [],
+					fill: false,
+			};
+			
+			for(var i = 0; i < weeklyemotion.length; i++) {
+				console.log(weeklyemotion[i]);
+				newWeekDataset.data.push(weeklyemotion[i]);
+			}
+			
+			week_config.data.datasets.push(newWeekDataset);
+			
+			/* ******* monthly ******* */
+			
+			var newMonthDataset = {
+						data: [],
+						backgroundColor: [
+							window.chartColors.blue,
+							window.chartColors.orange,
+							window.chartColors.green,
+						],
+						label: 'Dataset 1',
+			};
+			
+			for(var i = 0; i < monthlyScore.length; i++) {
+				console.log(monthlyScore[i]);
+				newMonthDataset.data.push(monthlyScore[i]);
+			}
+
+			month_config.data.datasets.push(newMonthDataset);
+
+			window.myLine.update();
+			window.myDoughnut.update();
 		};
 	</script>
+	
+	<div class="w3-margin"></div>
+	<div class="w3-row w3-container">
+		<div class="w3-col w3-container" style="width:30%"></div>
+		<div class="w3-col w3-container" style="width:40%; text-align:center">
+			<button class="w3-button w3-sand" onclick="window.location.href='Main'"><b>Main</b></button>
+		</div>
+		<div class="w3-col w3-container" style="width:30%"></div>
+	</div>
+	<div class="w3-margin"></div>
 </body>
 
 </html>
