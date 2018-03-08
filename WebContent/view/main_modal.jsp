@@ -46,11 +46,12 @@ function onClickThumb(element) {
 	document.getElementById("diaryImage").src = childElement[0].src;
 	document.getElementById("diaryTitle").innerHTML = childElement[2].innerHTML;
 	document.getElementById("diaryContent").innerHTML = childElement[3].innerHTML;
-	
+	document.getElementById("diaryNum").innerHTML = childElement[4].innerHTML;
 	document.getElementById("diaryModal").style.display = "block";
+	
 }
 
-function attachToPage(imagename, regdate, title, content) {
+function attachToPage(imagename, regdate, title, content, num) {
 	var newThumb = document.getElementById('dummy_thumb').cloneNode(true);
 	newThumb.href = imagename;
 	newThumb.style.display = "block";
@@ -59,7 +60,9 @@ function attachToPage(imagename, regdate, title, content) {
 	0 - imagename
 	1 - regdate
 	2 - title
-	3 - contet */
+	3 - contet
+	4 - num
+	*/
 	var childElement = newThumb.children;
 	
 	// article.imagename
@@ -67,6 +70,7 @@ function attachToPage(imagename, regdate, title, content) {
 	childElement[1].innerHTML = regdate;
 	childElement[2].innerHTML = title;
 	childElement[3].innerHTML = content;
+	childElement[4].innerHTML = num;
 	
 	console.log(childElement[0].src);
 	
@@ -99,6 +103,13 @@ function test1(thumb) {
 
 	rowIdx = (rowIdx % rowCount) + 1;
 }
+
+function deleteArticle() {
+	document.getElementById('confirmModal').style.display='none';
+	document.getElementById('diaryModal').style.display='none';
+	location.href="DeletediaryPro?num=" + document.getElementById('diaryNum').innerHTML;
+	console.log("DeletediaryPro?num=" + document.getElementById('diaryNum').innerHTML);
+}
 </script>
 
 <body class="txt_ko">
@@ -117,6 +128,7 @@ function test1(thumb) {
 			<!-- diary content -->	
 			<footer class="w3-container w3-teal">
 				<p id="diaryContent">Modal Content</p>
+				<p id="diaryNum" style="display:none">Modal Num</p>
 			</footer>
 		</div>
 		<div class="w3-bar w3-center w3-padding txt_ko">
@@ -133,8 +145,8 @@ function test1(thumb) {
 				정말 지울고얌?
 			</div>
 			<div class="w3-bar w3-center w3-padding">
-				<button class="w3-button w3-teal"onclick="document.getElementById('confirmModal').style.display='none'">No</button>
-				<button class="w3-button w3-red" onclick="document.getElementById('confirmModal').style.display='none'; document.getElementById('diaryModal').style.display='none'; location.href = 'DeletediaryPro?num=${article.num}';" >Yes</button>
+				<button class="w3-button w3-teal" onclick="document.getElementById('confirmModal').style.display='none'">No</button>
+				<button class="w3-button w3-red" onclick="deleteArticle()">Yes</button>
 			</div>
 		</div>
 		
@@ -217,6 +229,7 @@ function test1(thumb) {
 					<h1>2018 . 02 . 12 MON</h1>
 					<p style="display:none">Title</p>
 					<p style="display:none">Content</p>
+					<p style="display:none">Num</p>
 				</div>
 			</div>
 			<div id="thumb_container_row2"></div>
@@ -231,6 +244,7 @@ function test1(thumb) {
 	</c:if>
 	<c:forEach var="article" items="${articleList}">
 		<script type="text/javascript">
+			console.log(${article.num});
 			attachToPage("${article.imagename}", "${article.regdate}", "${article.title}", "${article.content}", "${article.num}");
 		</script>
 	</c:forEach>
