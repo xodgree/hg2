@@ -110,13 +110,20 @@ function deleteArticle() {
 	location.href="DeletediaryPro?num=" + document.getElementById('diaryNum').innerHTML;
 	console.log("DeletediaryPro?num=" + document.getElementById('diaryNum').innerHTML);
 }
+
+function updateArticle() {
+	document.getElementById('confirmModal').style.display='none';
+	document.getElementById('diaryModal').style.display='none';
+	location.href="diaryUpdateForm?num=" + document.getElementById('diaryNum').innerHTML;
+	console.log("diaryUpdateForm?num=" + document.getElementById('diaryNum').innerHTML);
+}
 </script>
 
 <body class="txt_ko">
 	<!-- modal div -->
 	<div id="diaryModal" class="w3-modal w3-animate-opacity">
 		<div class="w3-modal-content w3-card-4" style="width:50%; min-width:300px; max-width:500px;">
-			<header class="w3-container w3-teal">
+			<header class="w3-container w3-grey">
 				<span onclick="document.getElementById('diaryModal').style.display='none'" class="w3-button w3-display-topright">&times;</span>
 				<h2 id="diaryTitle">Modal Title</h2>
 			</header>
@@ -126,15 +133,15 @@ function deleteArticle() {
 			</div>
 		
 			<!-- diary content -->	
-			<footer class="w3-container w3-teal">
+			<footer class="w3-container w3-light-grey">
 				<p id="diaryContent">Modal Content</p>
 				<p id="diaryNum" style="display:none">Modal Num</p>
 			</footer>
 		</div>
 		<div class="w3-bar w3-center w3-padding txt_ko">
-			<button class="w3-button w3-teal" onclick="document.getElementById('diaryModal').style.display='none'">Confirm</button>
-			<button class="w3-button w3-teal" onclick="location.href = 'diaryUpdateForm'">Rewrite</button>
-			<button class="w3-button w3-teal" onclick="document.getElementById('confirmModal').style.display='block'">Delete</button>
+			<button class="w3-button w3-sand" onclick="document.getElementById('diaryModal').style.display='none'">Confirm</button>
+			<button class="w3-button w3-sand" onclick="updateArticle()">Rewrite</button>
+			<button class="w3-button w3-sand" onclick="document.getElementById('confirmModal').style.display='block'">Delete</button>
 		</div>
 	</div>
 

@@ -11,7 +11,7 @@
 </head>
 <body>	
 
-<input type = "hidden" name = "num" value="${num}">
+
 		<!-- Header -->
 			
 			<header id="header">
@@ -22,7 +22,9 @@
 		<!-- Main -->
 
 			<section id="main">
+			<input type = "hidden" name = "num" form="submitForm" value="${num}">
 				<!-- input regdate -->
+				
 				<div class="inner inputbox" style="text-align: center;">
 					<!-- Date: <input type="date" name="regdate" form="submitForm" style="border: 0; width: 400px;"> -->
 					제목 <input type="text" name ="title"  form="submitForm" value="${diary.title}">
@@ -40,8 +42,7 @@
 				 <div class="inner inputbox" style="text-align: center">
 					선택한 감정 : <strong>'${diary.emotion}'</strong>	
 				</div>
-					
-				 		
+							 		
 				<!-- input file Image upload -->
 				<div class="inner inputbox file-upload">
 					<div style="text-align: center">

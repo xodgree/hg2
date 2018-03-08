@@ -53,17 +53,21 @@ public class ProjectController extends Action{
 		HttpSession session = request.getSession();
 		String useremail = (String) session.getAttribute("userEmail");
 		MemberDBBean member = MemberDBBean.getInstance();
+		request.getSession().invalidate();
 		member.deleteMypage(useremail);
-			response.sendRedirect("/HugHug2/board/login");
-			 return null; 
+			//response.sendRedirect("/HugHug2/board/login");
+		
+			 
+		return "/board/login"; 
 			} 
 	//마이페이지 수정pro
 	public String myPageUpdatePro(HttpServletRequest request,
 			 HttpServletResponse response)  throws Throwable { 
 		HttpSession session = request.getSession();
 		String useremail = (String) session.getAttribute("userEmail");
-		String userName = MemberDBBean.getInstance().MainName(useremail);
+		String userName = request.getParameter("name");
 		session.setAttribute("userName", userName);
+		
 		MemberDataBean member = new MemberDataBean();
 		member.setName(request.getParameter("name"));
 	
@@ -111,7 +115,8 @@ public class ProjectController extends Action{
 			 HttpServletResponse response)  throws Throwable { 
 	
 		//int num = Integer.parseInt(request.getParameter("num"));
-		int num = 104;
+		int num = Integer.parseInt(request.getParameter("num"));
+		System.out.println("diaryUpdateForm==========="+num);
 		try{
 			DiaryDBBean dbPro = DiaryDBBean.getInstance();
 			DiaryDataBean diary = dbPro.getContent(num,"update");
@@ -166,11 +171,10 @@ public class ProjectController extends Action{
 		
 		
 		DiaryDataBean diary = new DiaryDataBean();
-		//diary.setNum(Integer.parseInt(request.getParameter("num")));
+		diary.setNum(Integer.parseInt(multi.getParameter("num")));
 		diary.setImagename(imagename);
 		diary.setContent(multi.getParameter("content"));
 		diary.setTitle(multi.getParameter("title"));
-		diary.setNum(104);
 		
 	
 	DiaryDBBean dbPro = DiaryDBBean.getInstance();
@@ -443,7 +447,9 @@ public String diaryWrite(HttpServletRequest request, HttpServletResponse respons
 	
 	//메인(로그인화면)
 	public String login(HttpServletRequest request, HttpServletResponse response)  throws Throwable { 
-			 return  "/view/login.jsp"; 
+		//request.getSession().invalidate();
+		
+		return  "/view/login.jsp"; 
 			} 
 	
 	//로그인 확인
