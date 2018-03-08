@@ -292,30 +292,30 @@ public class ProjectController extends Action{
 	}
 	
 	private String MonthlyListToJsonString(List list) {
-		int joy = 0;
-		int soso = 0;
-		int sad = 0;
-		
-		for(int i = 0; i < list.size(); i++) {
-			DiaryDataBean bean = (DiaryDataBean)list.get(i);
-			
-			if(bean.getEmotion() == "±â»Ý")
-				joy += 1; 
-			else if (bean.getEmotion() == "º¸Åë")
-				soso += 1;
-			else if (bean.getEmotion() == "³ª»Ý")
-				sad += 1;
-			
-			System.out.println(i);
-		}
-		
-		JsonObject data = new JsonObject();
-		data.addProperty("±â»Ý", Integer.toString(joy));
-		data.addProperty("º¸Åë", Integer.toString(soso));
-		data.addProperty("³ª»Ý", Integer.toString(sad));
-		
-		return data.toString();
-	}
+	      int joy = 0;
+	      int soso = 0;
+	      int sad = 0;
+	      
+	      for(int i = 0; i < list.size(); i++) {
+	         DiaryDataBean bean = (DiaryDataBean)list.get(i);
+	         
+	         if(bean.getEmotion().equals("±â»Ý"))
+	            joy += 1; 
+	         else if (bean.getEmotion().equals("º¸Åë"))
+	            soso += 1;
+	         else if (bean.getEmotion().equals("³ª»Ý"))
+	            sad += 1;
+	         
+	         System.out.println(i);
+	      }
+	      
+	      JsonObject data = new JsonObject();
+	      data.addProperty("1", Integer.toString(joy));
+	      data.addProperty("2", Integer.toString(soso));
+	      data.addProperty("3", Integer.toString(sad));
+	      
+	      return data.toString();
+	   }
 	
 	public String sevenList(HttpServletRequest request,
 			HttpServletResponse response)  throws Throwable { 
