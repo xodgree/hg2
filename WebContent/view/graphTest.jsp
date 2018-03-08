@@ -15,10 +15,16 @@
   
          <c:forEach var="article" items="${graphList}">
          <tr>
-         <td>${article.regdate}</td>
-          <td>${article.emotion}</td>
 		<tr>
       </tr></c:forEach>
-   </table>
+</table>
+
+<script>
+	var weeklydatas = ${weeklyGraphList};
+	var monthlydatas = ${monthlyGraphList};
+	console.log(weeklydatas);
+	console.log(monthlydatas);
+</script>
+
 </body>
 </html>

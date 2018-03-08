@@ -73,6 +73,12 @@ function removeData(chart) {
 	<button class="w3-button" onclick="removeData(document.getElementById('weekly-chart-area'));">gogo</button>
 	
 	<script>
+		var weeklydatas = ${weeklyGraphList};
+		var monthlydatas = ${monthlyGraphList};
+
+		console.log(weeklydatas);
+		console.log(monthlydatas);
+		
 		// 주간 선 차트
 		var MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 		var week_config = {

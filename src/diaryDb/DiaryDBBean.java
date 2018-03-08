@@ -28,9 +28,9 @@ public class DiaryDBBean {
 		   Connection con = null;			
 		   try {
 			   //DB의 URL,계정ID,PW
-		      String jdbcUrl = "jdbc:oracle:thin:@localhost:1521:orcl";	
-		      String dbUser = "scott";
-		      String dbPass = "tiger";
+		      String jdbcUrl = "jdbc:oracle:thin:@localhost:1521:xe";	
+		      String dbUser = "mooneegee";
+		      String dbPass = "1227";
 		      
 		      // 리플렌션(reflection) 동적 로딩에 대한 코드
 		      Class.forName("oracle.jdbc.driver.OracleDriver");
@@ -654,7 +654,7 @@ public class DiaryDBBean {
 					ResultSet rs = null;	//select 쿼리 날리면 DB에 요청한 결과를 줌.
 					
 					// Article을 저장할 ArrayList 변수를 선언합니다.
-					List graphList = null;	
+					ArrayList<DiaryDataBean> graphList = null;	
 					String sql = "";		//쿼리 작성 변수
 					
 					try {
@@ -696,5 +696,51 @@ public class DiaryDBBean {
 					}
 					return graphList;
 				}
+				
+				public List graphAllList() {	
+
+					Connection conn = null;	//커넥션 정보.
+					PreparedStatement pstmt = null; //쿼리를 담음.
+					ResultSet rs = null;	//select 쿼리 날리면 DB에 요청한 결과를 줌.
+					
+					// Article을 저장할 ArrayList 변수를 선언합니다.
+					ArrayList<DiaryDataBean> graphList = null;	
+					String sql = "";		//쿼리 작성 변수
+					
+					try {
+						conn = getConnection();		
+						/*sql = "select * from (select rownum rnum, b.* "
+								+" from (select regdate,emotion,useremail from diarys order by regdate desc)b)"
+								+ " where rnum between ? and ? and useremail = ?";*/
+						
+						sql = "select emotion from diarys";
+				
+						pstmt = conn.prepareStatement(sql); //pstmt = sql 쿼리를 담음 
+						
+						rs = pstmt.executeQuery();
+						if(rs.next()) {
+							graphList = new ArrayList();
+							do {
+								DiaryDataBean article = new DiaryDataBean(); //테이블 변수에 값 설정위해 객체 생성.
+								
+								article.setEmotion(rs.getString("emotion"));
+							
+								graphList.add(article);
+								//System.out.println(article);
+							}while(rs.next());
+							// 이 과정은 ResultSet에 더이상 데이터가 없을때까지 진행됩니다.
+						}	
+						
+					}catch (Exception e){
+						e.printStackTrace();
+					}finally {
+						close(conn,rs,pstmt);
+						
+						//System.out.println(articleList);
+					}
+					return graphList;
+				}
+				
+				
 		
 }
