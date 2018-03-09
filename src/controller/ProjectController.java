@@ -274,7 +274,7 @@ public class ProjectController extends Action{
 		request.setAttribute("weeklyGraphList", WeeklyListToJsonString(weeklyGraphList));
 		request.setAttribute("monthlyGraphList", MonthlyListToJsonString(monthlyGraphList));
 		
-		return "/view/graphTest.jsp";
+		  return "/view/chart.jsp";
 	}
 	
 	private String WeeklyListToJsonString(List list) {
