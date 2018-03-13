@@ -21,6 +21,7 @@ public class MemDBMybatis extends MybatisConnector{
    }
    SqlSession sqlSession;
    
+   //탈퇴 메소드
    public int deleteMypage(String useremail){
 	   sqlSession = sqlSession();
 	      Map map = new HashMap();
@@ -33,7 +34,83 @@ public class MemDBMybatis extends MybatisConnector{
 	      sqlSession.close();
 	      
 	      return x;
+   }
+   
+   //member가져오기
+   public MemberDataBean getMember(String useremail) {
+	   sqlSession = sqlSession();
+	      Map map = new HashMap();
+	      map.put("useremail", useremail);
+	  
+	      MemberDataBean article 
+	      = sqlSession.selectOne(namespace+".getMember", map) ;      //오브젝트인가? 컬렉션인가?
+	      sqlSession.commit();
+	      sqlSession.close();
+	      return article;
+   }
+   
+   //마이페이지 수정
+   public int updateMypage(MemberDataBean member,String useremail) {
+		  sqlSession = sqlSession();	  
+		  Map map = new HashMap();
+		  map.put("name", member.getName());
+		  map.put("useremail", useremail);
+	      int pwdck
+	      = sqlSession.update(namespace+".updateMypage", map) ;      //오브젝트인가? 컬렉션인가?      
+	      sqlSession.commit();
+	      sqlSession.close();
+	      return pwdck;
+   }
+   
+   //아이디, 비밀번호 조회
+   public int login(String inputEmail,String inputPasswd)throws Exception{
+	   sqlSession = sqlSession();	  
+		  Map map = new HashMap();
+		  map.put("inputEmail", inputEmail);
+	   int loginResult = -1;
+	 String passwd =  sqlSession.selectOne(namespace+".login", map);
+			if(passwd.equals(inputPasswd)) {
+				loginResult = 1;
+			}else {
+				loginResult = 0;
+			}
 
+	   return loginResult;
+   }
+   
+   public String MainName(String inputEmail){
+	   sqlSession = sqlSession();	  
+		  Map map = new HashMap();
+		  map.put("inputEmail", inputEmail);
+		  String userName =  sqlSession.selectOne(namespace+".MainName", map);
+		return userName;
+   }
+   
+   public void insertArticle(MemberDataBean member) {
+	   sqlSession = sqlSession();
+	      int number = sqlSession.selectOne(namespace+".getNextNumber",member);
+	      member.setNum(number);
+			 sqlSession.insert(namespace+".insertArticle",member);
+		      sqlSession.commit();
+		      sqlSession.close();
+   }
+   
+   public int getDataCount() {
+	   sqlSession = sqlSession();
+		int count = 0;
+		count = sqlSession.selectOne(namespace+".getDataCount");	//하나가져오니까 selectOne
+		return count;
+   }
+   
+   public List articleList(int startRow,int endRow) {
+	   sqlSession = sqlSession();
+	      Map map = new HashMap();
+	      map.put("startRow", startRow);
+	      map.put("endRow", endRow);
+	      
+	      List articleList = sqlSession.selectList(namespace+".articleList", map) ;      //오브젝트인가? 컬렉션인가?
+	      sqlSession.close();
+	      return articleList;
    }
 
    

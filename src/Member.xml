@@ -7,17 +7,37 @@
 	<delete id="deleteMypage" parameterType="hashmap">
 	 	delete from members where email=#{useremail}
 	</delete>
+	<!--  -->
+   <select id="getMember" parameterType="hashmap" resultType="Member">
+	select * from members where email =#{useremail}
+   </select>
+	<update id="updateMypage" parameterType="hashmap">
+	update members set name=#{name} where email = #{useremail}
+	</update>
+	 <select id="login" parameterType="hashmap" resultType="String">
+	  select passwd from members where email=#{inputEmail}
+   </select>
+   <select id="MainName" parameterType="hashmap" resultType="String">
+ select name from members where email=#{inputEmail}
+</select>
+<select id="getNextNumber" resultType="int">
+	select MEMBER_SEQ.nextval from dual
+	</select>
+	
+	<insert id="insertArticle" parameterType="hashmap">
+		insert into members(num,name,email,passwd,regdate) values(#{num},#{name},#{email},#{passwd},sysdate)
+	</insert>
+	
+<select id="getNextNumber" resultType="int">
+	select nvl(count(*),0) from members
+</select>
 
-
-
-
-
-
-
-
-
-
-
+<select id="articleList" resultType="Member" parameterType="hashmap">
+	select * from 
+		(select rownum rnum, b.* from 
+     		   (select num,email,name,passwd,regdate from members order by regdate desc)b
+     		   )where rnum between #{startRow} and #{endRow}
+	</select>
 
 
 

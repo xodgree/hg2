@@ -48,6 +48,7 @@ public class MemberDBBean {
 		   return con;
 		   }
 
+	/*
 		//Count 세는 메소드
 		public int getDataCount() {
 			String sql = "select nvl(count(*),0) from members";
@@ -67,7 +68,9 @@ public class MemberDBBean {
 			}
 			return count;
 		}
+		*/
 		
+	/*
 		// 데이터 가져오는 메소드 (getArticles)
 		public List articleList(int startRow,int endRow) {
 			// Connection, PreparedStatement, ResultSet 등 
@@ -136,9 +139,11 @@ public class MemberDBBean {
 			
 			
 		}
+		*/
 		
 		//회원 등록, 데이터 삽입 메소드
 		//	리턴 타입 void, BoardDataBean type의 article을 매개변수로 받음
+		/*
 		public void insertArticle(MemberDataBean member) {
 			//쿼리를 저장할 sql 변수 선언
 			String sql ="";
@@ -187,6 +192,7 @@ public class MemberDBBean {
 			}
 		
 	}
+	*/
 
 		private void close(Connection con, ResultSet rs, PreparedStatement pstmt) {
 			// TODO Auto-generated method stub
@@ -203,6 +209,7 @@ public class MemberDBBean {
 			}
 		}
 		
+		/*
 		//회원 보기 메소드 (getArticle)
 				public MemberDataBean getMember(String useremail) {
 					Connection conn = null;
@@ -234,6 +241,7 @@ public class MemberDBBean {
 					return member;
 					
 				}
+				*/
 		
 		//글 보기 메소드 (getArticle)
 		public MemberDataBean getContent(int num,String chk) {
@@ -267,6 +275,7 @@ public class MemberDBBean {
 			
 		}
 		
+		/*
 		//글 수정 메소드
 				public void updateMypage(MemberDataBean member,String useremail) {
 					Connection conn =null;
@@ -286,7 +295,7 @@ public class MemberDBBean {
 					}
 					return ;
 				}
-		
+		*/
 		//글 수정 메소드
 		public int updatemember(MemberDataBean member) {
 			Connection conn =null;
@@ -328,6 +337,7 @@ public class MemberDBBean {
 				close(conn,rs,pstmt);
 			}return x;
 		}
+		/*
 		//마이페이지에서 탈퇴 메소드
 				public int deleteMypage(String useremail)throws Exception{
 					Connection conn = null;
@@ -346,7 +356,9 @@ public class MemberDBBean {
 						close(conn,rs,pstmt);
 					}return x;
 				}
+		*/
 		
+		/*
 		//로그인 메소드
 		public int login(String inputEmail,String inputPasswd)throws Exception{
 			Connection conn = null;
@@ -377,6 +389,9 @@ public class MemberDBBean {
 			}
 			return loginResult;
 		}
+		*/
+		
+		/*
 		//로그인 - > 메인으로 넘어갈때 닉네임  가져가는 메소드
 		public String MainName(String inputEmail)throws Exception{
 			Connection conn = null;
@@ -400,5 +415,7 @@ public class MemberDBBean {
 			}
 			return userName;
 		}
+		
+		*/
 		
 	}

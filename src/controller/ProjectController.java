@@ -53,7 +53,7 @@ public class ProjectController extends Action{
 		return  "/view/main_modal.jsp"; 
 				} 
 	
-
+	//탈퇴
 	public String memberDelete(HttpServletRequest request,
 			 HttpServletResponse response)  throws Throwable {
 		HttpSession session = request.getSession();
@@ -66,7 +66,8 @@ public class ProjectController extends Action{
 			 
 		return "/board/login"; 
 			} 
-
+	
+	//마이페이지 업데이트
 	public String myPageUpdatePro(HttpServletRequest request,
 			 HttpServletResponse response)  throws Throwable { 
 		HttpSession session = request.getSession();
@@ -77,20 +78,20 @@ public class ProjectController extends Action{
 		MemberDataBean member = new MemberDataBean();
 		member.setName(request.getParameter("name"));
 	
-		MemberDBBean dbPro = MemberDBBean.getInstance();
+		MemDBMybatis dbPro = MemDBMybatis.getInstance();
 		dbPro.updateMypage(member,useremail);
 		
 	
 			 return  "/board/myPage"; 
 			} 
 	
-
+		//마이페이지 업데이트 (고칠것x)
 		public String myPageUpdate(HttpServletRequest request,
 				 HttpServletResponse response)  throws Throwable { 
 			HttpSession session = request.getSession();
 			String useremail = (String) session.getAttribute("userEmail");
 			try{
-				MemberDBBean dbPro = MemberDBBean.getInstance();
+				MemDBMybatis dbPro = MemDBMybatis.getInstance();
 				MemberDataBean member = dbPro.getMember(useremail);
 				request.setAttribute("member", member);
 		
@@ -100,13 +101,13 @@ public class ProjectController extends Action{
 				 return  "/view/myPageUpdate.jsp"; 
 				} 
 		
-	
+	//마이페이지
 	public String myPage(HttpServletRequest request,
 			 HttpServletResponse response)  throws Throwable { 
 		HttpSession session = request.getSession();
 		String useremail = (String) session.getAttribute("userEmail");
 		try{
-			MemberDBBean dbPro = MemberDBBean.getInstance();
+			MemDBMybatis dbPro = MemDBMybatis.getInstance();
 			MemberDataBean member = dbPro.getMember(useremail);
 			request.setAttribute("member", member);
 	
@@ -422,6 +423,7 @@ public String diaryWrite(HttpServletRequest request, HttpServletResponse respons
 		return  "/view/login.jsp"; 
 			} 
 	
+	//로그인
 	public String LoginDb(HttpServletRequest request, HttpServletResponse response)  throws Throwable {
 		String inputEmail = null;
 		String inputPasswd = null;
@@ -441,7 +443,7 @@ public String diaryWrite(HttpServletRequest request, HttpServletResponse respons
 				inputPasswd = request.getParameter("inputPasswd");
 			}
 
-			result = MemberDBBean.getInstance().login(inputEmail, inputPasswd);
+			result = MemDBMybatis.getInstance().login(inputEmail, inputPasswd);
 			
 			System.out.println(inputEmail + "," + inputPasswd);
 			
@@ -451,7 +453,7 @@ public String diaryWrite(HttpServletRequest request, HttpServletResponse respons
 		}
 		
 		if(result == 1){
-			String userName = MemberDBBean.getInstance().MainName(inputEmail);
+			String userName = MemDBMybatis.getInstance().MainName(inputEmail);
 			
 			session.setAttribute("userEmail", inputEmail);
 			session.setAttribute("userName", userName);
@@ -471,6 +473,7 @@ public String diaryWrite(HttpServletRequest request, HttpServletResponse respons
 		
 	}
 	
+	//회원가입
 	public String signUp(HttpServletRequest request,
 			 HttpServletResponse response)  throws Throwable { 
 		int num = 0;
@@ -489,12 +492,13 @@ public String diaryWrite(HttpServletRequest request, HttpServletResponse respons
 		member.setNum(Integer.parseInt(request.getParameter("num")));
 		member.setPasswd(request.getParameter("passwd"));
 		 System.out.println(member); 
-		 MemberDBBean dbPro = MemberDBBean.getInstance();
+		 MemDBMybatis dbPro = MemDBMybatis.getInstance();
 			dbPro.insertArticle(member);
 
 			 return  "/view/login.jsp"; 
 			} 	
 	
+	//목록
 	public String list(HttpServletRequest request, HttpServletResponse response)  throws Throwable { 
 
 		String boardid = request.getParameter("boardid");
@@ -512,7 +516,7 @@ public String diaryWrite(HttpServletRequest request, HttpServletResponse respons
 		   int count = 0;
 		   int number = 0;
 		   List articleList = null;
-		   MemberDBBean dbPro = MemberDBBean.getInstance();
+		   MemDBMybatis dbPro = MemDBMybatis.getInstance();
 		   count = dbPro.getDataCount();
 		   if(count > 0){
 		      articleList = dbPro.articleList(startRow, endRow);}
