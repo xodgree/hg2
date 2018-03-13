@@ -17,6 +17,7 @@ import com.sist.msk.Action;
 
 import diaryDb.DiaryDBBean;
 import diaryDb.DiaryDataBean;
+import memberDb.MemDBMybatis;
 import memberDb.MemberDBBean;
 import memberDb.MemberDataBean;
 
@@ -57,7 +58,7 @@ public class ProjectController extends Action{
 			 HttpServletResponse response)  throws Throwable {
 		HttpSession session = request.getSession();
 		String useremail = (String) session.getAttribute("userEmail");
-		MemberDBBean member = MemberDBBean.getInstance();
+		MemDBMybatis member = MemDBMybatis.getInstance();
 		request.getSession().invalidate();
 		member.deleteMypage(useremail);
 			//response.sendRedirect("/HugHug2/board/login");
