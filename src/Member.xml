@@ -32,7 +32,7 @@
 	select nvl(count(*),0) from members
 </select>
 
-<select id="articleList" resultType="Member" parameterType="hashmap">
+<select id="articleList" parameterType="hashmap" resultType="Member">
 	select * from 
 		(select rownum rnum, b.* from 
      		   (select num,email,name,passwd,regdate from members order by regdate desc)b
