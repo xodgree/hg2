@@ -15,10 +15,9 @@ import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import com.sist.msk.Action;
 
-import diaryDb.DiaryDBBean;
+import diaryDb.DiaryDBMybatis;
 import diaryDb.DiaryDataBean;
 import memberDb.MemDBMybatis;
-import memberDb.MemberDBBean;
 import memberDb.MemberDataBean;
 
 /*for fileupload*/
@@ -39,7 +38,7 @@ public class ProjectController extends Action{
 		String useremail = (String) session.getAttribute("userEmail");
 		 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 	     List articleList = null;
-	     DiaryDBBean dbPro = DiaryDBBean.getInstance();
+	     DiaryDBMybatis dbPro = DiaryDBMybatis.getInstance();
 	     int count = 0;
 			 count = dbPro.getDataCount(useremail);
 			 
@@ -125,7 +124,7 @@ public class ProjectController extends Action{
 		int num = Integer.parseInt(request.getParameter("num"));
 		System.out.println("diaryUpdateForm==========="+num);
 		try{
-			DiaryDBBean dbPro = DiaryDBBean.getInstance();
+			DiaryDBMybatis dbPro = DiaryDBMybatis.getInstance();
 			DiaryDataBean diary = dbPro.getContent(num,"update");
 			request.setAttribute("diary", diary);
 			request.setAttribute("num", num);
@@ -178,8 +177,8 @@ public class ProjectController extends Action{
 		diary.setTitle(multi.getParameter("title"));
 		
 	
-	DiaryDBBean dbPro = DiaryDBBean.getInstance();
-	dbPro.update(diary);
+		DiaryDBMybatis dbPro = DiaryDBMybatis.getInstance();
+		dbPro.update(diary);
 
 
 		/*DiaryDataBean diary = new DiaryDataBean();
@@ -198,11 +197,12 @@ public class ProjectController extends Action{
 				 HttpServletResponse response)  throws Throwable {
 
 			int num = Integer.parseInt(request.getParameter("num")); //deleteForm 
-			DiaryDBBean diary = DiaryDBBean.getInstance();
+			DiaryDBMybatis diary = DiaryDBMybatis.getInstance();
 			diary.delete(num);
 				 return  "/board/Main"; 
 				}
 		
+		//Mybatis로 못 바꿈.
 		public String searchList(HttpServletRequest request, HttpServletResponse response)  throws Throwable { 
 			HttpSession session = request.getSession();
 			String useremail = (String) session.getAttribute("userEmail");
@@ -225,16 +225,20 @@ public class ProjectController extends Action{
 			   int number = 0;
 			   
 			   List articleList = null;
-			  DiaryDBBean dbPro = DiaryDBBean.getInstance();
+			   DiaryDBMybatis dbPro = DiaryDBMybatis.getInstance();
 			   count = dbPro.getSearchCount(useremail, opt, condition);
+			   System.out.println("count :::"+count);
 			   if(count > 0){
-				   
-				   System.out.println("startRow==="+startRow);
-				   System.out.println("startRow==="+endRow);
-			      articleList = dbPro.articleList(startRow, endRow, useremail,opt,condition);}
+			   
+//				   System.out.println("startRow==="+startRow);
+//				   System.out.println("startRow==="+endRow);
+			      articleList = dbPro.articleList(startRow, endRow, useremail,opt,condition);
+			      
+			      System.out.println("articleList:::"+articleList);
+			   }
 
 			   number=count - (currentPage-1)*pageSize;
-			   System.out.println("number=="+number);
+//			   System.out.println("number=="+number);
 			
 			
 			
@@ -269,7 +273,7 @@ public class ProjectController extends Action{
 		HttpSession session = request.getSession();
 		String useremail = (String) session.getAttribute("userEmail");
 		
-		DiaryDBBean dbPro = DiaryDBBean.getInstance();
+		DiaryDBMybatis dbPro = DiaryDBMybatis.getInstance();
 		List weeklyGraphList = dbPro.graphList(1, 7, useremail);
 		List monthlyGraphList = dbPro.graphAllList();
 		
@@ -325,7 +329,7 @@ public class ProjectController extends Action{
 		String useremail = (String) session.getAttribute("userEmail");
 	        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 	        List articleList = null;
-	        DiaryDBBean dbPro = DiaryDBBean.getInstance();
+	        DiaryDBMybatis dbPro = DiaryDBMybatis.getInstance();
 	        int count = 0;
 			 count = dbPro.getDataCount(useremail);
 			 
@@ -344,7 +348,7 @@ public String read(HttpServletRequest request,
 	int num = 1;
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm");
 	try{
-		DiaryDBBean dbPro = DiaryDBBean.getInstance();
+		DiaryDBMybatis dbPro = DiaryDBMybatis.getInstance();
 		DiaryDataBean diary = dbPro.getContent(num,"content");
 		
 		request.setAttribute("diary", diary);
@@ -404,7 +408,7 @@ public String diaryWrite(HttpServletRequest request, HttpServletResponse respons
 		diary.setTitle(multi.getParameter("title"));
 
 	
-	DiaryDBBean dbPro = DiaryDBBean.getInstance();
+		DiaryDBMybatis dbPro = DiaryDBMybatis.getInstance();
 		dbPro.insertArticle(diary,useremail);
 		String emotion = diary.getEmotion();
 		List commentList = dbPro.commentList(emotion);
@@ -551,7 +555,7 @@ public String diaryWrite(HttpServletRequest request, HttpServletResponse respons
 		}
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm");
 		try{
-			MemberDBBean dbPro = MemberDBBean.getInstance();
+			MemDBMybatis dbPro = MemDBMybatis.getInstance();
 			MemberDataBean member = dbPro.getContent(num,"content");
 			
 			request.setAttribute("member", member);
@@ -568,7 +572,7 @@ public String diaryWrite(HttpServletRequest request, HttpServletResponse respons
 	
 		int num = Integer.parseInt(request.getParameter("num"));
 		try{
-			MemberDBBean dbPro = MemberDBBean.getInstance();
+			MemDBMybatis dbPro = MemDBMybatis.getInstance();
 			MemberDataBean member = dbPro.getContent(num,"update");
 			request.setAttribute("member", member);
 			request.setAttribute("num", num);
@@ -594,7 +598,7 @@ public String diaryWrite(HttpServletRequest request, HttpServletResponse respons
 		if(pageNum == null || pageNum =="1"){
 			pageNum ="1";
 		}
-		MemberDBBean dbPro = MemberDBBean.getInstance();
+		MemDBMybatis dbPro = MemDBMybatis.getInstance();
 		int pwdck = dbPro.updatemember(member);
 			
 		request.setAttribute("pwdck", pwdck);
@@ -624,7 +628,7 @@ public String diaryWrite(HttpServletRequest request, HttpServletResponse respons
 
 		int num = Integer.parseInt(request.getParameter("num")); 
 		String passwd = request.getParameter("passwd");
-		MemberDBBean dbPro = MemberDBBean.getInstance();
+		MemDBMybatis dbPro = MemDBMybatis.getInstance();
 		int check = dbPro.deletemember(num, passwd);
 		
 		request.setAttribute("check", check);
@@ -642,10 +646,7 @@ public String diaryWrite(HttpServletRequest request, HttpServletResponse respons
 	public String Logout(HttpServletRequest request,
 			 HttpServletResponse response)  throws Throwable { 
 		request.getSession().invalidate();
-		System.out.println("asdfasfd");
-		System.out.println("asdfasfd");
-		System.out.println("asdfasfd");
-		System.out.println("asdfasfd");
+		System.out.println("로그아웃 되었습니다.");
 		return  "/view/Logout.jsp"; 
 			} 
 }

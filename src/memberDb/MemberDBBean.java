@@ -10,6 +10,7 @@ import java.util.List;
 
 import memberDb.MemberDataBean;
 
+/*
 //DB와 연결
 public class MemberDBBean {
 	//싱글톤
@@ -21,7 +22,9 @@ public class MemberDBBean {
 	public static MemberDBBean getInstance() {
 		return instance;				
 	}
-	
+*/
+
+/*
 	//DB연결 메소드
 	public Connection getConnection(){
 		//   리턴타입      변수             
@@ -48,6 +51,7 @@ public class MemberDBBean {
 		   return con;
 		   }
 
+*/
 	/*
 		//Count 세는 메소드
 		public int getDataCount() {
@@ -194,6 +198,9 @@ public class MemberDBBean {
 	}
 	*/
 
+
+ /* 이 메소드는 복사하지 않음. mybatis로 넘어가면서 필요없는 듯. */
+/*
 		private void close(Connection con, ResultSet rs, PreparedStatement pstmt) {
 			// TODO Auto-generated method stub
 			if(rs != null)
@@ -209,6 +216,7 @@ public class MemberDBBean {
 			}
 		}
 		
+*/		
 		/*
 		//회원 보기 메소드 (getArticle)
 				public MemberDataBean getMember(String useremail) {
@@ -243,6 +251,7 @@ public class MemberDBBean {
 				}
 				*/
 		
+		/*
 		//글 보기 메소드 (getArticle)
 		public MemberDataBean getContent(int num,String chk) {
 			Connection conn = null;
@@ -274,6 +283,7 @@ public class MemberDBBean {
 			return member;
 			
 		}
+		*/
 		
 		/*
 		//글 수정 메소드
@@ -296,6 +306,8 @@ public class MemberDBBean {
 					return ;
 				}
 		*/
+		
+		/*
 		//글 수정 메소드
 		public int updatemember(MemberDataBean member) {
 			Connection conn =null;
@@ -317,7 +329,9 @@ public class MemberDBBean {
 			}
 			return pwdck;
 		}
+		*/
 		
+		/*
 		//삭제 메소드
 		public int deletemember(int num,String passwd)throws Exception{
 			Connection conn = null;
@@ -337,6 +351,7 @@ public class MemberDBBean {
 				close(conn,rs,pstmt);
 			}return x;
 		}
+		*/
 		/*
 		//마이페이지에서 탈퇴 메소드
 				public int deleteMypage(String useremail)throws Exception{
@@ -417,5 +432,6 @@ public class MemberDBBean {
 		}
 		
 		*/
-		
+/*		
 	}
+*/

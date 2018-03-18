@@ -69,12 +69,18 @@ public class MemDBMybatis extends MybatisConnector{
 		  map.put("inputEmail", inputEmail);
 	   int loginResult = -1;
 	 String passwd =  sqlSession.selectOne(namespace+".login", map);
+	 System.out.println("패스워드" + passwd);
+	 
+	 	if(passwd == null) {
+	 		 return loginResult;
+	 		
+	 	}
 			if(passwd.equals(inputPasswd)) {
 				loginResult = 1;
 			}else {
 				loginResult = 0;
 			}
-
+			System.out.println("login결과" + loginResult);
 	   return loginResult;
    }
    
@@ -113,15 +119,42 @@ public class MemDBMybatis extends MybatisConnector{
 	      return articleList;
    }
 
+   public MemberDataBean getContent(int num, String chk) {
+	   sqlSession = sqlSession();
+	      Map map = new HashMap();
+	      map.put("num", num);
+	      MemberDataBean member = sqlSession.selectOne(namespace+".getContent", map);
+	      sqlSession.commit();
+	      sqlSession.close();
+	      
+	   return member;
+   }
    
+	public int updatemember(MemberDataBean member) {
+		sqlSession = sqlSession();	     
+		int pwdck = 0;
+		pwdck = sqlSession.update(namespace+".updatemember", member) ;      //오브젝트인가? 컬렉션인가?      
+		sqlSession.commit();
+		sqlSession.close();
+
+		
+		return pwdck;
+		
+	}
+	public int deletemember(int num,String passwd)throws Exception{
+		 sqlSession = sqlSession();
+	     Map map = new HashMap();
+	     map.put("num", num);
+	     map.put("passwd", passwd);
+	     int chk 
+	     = sqlSession.delete(namespace+".deletemember", map) ;      //오브젝트인가? 컬렉션인가?
+	     sqlSession.commit();
+	     sqlSession.close();
+	     return chk;
+	}
    
-   
-   
-   
-   
-   
-   
-   
+	
+ 
    
    //---------------------------------------------------
    

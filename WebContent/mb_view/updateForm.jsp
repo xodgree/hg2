@@ -1,4 +1,3 @@
-<%@page import="memberDb.MemberDBBean"%>
 <%@page import="memberDb.MemberDataBean"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
