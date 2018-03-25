@@ -26,12 +26,12 @@
 		delete from diarys where num = #{num}
 	</delete>
 			
-	<select id="graphList" resultType="hashmap" parameterType="hashmap">
+	<select id="graphList" resultType="Diary" parameterType="hashmap">
 	select regdate,emotion from (select * from diarys where useremail = #{useremail}
 					order by regdate desc)where ROWNUM between #{startRow} AND #{endRow}
 	</select>	
 	
-	<select id="graphAllList" resultType="hashmap">
+	<select id="graphAllList" resultType="Diary">
 		select emotion from diarys	
 	</select>	
 

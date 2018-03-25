@@ -232,10 +232,7 @@ public class ProjectController extends Action{
 			   
 //				   System.out.println("startRow==="+startRow);
 //				   System.out.println("startRow==="+endRow);
-			      articleList = dbPro.articleList(startRow, endRow, useremail,opt,condition);
-			      
-			      System.out.println("articleList:::"+articleList);
-			   }
+			      articleList = dbPro.articleList(startRow, endRow, useremail,opt,condition);}
 
 			   number=count - (currentPage-1)*pageSize;
 //			   System.out.println("number=="+number);
@@ -312,7 +309,7 @@ public class ProjectController extends Action{
 	         else if (bean.getEmotion().equals("³ª»Ý"))
 	            sad += 1;
 	         
-	         //System.out.println(i);
+	         System.out.println(i);
 	      }
 	      
 	      JsonObject data = new JsonObject();
