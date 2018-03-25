@@ -1,4 +1,4 @@
-package memberDb;
+/*package memberDb;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import memberDb.MemberDataBean;
-
+*/
 /*
 //DB¿Í ¿¬°á
 public class MemberDBBean {

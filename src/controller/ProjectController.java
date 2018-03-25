@@ -312,7 +312,7 @@ public class ProjectController extends Action{
 	         else if (bean.getEmotion().equals("³ª»Ý"))
 	            sad += 1;
 	         
-	         System.out.println(i);
+	         //System.out.println(i);
 	      }
 	      
 	      JsonObject data = new JsonObject();

@@ -1,52 +1,52 @@
-//package diaryDb;
-//
-//import java.sql.Connection;
-//import java.sql.DriverManager;
-//import java.sql.PreparedStatement;
-//import java.sql.ResultSet;
-//import java.sql.SQLException;
-//import java.util.ArrayList;
-//import java.util.List;
-//
-//
-//
-//public class DiaryDBBean {
-//	//싱글톤
-//	private static DiaryDBBean instance = new DiaryDBBean();	//객체 생성, 레퍼런스변수 static 설정 -> 1개로 공유.
-//	private DiaryDBBean() {	//생성자 private으로 설정하여 밖에서 객체 생성 불가능.
-//		
-//	}
-//	//객체를 static으로 정의하여 만들지 않고 쓸수있고 instance 레퍼런스 변수도 동일. 이걸 쓰기위해선 get으로 가져오게 해야함. 
-//	public static DiaryDBBean getInstance() {
-//		return instance;				
-//	}
+package diaryDb;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+
+
+public class DiaryDBBean {
+	//싱글톤
+	private static DiaryDBBean instance = new DiaryDBBean();	//객체 생성, 레퍼런스변수 static 설정 -> 1개로 공유.
+	private DiaryDBBean() {	//생성자 private으로 설정하여 밖에서 객체 생성 불가능.
+		
+	}
+	//객체를 static으로 정의하여 만들지 않고 쓸수있고 instance 레퍼런스 변수도 동일. 이걸 쓰기위해선 get으로 가져오게 해야함. 
+	public static DiaryDBBean getInstance() {
+		return instance;				
+	}
 	
-//	
+	
 //	//DB연결 메소드
-//	public Connection getConnection(){
-//		//   리턴타입      변수             
-//		   Connection con = null;			
-//		   try {
-//			   //DB의 URL,계정ID,PW
-//		      String jdbcUrl = "jdbc:oracle:thin:@localhost:1521:orcl";	
-//		      String dbUser = "scott";
-//		      String dbPass = "tiger";
-//		      
-//		      // 리플렌션(reflection) 동적 로딩에 대한 코드
-//		      Class.forName("oracle.jdbc.driver.OracleDriver");
-//		      
-//		      // DB URL,계정, 비밀번호를 가지고 DB에 접속합니다. 접속 결과를 con에 저장합니다.
-//		      con = DriverManager.getConnection(jdbcUrl, dbUser, dbPass);
-//		      
-//		   // 예외(Exception)가 발생하면 어떤 문제인지 파악하기 위한 코드가 여기에 들어갑니다.
-//		   }catch(Exception e) {
-//		      e.printStackTrace();
-//		      System.out.println(e.getMessage());
-//		   }
-//		   // Exception이 발생하지 않았다면 무사히 접속하였습니다.
-//		   // 접속 정보를 return합니다.
-//		   return con;
-//		   }
+	public Connection getConnection(){
+		//   리턴타입      변수             
+		   Connection con = null;			
+		   try {
+			   //DB의 URL,계정ID,PW
+		      String jdbcUrl = "jdbc:oracle:thin:@localhost:1521:orcl";	
+		      String dbUser = "scott";
+		      String dbPass = "tiger";
+		      
+		      // 리플렌션(reflection) 동적 로딩에 대한 코드
+		      Class.forName("oracle.jdbc.driver.OracleDriver");
+		      
+		      // DB URL,계정, 비밀번호를 가지고 DB에 접속합니다. 접속 결과를 con에 저장합니다.
+		      con = DriverManager.getConnection(jdbcUrl, dbUser, dbPass);
+		      
+		   // 예외(Exception)가 발생하면 어떤 문제인지 파악하기 위한 코드가 여기에 들어갑니다.
+		   }catch(Exception e) {
+		      e.printStackTrace();
+		      System.out.println(e.getMessage());
+		   }
+		   // Exception이 발생하지 않았다면 무사히 접속하였습니다.
+		   // 접속 정보를 return합니다.
+		   return con;
+		   }
 	//삭제 메소드
 //		public int delete(int num) {
 //			Connection conn = null;
@@ -138,7 +138,7 @@
 			return count;
 		}	
 		*/
-//		//Count 세는 메소드
+		//Count 세는 메소드
 //		public int getSearchCount(String useremail,String opt,String condition) {
 //			Connection con = getConnection();
 //			PreparedStatement pstmt = null;
@@ -206,7 +206,7 @@
 //			return count;
 //		}
 //		
-//		// 검색리스트 가져오는 메소드 (getArticles)
+		// 검색리스트 가져오는 메소드 (getArticles)
 //		public List articleList(int startRow,int endRow,String useremail,String opt,String condition) {
 //			// Connection, PreparedStatement, ResultSet 등 
 //			// DB에 접속하여 작업하기 위해 필요한 레퍼런스 변수를 선언합니다.
@@ -329,7 +329,7 @@
 //			
 //			
 //		}
-//		
+		
 		
 	/*	// 데이터 가져오는 메소드 (getArticles)
 		public List articleList(int startRow,int endRow,String useremail) {
@@ -458,22 +458,22 @@
 //		
 //	}
 
-//		private void close(Connection con, ResultSet rs, PreparedStatement pstmt) {
-//			// TODO Auto-generated method stub
-//			if(rs != null)
-//				try {
-//					rs.close();
-//				}catch(SQLException ex) {}
-//			if(pstmt !=null) try {pstmt.close();
-//				}catch(SQLException ex) {}
-//			if(con !=null)
-//				try {
-//					con.close();
-//				}catch(SQLException ex) {
-//			}
-//		}
-//		
-//		
+		private void close(Connection con, ResultSet rs, PreparedStatement pstmt) {
+			// TODO Auto-generated method stub
+			if(rs != null)
+				try {
+					rs.close();
+				}catch(SQLException ex) {}
+			if(pstmt !=null) try {pstmt.close();
+				}catch(SQLException ex) {}
+			if(con !=null)
+				try {
+					con.close();
+				}catch(SQLException ex) {
+			}
+		}
+		
+		
 		
 		//글 보기 메소드 (getArticle)
 //				public DiaryDataBean getContent(int num,String chk) {
@@ -581,7 +581,7 @@
 				}
 				*/
 		
-//				//시퀀스 가져오는 메소드
+				//시퀀스 가져오는 메소드
 //				public int getDiarySeq() {
 //					Connection con = null;
 //					String sql = "select diary_seq.nextval from dual";
@@ -648,100 +648,100 @@
 //				}
 				
 	// 감정 그래프 
-//				public List graphList(int startRow,int endRow,String useremail) {	
-//
-//					Connection conn = null;	//커넥션 정보.
-//					PreparedStatement pstmt = null; //쿼리를 담음.
-//					ResultSet rs = null;	//select 쿼리 날리면 DB에 요청한 결과를 줌.
-//					
-//					// Article을 저장할 ArrayList 변수를 선언합니다.
-//					ArrayList<DiaryDataBean> graphList = null;	
-//					String sql = "";		//쿼리 작성 변수
-//					
-//					try {
-//						conn = getConnection();		
-//						/*sql = "select * from (select rownum rnum, b.* "
-//								+" from (select regdate,emotion,useremail from diarys order by regdate desc)b)"
-//								+ " where rnum between ? and ? and useremail = ?";*/
-//						
-//						sql = "select regdate,emotion from (select * from diarys where useremail = ? "
-//								+ "order by regdate desc)where ROWNUM between ? AND ?";
-//				
-//						pstmt = conn.prepareStatement(sql); //pstmt = sql 쿼리를 담음 
-//						
-//						pstmt.setString(1, useremail);
-//						pstmt.setInt(2, startRow);
-//						pstmt.setInt(3, endRow);
-//						
-//						rs = pstmt.executeQuery();
-//						if(rs.next()) {
-//							graphList = new ArrayList();
-//							do {
-//								DiaryDataBean article = new DiaryDataBean(); //테이블 변수에 값 설정위해 객체 생성.
-//								
-//								article.setRegdate(rs.getDate("regdate"));
-//								article.setEmotion(rs.getString("emotion"));
-//							
-//								graphList.add(article);
-//								//System.out.println(article);
-//							}while(rs.next());
-//							// 이 과정은 ResultSet에 더이상 데이터가 없을때까지 진행됩니다.
-//						}	
-//						
-//					}catch (Exception e){
-//						e.printStackTrace();
-//					}finally {
-//						close(conn,rs,pstmt);
-//						
-//						//System.out.println(articleList);
-//					}
-//					return graphList;
-//				}
+				public List graphList(int startRow,int endRow,String useremail) {	
+
+					Connection conn = null;	//커넥션 정보.
+					PreparedStatement pstmt = null; //쿼리를 담음.
+					ResultSet rs = null;	//select 쿼리 날리면 DB에 요청한 결과를 줌.
+					
+					// Article을 저장할 ArrayList 변수를 선언합니다.
+					ArrayList<DiaryDataBean> graphList = null;	
+					String sql = "";		//쿼리 작성 변수
+					
+					try {
+						conn = getConnection();		
+						/*sql = "select * from (select rownum rnum, b.* "
+								+" from (select regdate,emotion,useremail from diarys order by regdate desc)b)"
+								+ " where rnum between ? and ? and useremail = ?";*/
+						
+						sql = "select regdate,emotion from (select * from diarys where useremail = ? "
+								+ "order by regdate desc)where ROWNUM between ? AND ?";
 				
-//				public List graphAllList() {	
-//
-//					Connection conn = null;	//커넥션 정보.
-//					PreparedStatement pstmt = null; //쿼리를 담음.
-//					ResultSet rs = null;	//select 쿼리 날리면 DB에 요청한 결과를 줌.
-//					
-//					// Article을 저장할 ArrayList 변수를 선언합니다.
-//					ArrayList<DiaryDataBean> graphList = null;	
-//					String sql = "";		//쿼리 작성 변수
-//					
-//					try {
-//						conn = getConnection();		
-//						/*sql = "select * from (select rownum rnum, b.* "
-//								+" from (select regdate,emotion,useremail from diarys order by regdate desc)b)"
-//								+ " where rnum between ? and ? and useremail = ?";*/
-//						
-//						sql = "select emotion from diarys";
-//				
-//						pstmt = conn.prepareStatement(sql); //pstmt = sql 쿼리를 담음 
-//						
-//						rs = pstmt.executeQuery();
-//						if(rs.next()) {
-//							graphList = new ArrayList();
-//							do {
-//								DiaryDataBean article = new DiaryDataBean(); //테이블 변수에 값 설정위해 객체 생성.
-//								
-//								article.setEmotion(rs.getString("emotion"));
-//							
-//								graphList.add(article);
-//								//System.out.println(article);
-//							}while(rs.next());
-//							// 이 과정은 ResultSet에 더이상 데이터가 없을때까지 진행됩니다.
-//						}	
-//						
-//					}catch (Exception e){
-//						e.printStackTrace();
-//					}finally {
-//						close(conn,rs,pstmt);
-//						
-//						//System.out.println(articleList);
-//					}
-//					return graphList;
-//				}
-//				
-//				
-//		
-//}
+						pstmt = conn.prepareStatement(sql); //pstmt = sql 쿼리를 담음 
+						
+						pstmt.setString(1, useremail);
+						pstmt.setInt(2, startRow);
+						pstmt.setInt(3, endRow);
+						
+						rs = pstmt.executeQuery();
+						if(rs.next()) {
+							graphList = new ArrayList();
+							do {
+								DiaryDataBean article = new DiaryDataBean(); //테이블 변수에 값 설정위해 객체 생성.
+								
+								article.setRegdate(rs.getDate("regdate"));
+								article.setEmotion(rs.getString("emotion"));
+							
+								graphList.add(article);
+								//System.out.println(article);
+							}while(rs.next());
+							// 이 과정은 ResultSet에 더이상 데이터가 없을때까지 진행됩니다.
+						}	
+						
+					}catch (Exception e){
+						e.printStackTrace();
+					}finally {
+						close(conn,rs,pstmt);
+						
+						//System.out.println(articleList);
+					}
+					return graphList;
+				}
+				
+				public List graphAllList() {	
+
+					Connection conn = null;	//커넥션 정보.
+					PreparedStatement pstmt = null; //쿼리를 담음.
+					ResultSet rs = null;	//select 쿼리 날리면 DB에 요청한 결과를 줌.
+					
+					// Article을 저장할 ArrayList 변수를 선언합니다.
+					ArrayList<DiaryDataBean> graphList = null;	
+					String sql = "";		//쿼리 작성 변수
+					
+					try {
+						conn = getConnection();		
+						/*sql = "select * from (select rownum rnum, b.* "
+								+" from (select regdate,emotion,useremail from diarys order by regdate desc)b)"
+								+ " where rnum between ? and ? and useremail = ?";*/
+						
+						sql = "select emotion from diarys";
+				
+						pstmt = conn.prepareStatement(sql); //pstmt = sql 쿼리를 담음 
+						
+						rs = pstmt.executeQuery();
+						if(rs.next()) {
+							graphList = new ArrayList();
+							do {
+								DiaryDataBean article = new DiaryDataBean(); //테이블 변수에 값 설정위해 객체 생성.
+								
+								article.setEmotion(rs.getString("emotion"));
+							
+								graphList.add(article);
+								//System.out.println(article);
+							}while(rs.next());
+							// 이 과정은 ResultSet에 더이상 데이터가 없을때까지 진행됩니다.
+						}	
+						
+					}catch (Exception e){
+						e.printStackTrace();
+					}finally {
+						close(conn,rs,pstmt);
+						
+						//System.out.println(articleList);
+					}
+					return graphList;
+				}
+				
+				
+		
+}
