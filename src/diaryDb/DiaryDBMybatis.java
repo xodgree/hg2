@@ -87,7 +87,7 @@ public class DiaryDBMybatis extends MybatisConnector{
 	      map.put("useremail", useremail);
 	      map.put("startRow", startRow);
 	      map.put("endRow", endRow);
-	      graphList = sqlSession.selectOne(namespace+".graphList", map);
+	      graphList = (ArrayList) sqlSession.selectList(namespace+".graphList", map);
 	      sqlSession.commit();
 	      sqlSession.close();
 		return graphList;
@@ -96,7 +96,7 @@ public class DiaryDBMybatis extends MybatisConnector{
 	public List graphAllList() {	
 		ArrayList<DiaryDataBean> graphList = null;	
 		sqlSession = sqlSession();
-		graphList = sqlSession.selectOne(namespace+".graphAllList");
+		graphList = (ArrayList) sqlSession.selectList(namespace+".graphAllList");
 		return graphList;
 	}
 	 
